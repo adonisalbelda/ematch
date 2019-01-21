@@ -29,8 +29,8 @@ var server  = app.listen(port, function(){
 	console.log('listening to request on port'+ port);
 });
 
-// app.set('view engine', 'ejs');
-// app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 // app.use('/about', about);
 
 //Static files
