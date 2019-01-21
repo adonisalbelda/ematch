@@ -35,7 +35,7 @@ var server  = app.listen(port, function(){
 
 //Static files
 // app.use(app.router);
-app.use(express.static('public'));
+// app.use(express.static('public'));
 app.use(express.static('assets'));
 // app.use(express.static('views'));
 
@@ -78,6 +78,6 @@ app.use(express.static('assets'));
 // 	res.render("match", {name : "hello world"});	
 // });
 
-// app.get('*', function(req, res){
-// 	res.render("home", {name : "hello world"});
-// });
+app.get('*', function(req, res){
+	res.render("home", {name : "hello world"});
+});
