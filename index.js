@@ -41,17 +41,17 @@ var students = {
 
 //Static files
 // app.use(app.router);
-// app.use(express.static('public'));
+app.use(express.static('public'));
 app.use(express.static('assets'));
-app.use(express.static('views'));
+// app.use(express.static('views'));
 
-app.get('/about', function(req, res){
-	res.render("index", {name : "hello world"});	
-});
+// app.get('/about', function(req, res){
+// 	res.render("index", {name : "hello world"});	
+// });
 
-app.get('/students', function(req, res){
-	res.render("students", {name : "hello world"});	
-});
+// app.get('/students', function(req, res){
+// 	res.render("students", {name : "hello world"});	
+// });
 
 // app.get('/login', function(req, res){
 // 	connection.getConnection(function(error, tempCount){
@@ -72,18 +72,18 @@ app.get('/students', function(req, res){
 // 	});
 // });
 
-app.get('/home', function(req, res){
-	res.render("home", {name : "hello world"});	
-});
+// app.get('/home', function(req, res){
+// 	res.render("home", {name : "hello world"});	
+// });
 
-app.get('/duel', function(req, res){
-	res.render("duel", {name : "hello world"});	
-});
+// app.get('/duel', function(req, res){
+// 	res.render("duel", {name : "hello world"});	
+// });
 
-app.get('/match', function(req, res){
-	res.render("match", {name : "hello world"});	
-});
+// app.get('/match', function(req, res){
+// 	res.render("match", {name : "hello world"});	
+// });
 
-app.get('*', function(req, res){
-	res.render("home", {name : "hello world"});
-});
+// app.get('*', function(req, res){
+// 	res.render("home", {name : "hello world"});
+// });
