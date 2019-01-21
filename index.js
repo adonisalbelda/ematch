@@ -1,9 +1,9 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var mysql = require('mysql');
+// var mysql = require('mysql');
 
-var about = require('./routes/about');
+// var about = require('./routes/about');
 
 //database connection
 // var connection = mysql.createPool({
@@ -13,7 +13,7 @@ var about = require('./routes/about');
 // 	password : '',
 // 	database: 'hotel'
 
-// });
+// });	
 
 // connection.connect(function(error){
 // 	if(!!error) {
@@ -29,15 +29,9 @@ var server  = app.listen(port, function(){
 	console.log('listening to request on port'+ port);
 });
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
 // app.use('/about', about);
-
-var students = {
-	1 : 'Mark',
-	2 : 'Mark',
-	3 : 'Mark',
-}
 
 //Static files
 // app.use(app.router);
