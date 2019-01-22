@@ -321,17 +321,50 @@ input[type='text']:focus::placeholder {
     margin-top: 5px;
 }
 
-
-
-
-@media (max-width: 992px) {
+@media screen and (max-width: 992px) {
     .main-wrapper {
 		width: 70%;
 	}
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .main-wrapper {
 		width: 100%;
 	}
 }
+
+@media screen and (max-width: 400px) {
+    .duel-member-list {
+		width: 300px;
+	    min-height: 200px;
+	    max-height: 300px;
+	    overflow-y: scroll;
+	    border: 5px solid #002a33;
+	    background-color: #fff;
+	    border-radius: 20px;
+	    margin-bottom: 65px;
+	    padding: 15px 15px 5px 0px;
+	}
+
+	.duel-name p {
+	    font-size: 14px;
+	}
+
+	.duel-player-btn img {
+		width: 100px;
+	}
+
+	.duel-member-list table td p {
+	    margin-right: 10px;
+	    font-size: 14px;
+	}
+
+	.duel-member-list table .duel-profile-image img {
+	    width: 45px;
+	}
+
+	.match-content {
+	    width: 310px;
+	}
+}
+
