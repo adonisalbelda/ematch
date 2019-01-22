@@ -66,18 +66,18 @@ app.use(express.static('assets'));
 // 	});
 // });
 
-// app.get('/home', function(req, res){
-// 	res.render("home", {name : "hello world"});	
-// });
+app.get('/home', function(req, res){
+	res.render("home", {name : "hello world"});	
+});
 
-// app.get('/duel', function(req, res){
-// 	res.render("duel", {name : "hello world"});	
-// });
+app.get('/duel', function(req, res){
+	res.render("duel", {name : "hello world"});	
+});
 
-// app.get('/match', function(req, res){
-// 	res.render("match", {name : "hello world"});	
-// });
+app.get('/match', function(req, res){
+	res.render("match", {name : "hello world"});	
+});
 
 app.get('*', function(req, res){
-	res.render("home", {name : "hello world"});
+	res.render("login", {name : "hello world"});
 });
