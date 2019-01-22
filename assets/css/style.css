@@ -8,6 +8,11 @@
   src: url('../images/Raleway-Thin.tff');
 }
 
+@font-face {
+  font-family: railwayBold_font;
+  src: url('../images/Raleway-SemiBold.tff');
+}
+
 body {
 	font-family: umberto_font;
 }
@@ -226,6 +231,7 @@ input[type='text']:focus::placeholder {
 .match-players-info {
 	position: relative;
 	overflow: hidden;
+	margin-bottom: 20px;
 }
 
 .match-player {
@@ -329,6 +335,46 @@ input[type='text']:focus::placeholder {
     margin-top: 5px;
 }
 
+.match-question-area {
+	width: 300px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 5px solid #00343f;
+    color: #000;
+    position: relative;
+}
+
+.match-question {
+    font-family: railwayBold_font;
+    margin-bottom: 40px;
+    margin-top: 10px;
+}
+
+.question-multiple-type {
+	position: relative;
+    overflow: hidden;
+}
+
+.answer-option {
+	float: left;
+    width: 48%;
+    background-color: #d4d4dc;
+    text-align: center;
+    border-radius: 3px;
+    margin-bottom: 3px;
+    padding: 5px 2px;
+    box-sizing: border-box;
+    margin-right: 1%;
+    font-family: railway_font;
+}
+
+.next-arr-btn {
+	position: absolute;
+	right: 10px;
+	top:10px;
+}
+
 @media screen and (max-width: 992px) {
     .main-wrapper {
 		width: 70%;
@@ -373,12 +419,16 @@ input[type='text']:focus::placeholder {
 
 	/* duel */
 	.match-content {
-	    width: 310px;
+	    width: auto;
 	}
 
 	/* match */
 	.match-players-info .match-player img {
 	    width: 32px;
+	}
+
+	.match-question-area {
+		padding: 40px 10px 30px 20px;
 	}
 }
 
