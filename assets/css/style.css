@@ -259,11 +259,13 @@ input[type='text']:focus::placeholder {
 .left-player {
 	background-color: orange;
 	padding-top: 3px;
+	border-radius: 7px 0px 0px 7px;
 }
 
 .right-player {
 	background-color: green;
 	padding-top: 3px;
+	border-radius: 0px 7px 7px 0px;
 }
 
 .left-player-box div {
@@ -428,6 +430,7 @@ input[type='text']:focus::placeholder {
 	}
 
 	.match-question-area {
+		width: 280px;
 		padding: 40px 10px 30px 20px;
 	}
 }
