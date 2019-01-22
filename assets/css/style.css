@@ -141,6 +141,14 @@ input[type='text']:focus::placeholder {
     font-family: none;
 }
 
+/* user settings*/
+.user-home-settings {
+	width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 45px;
+}
+
 /*style for duel */
 .duel-top-option {
 	width: 100%;
@@ -363,8 +371,14 @@ input[type='text']:focus::placeholder {
 	    width: 45px;
 	}
 
+	/* duel */
 	.match-content {
 	    width: 310px;
+	}
+
+	/* match */
+	.match-players-info .match-player img {
+	    width: 32px;
 	}
 }
 
