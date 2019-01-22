@@ -51,6 +51,11 @@ input[type='text']:focus::placeholder {
 	color: #fff;
 }
 
+.back-music {
+	position: absolute;
+	top: 0px;
+}
+
 .duel-player-btn button {
     background-image: url(../images/duel_btn.png);
     background-size: cover;
