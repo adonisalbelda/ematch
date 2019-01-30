@@ -2,6 +2,8 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 // var mysql = require('mysql');
+var bodyParser = require("body-parser");
+var httpMsgs = require("http-msgs");
 
 // var about = require('./routes/about');
 
@@ -30,13 +32,14 @@ var server  = app.listen(port, function(){
 });
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public/views'));
 // app.use('/about', about);
 
 //Static files
 // app.use(app.router);
-// app.use(express.static('public'));
+app.use(express.static('public'));
 app.use(express.static('assets'));
+app.use(bodyParser.urlencoded({extended : false}));
 // app.use(express.static('views'));
 
 // app.get('/about', function(req, res){
@@ -65,19 +68,24 @@ app.use(express.static('assets'));
 // 		}
 // 	});
 // });
+const fakeDatabase = {
+	'Philip': {job: 'professor', pet: 'cat.jpg'}
+};
 
-app.get('/home', function(req, res){
-	res.render("home", {name : "hello world"});	
+app.post('/home', function(req, res){
+	const all = Object.keys(fakeDatabase);
+	var someData = { message: 'hi' };
+	res.render('home', someData);
 });
 
-app.get('/duel', function(req, res){
-	res.render("duel", {name : "hello world"});	
+app.post('/duel', function(req, res){
+	res.render('duel');
 });
 
-app.get('/match', function(req, res){
-	res.render("match", {name : "hello world"});	
+app.post('/match', function(req, res){
+	res.render('match');	
 });
 
-app.get('*', function(req, res){
-	res.render("login", {name : "hello world"});
+app.post('*', function(req, res){
+	res.render('home');
 });
