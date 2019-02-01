@@ -68,12 +68,7 @@ app.use(bodyParser.urlencoded({extended : false}));
 // 		}
 // 	});
 // });
-const fakeDatabase = {
-	'Philip': {job: 'professor', pet: 'cat.jpg'}
-};
-
 app.post('/home', function(req, res){
-	const all = Object.keys(fakeDatabase);
 	var someData = { message: 'hi' };
 	res.render('home', someData);
 });
@@ -86,6 +81,10 @@ app.post('/match', function(req, res){
 	res.render('match');	
 });
 
-app.post('*', function(req, res){
-	res.render('home');
+app.post('/register', function(req, res){
+	res.render('register');	
+});
+
+app.post('/login', function(req, res){
+	res.render('login');
 });

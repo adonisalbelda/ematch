@@ -8,6 +8,11 @@ $(document).ready(function(){
 		home_Directory(url, data);
 	});
 
+	$(document).on('click', "#register-btn", function() {
+		var url = "register";
+		redirect_To(url);
+	});
+
 	$(document).on('click', '#battle-btn', function() {
 		var mytext = "hello world";
 		$('.searching-enemy-loading').removeClass('hide').addClass('show');
@@ -29,6 +34,7 @@ $(document).ready(function(){
 	        }
     	});
 	});
+
 
 	$(document).on('click', '#duel-btn', function() {
 		var mytext = "hello world";
@@ -56,6 +62,26 @@ $(document).ready(function(){
 		var url = $(this).attr("data-value");
 		home_Directory(url, {});
 	});
+
+	$(document).on('click', '#register-dir-login', function(){
+		var url = "login";
+		home_Directory(url, {});
+	});
+
+	function redirect_To(url) {
+		$.ajax({
+	        url: "/"+url,
+	        method:"POST",
+	        contentType: "application/x-www-form-urlencoded",
+	        success: function(data) {
+	            $('.child-wrapper').html(data);
+	            $('#register-dir-login').attr("data-value", "login");
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            alert('error ' + textStatus + " " + errorThrown);
+	        }
+    	});
+	}
 
 	function home_Directory(url, data) {
 		$.ajax({

@@ -15,6 +15,7 @@
 
 body {
 	font-family: umberto_font;
+	font-family: 12px;
 }
 
 body,
@@ -23,6 +24,10 @@ p,
 h3 {
 	margin: 0px;
 	padding: 0px;
+}
+
+a:hover {
+	color: #fff !important;
 }
 
 table {
@@ -37,6 +42,15 @@ table td {
 	text-align: left;
 }
 
+input[type='text'] {
+	padding: 10px 0px;
+    padding-left: 20px;
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 14px;
+}
+
 input[type='text']:focus {
 	transition: all ease 0.3s;
 	background-color: #0f3a43;
@@ -46,6 +60,11 @@ input[type='text']:focus {
 	outline: none;
 }
 
+input[type='text']::placeholder {
+	font-size: 14px;
+	font-family: Arial;
+	color: #000;
+}
 
 input[type='text']:focus::placeholder {
 	color: #fff;
@@ -79,7 +98,8 @@ input[type='text']:focus::placeholder {
 }
 
 .login-content,
-.home-content {
+.home-content,
+.register-content {
 	width: auto;
 	margin: 0 auto;
 	position: absolute;
@@ -91,23 +111,23 @@ input[type='text']:focus::placeholder {
 	color: #fff;
 	font-size: 20px;
 	max-height: 600px;
+	font-family: umberto_font;
 }
 
 /*style for login*/
 .login-content p{
     font-size: 20px;
     margin-bottom: 65px;
+    cursor: pointer;
 }
 
+.login-form-input {
+	margin-bottom: 30px;
+}
 
 .login-form-input input {
-	width: 100%;
     margin-bottom: 20px;
     border-radius: 50px;
-    padding: 10px 0px;
-    padding-left: 20px;
-    outline: none;
-    border: none;
 }
 
 .login-content h3{
@@ -199,7 +219,7 @@ input[type='text']:focus::placeholder {
 	background-color: #fff;
 	border-radius: 20px;
 	margin-bottom: 65px;
-	padding: 15px 15px 5px 0px;
+	padding: 15px 15px 15px 10px;
 }
 
 .duel-member-list table tbody tr {
@@ -232,6 +252,7 @@ input[type='text']:focus::placeholder {
 }
 .duel-member-list table td p {
 	margin-right: 10px;
+	margin-bottom: 0px;
 }
 
 /*style for match*/
@@ -307,6 +328,7 @@ input[type='text']:focus::placeholder {
 .player-details p {
 	position: relative;
     top: 5px;
+    margin: 0px;
 }
 
 .right-player .player-details p:last-child {
@@ -423,6 +445,50 @@ input[type='text']:focus::placeholder {
 
 }
 
+.register-inputs {
+	overflow: hidden;
+	font-family: railway_font;
+	width: 440px;;
+}
+
+.form-box {
+	text-align: left;
+	/*float: left;*/
+	margin-bottom: 10px;
+}
+
+.form-box input {
+	margin-top: 3px;
+	background-color: #258294;
+    border: 1px solid #ffff;
+}
+
+.form-box i {
+	margin-right: 5px;
+}
+
+.form-box label {
+	font-size: 15px;
+} 
+
+.register-form-submit {
+	padding-top: 30px;
+}
+.register-form-submit a {
+	color: #fff;
+    font-size: 14px;
+}
+
+.register-form-submit button {
+	color: #f7f6f6;
+    font-size: 12px;
+    padding: 8px 25px;
+    background-color: #005c71;
+    outline: none;
+    border: none;
+    border: 1px solid #fff;
+}
+
 @media screen and (max-width: 992px) {
     .main-wrapper {
 		width: 70%;
@@ -477,6 +543,10 @@ input[type='text']:focus::placeholder {
 	.match-question-area {
 		width: 280px;
 		padding: 40px 10px 30px 20px;
+	}
+
+	.register-inputs {
+	    width: 310px;
 	}
 }
 
