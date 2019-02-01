@@ -182,7 +182,7 @@ input[type='text']:focus::placeholder {
 	width: 100%;
     text-align: center;
     position: absolute;
-    bottom: 45px;
+    bottom: 15px;
 }
 
 /*style for duel */
