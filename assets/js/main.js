@@ -14,6 +14,7 @@ $(document).ready(function(){
 	});
 
 	$(document).on('click', '#login-btn', function(e) {
+		$('#myAudio').trigger('play');
 		e.preventDefault();
 		show_loader();
 		var data = {
