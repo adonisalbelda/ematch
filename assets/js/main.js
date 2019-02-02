@@ -1,5 +1,19 @@
+function hide_loader() {
+	$('.page-loading').css('display', 'none');
+}
+
+function show_loader() {
+	$('.page-loading').css('display', 'block');
+}
+
 $(document).ready(function(){
+
+	$(window).on('load', function() {
+		hide_loader();
+	});
+
 	$(document).on('click', '#login-btn', function() {
+		show_loader();
 		var data = {
 			'mytext' : "hello world"
 		}
@@ -9,6 +23,7 @@ $(document).ready(function(){
 	});
 
 	$(document).on('click', "#register-btn", function() {
+		show_loader();
 		var url = "register";
 		redirect_To(url);
 	});
@@ -59,11 +74,13 @@ $(document).ready(function(){
 	});
 
 	$(document).on('click', '#match-dir-home, #duel-dir-home', function(){
+		show_loader();
 		var url = $(this).attr("data-value");
 		home_Directory(url, {});
 	});
 
 	$(document).on('click', '#register-dir-login', function(){
+		show_loader();
 		var url = "login";
 		home_Directory(url, {});
 	});
@@ -115,6 +132,7 @@ $(document).ready(function(){
 	        success: function(data) {
 	            $('.child-wrapper').html(data);
 	            $('#register-dir-login').attr("data-value", "login");
+	            hide_loader();
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
 	            alert('error ' + textStatus + " " + errorThrown);
@@ -130,6 +148,7 @@ $(document).ready(function(){
 	        contentType: "application/x-www-form-urlencoded",
 	        success: function(data) {
 	            $('.child-wrapper').html(data);
+	            hide_loader();
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
 	            alert('error ' + textStatus + " " + errorThrown);
