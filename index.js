@@ -85,6 +85,10 @@ app.post('/register', function(req, res){
 	res.render('register');	
 });
 
+app.post('/forgot_pass', function(req, res){
+	res.render('forgot_pass');	
+});
+
 app.post('/login', function(req, res){
 	res.render('login');
 });

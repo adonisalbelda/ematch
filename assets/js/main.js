@@ -12,7 +12,8 @@ $(document).ready(function(){
 		hide_loader();
 	});
 
-	$(document).on('click', '#login-btn', function() {
+	$(document).on('click', '#login-btn', function(e) {
+		e.preventDefault();
 		show_loader();
 		var data = {
 			'mytext' : "hello world"
@@ -22,9 +23,18 @@ $(document).ready(function(){
 		home_Directory(url, data);
 	});
 
-	$(document).on('click', "#register-btn", function() {
+
+	$(document).on('click', "#register-btn", function(e) {
+		e.preventDefault();
 		show_loader();
 		var url = "register";
+		redirect_To(url);
+	});
+
+	$(document).on('click', "#forgot-pass-btn", function(e) {
+		e.preventDefault();
+		show_loader();
+		var url = "forgot_pass";
 		redirect_To(url);
 	});
 
