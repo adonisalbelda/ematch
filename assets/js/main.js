@@ -10,6 +10,7 @@ $(document).ready(function(){
 
 	$(window).on('load', function() {
 		hide_loader();
+		$('#myAudio').play();
 	});
 
 	$(document).on('click', '#login-btn', function(e) {
