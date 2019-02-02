@@ -11,47 +11,79 @@
 <div class="container">
 	<div class="register-content">
 		<div class="register-inputs">
-
 			<div class="row">
-				<div class="col-md-6">
-					<div class="form-box">
-						<label><i class="fa fa-tag"></i>First name :</label><br>
-						<input type="text" name="">
+				<div class="col-md-12">
+					<h1 class="register-status">PERSONAL INFO</h1>
+				</div>
+			</div>
+			<div class="personal-info">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-tag"></i>First name :</label><br>
+							<input type="text" name="">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-tag"></i>Last name :</label><br>
+							<input type="text" name="">
+						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<div class="form-box">
-						<label><i class="fa fa-tag"></i>Last name :</label><br>
-						<input type="text" name="">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-envelope"></i>Email :</label><br>
+							<input type="text" name="">
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-box">
-						<label><i class="fa fa-envelope"></i>Email :</label><br>
-						<input type="text" name="">
+			<div class="security-info status-hide">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-user-circle"></i>Username :</label><br>
+							<input type="text" name="">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-key"></i>Password :</label><br>
+							<input type="password" name="">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-key"></i>Password :</label><br>
+							<input type="password" name="">
+						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<div class="form-box">
-						<label><i class="fa fa-user-circle"></i>Username :</label><br>
-						<input type="text" name="">
+				
+			</div>
+			<div class="profile-info status-hide">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-box text-center mb-3">
+							<img src="images/profile.png"><br>
+							<label>Ematch profile picture</label>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-box">
+							<!-- <label>Choose</label><br> -->
+							<input type="file" name="">
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-box">
-						<label><i class="fa fa-key"></i>Password :</label><br>
-						<input type="text" name="">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12 text-right">
+			<div class="col-md-12 text-center">
 				<div class="register-form-submit">
-					<button>Register</button><br>
-					<a href="">I have an acoount already!</a><br>
+					<button id="form-prev-status" data-value="0">PREV</button>
+					<button id="form-next-status" data-value="0">NEXT</button><br>
+					<a href="">I have an acoount already!</a>
 					<a href="">I forgot my account!</a>
 				</div>
 			</div>

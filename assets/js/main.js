@@ -68,6 +68,45 @@ $(document).ready(function(){
 		home_Directory(url, {});
 	});
 
+	$(document).on('click', '#form-next-status', function() {
+		var val = parseInt($(this).attr("data-value"));
+		update_registerStatus(val, 1);
+	});
+
+	$(document).on('click', '#form-prev-status', function() {
+		var val = parseInt($(this).attr("data-value"));
+		update_registerStatus(val, 0);
+	});
+
+	function update_registerStatus(val, action) {
+		var statuses = ['personal-info', 'security-info', 'profile-info'];
+		var label = ['personal info', 'security info', 'profile info'];
+		var new_val;
+		for (var i = 0; i < statuses.length; i++) {
+			if ($('.'+statuses[i]).not('.status-hide')) {
+				$('.'+statuses[i]).addClass('status-hide');
+			}
+		}
+
+		if (action == 1) {
+			new_val = val+1;
+			$('.'+statuses[new_val]).removeClass('status-hide');
+		} else {
+			new_val = val-1
+			$('.'+statuses[new_val]).removeClass('status-hide');
+		}
+
+		$('.register-status').text(label[new_val]);
+		$('#form-prev-status').attr("data-value", new_val);
+		$('#form-next-status').attr("data-value", new_val);
+		
+		if (new_val == 0) {
+			$('#form-prev-status').css('display', 'none');
+		} else {
+			$('#form-prev-status').css('display', 'inline-block');
+		}
+	}
+
 	function redirect_To(url) {
 		$.ajax({
 	        url: "/"+url,
