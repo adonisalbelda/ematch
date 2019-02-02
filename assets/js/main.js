@@ -8,13 +8,19 @@ function show_loader() {
 
 $(document).ready(function(){
 
-	$('#myAudio').trigger('play');
 	$(window).on('load', function() {
 		hide_loader();
+		$('body').trigger('click');
+	});
+
+	$(document).on('click', 'body', function() {
+		var myAudio = document.getElementById('myAudio');
+		if (!myAudio.currentTime) {
+			$('#myAudio').trigger('play');
+		}
 	});
 
 	$(document).on('click', '#login-btn', function(e) {
-		$('#myAudio').trigger('play');
 		e.preventDefault();
 		show_loader();
 		var data = {
