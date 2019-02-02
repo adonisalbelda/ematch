@@ -8,9 +8,9 @@ function show_loader() {
 
 $(document).ready(function(){
 
+	$('#myAudio').trigger('play');
 	$(window).on('load', function() {
 		hide_loader();
-		$('#myAudio').trigger('play');
 	});
 
 	$(document).on('click', '#login-btn', function(e) {
