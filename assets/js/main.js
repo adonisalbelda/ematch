@@ -113,9 +113,21 @@ $(document).ready(function(){
 		update_registerStatus(val, 0);
 	});
 
+	$(document).on('change', '#choose-pro-img', function() {
+        readURL(this);
+	});
+
 	function update_registerStatus(val, action) {
 		var statuses = ['personal-info', 'security-info', 'profile-info'];
 		var label = ['personal info', 'security info', 'profile info'];
+
+		if (val == (statuses.length-1) && action == 1) {
+			dialog.confirm("are you sure want to save this info ?", function() {
+				alert("dasda");
+			}, "Confirm ?");
+			return false;
+		}
+
 		var new_val;
 		for (var i = 0; i < statuses.length; i++) {
 			if ($('.'+statuses[i]).not('.status-hide')) {
@@ -130,6 +142,7 @@ $(document).ready(function(){
 			new_val = val-1
 			$('.'+statuses[new_val]).removeClass('status-hide');
 		}
+		
 
 		$('.register-status').text(label[new_val]);
 		$('#form-prev-status').attr("data-value", new_val);
@@ -173,4 +186,37 @@ $(document).ready(function(){
 	        }
     	});
 	}
+
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            var file =  input.files[0];
+            var _URL = window.URL || window.webkitURL;
+
+            img = new Image();
+            var imgwidth = 0;
+			var imgheight = 0;
+			var maxwidth = 200;
+			var maxheight = 200;
+
+			img.src = _URL.createObjectURL(file);
+			img.onload = function() {
+				imgwidth = this.width;
+				imgheight = this.height;
+
+				if (imgwidth <= maxwidth && imgheight <= maxheight){
+		            reader.onload = function (e) {
+		                $('#profile-img-tag').attr('src', e.target.result);
+		            }
+		            reader.readAsDataURL(input.files[0]);
+
+				// var formData = new FormData();
+				// formData.append('fileToUpload', $('#file')[0].files[0]);
+				} else {
+					$('#choose-pro-img').val('');
+					dialog.alert("Invalid image size, at least 200x200 size only.", "Error found");
+				}
+			};
+        }
+    }
 });

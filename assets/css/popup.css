@@ -1,0 +1,59 @@
+.dialog-wrapper {
+	position: absolute;
+	top: 0px;
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	background-color: #0000004d;
+	z-index: 999;
+}
+
+.dialog-wrapper .dialog {
+	width: 280px;
+    background-color: #1a5360;
+    margin: auto;
+    margin-top: 230px;
+    border: 1px solid #c3c3c3;
+    overflow: hidden;
+    box-shadow: 0 4px 9px grey;
+    border-radius: 5px;
+}
+
+.dialog-wrapper .dialog .dialog-head {
+	background-color: transparent;
+    padding: 10px 10px;
+    border-bottom: 1px solid #c3c3c3;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.dialog-wrapper .dialog .dialog-body {
+	background-color: #003d4a;
+    padding: 20px 20px;
+    color: #f3efef;
+    font-size: 14px;
+}
+
+.dialog-wrapper .dialog .dialog-foot {
+	border-top: 1px solid #c3c3c3;
+	background-color:transparent;
+    padding: 12px 12px;
+    color: #333;
+    text-align: right;
+}
+
+.dialog-wrapper .dialog .popup-btn {
+	margin-left: 10px;
+    font-size: 12px;
+}
+
+
+.dialog-wrapper .dialog .dialog-input {
+	border: 1px solid #a0a0a0;
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: #333;
+    margin-left: 5px;
+}
