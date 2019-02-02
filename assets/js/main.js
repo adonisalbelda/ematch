@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 	$(window).on('load', function() {
 		hide_loader();
-		$('#myAudio').play();
+		$('#myAudio').trigger('play');
 	});
 
 	$(document).on('click', '#login-btn', function(e) {
