@@ -37,10 +37,6 @@ table {
     width: 100%;		
 }
 
-audio {
-	display: none;
-}
-
 table td {
 	vertical-align: middle;
 	text-align: left;
