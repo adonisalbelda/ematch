@@ -50,6 +50,7 @@ input {
     border: none;
     font-size: 14px !important;
     font-family: Arial !important;
+    border-radius: 50px; 
 }
 
 input:focus {
@@ -463,6 +464,13 @@ input:focus::placeholder {
     letter-spacing: 3px;
     margin-bottom: 45px;
     text-transform: uppercase;
+    animation: glow .5s infinite alternate;
+}
+
+@keyframes glow {
+    to {
+        text-shadow: 0 0 10px #85ea2d;
+    }
 }
 
 .form-box {
