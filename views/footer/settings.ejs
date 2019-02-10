@@ -1,0 +1,124 @@
+<div class="duel-top-option">
+	<div class="back-btn">
+		<img src="images/home.png" id="match-dir-home"><br>
+	</div>
+	<div class="logo-area">
+		<img src="images/settings.png">
+	</div>
+</div>
+<div class="settings-content">
+	<div class="profile-details">
+		<img src="images/profile.png">
+		<div class="user-level-status">
+			<small>Change Avatar</small>
+		</div>
+	</div>
+	<div class="edit-user-info">
+		<div class="container">
+			<div class="edit-personal-info edit-head-box">
+				<div class="row">
+					<div class="col-12 edit-title-box">
+						<span class="active">Personal info</span>
+					</div>
+				</div>
+				<div class="row edit-box-content">
+					<div class="col-6">
+						<div class="form-box">
+							<label><i class="fa fa-tag"></i>First name :</label><br>
+							<input data-validation="length alphanumeric" class="first-name" placeholder="required" value="<%=data['fname']%>">
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="form-box">
+							<label><i class="fa fa-tag"></i>Last name :</label><br>
+							<input type="text" class="last-name" placeholder="required" 
+							value="<%=data['lname']%>">
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="form-box">
+							<label><i class="fa fa-envelope"></i>Email :</label><br>
+							<input type="email" class="envelope" placeholder="required"
+							value="<%=data['email']%>">
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="form-box">
+							<label><i class="fa fa-envelope"></i>Email :</label><br>
+							<input type="email" class="envelope" placeholder="required" value="<%=data['course']%>">
+						</div>
+					</div>
+					<div class="col-12 text-right save-changes-box">
+						<img src="images/save_changes.png" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="edit-security-info edit-head-box">
+				<div class="row">
+					<div class="col-md-12 edit-title-box">
+						<span>Security info</span>
+					</div>
+				</div>
+				<div  class="edit-box-content hide-content">
+					<div class="row">
+						<div class="col-12">
+							<div class="form-box">
+								<label><i class="fa fa-user-circle"></i>Username :</label><br>
+								<input type="text" class="username" placeholder="required"
+								value="<%=data['username']%>">
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-box">
+								<label><i class="fa fa-key"></i>Password :</label><br>
+								<input type="password" class="password" placeholder="required">
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-box">
+								<label><i class="fa fa-lock"></i>Confirm password :</label><br>
+								<input type="password" class="c-password" placeholder="required">
+							</div>
+						</div>
+						<div class="col-12 text-right save-changes-box">
+							<img src="images/save_changes.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="edit-game-info edit-head-box">
+				<div class="row">
+					<div class="col-12 edit-title-box">
+						<span>Game Settings</span>
+					</div>
+				</div>
+				<div  class="edit-box-content hide-content">
+					<div class="row">
+						<div class="col-12">
+							<div class="form-box">
+								<label><i class="fa fa-user-circle"></i>Username :</label><br>
+								<input type="text" class="username" placeholder="required">
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-box">
+								<label><i class="fa fa-key"></i>Password :</label><br>
+								<input type="password" class="password" placeholder="required">
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-box">
+								<label><i class="fa fa-lock"></i>Confirm password :</label><br>
+								<input type="password" class="c-password" placeholder="required">
+							</div>
+						</div>
+						<div class="col-12 text-right save-changes-box">
+							<img src="images/save_changes.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <% include ../demo %> -->

@@ -6,6 +6,9 @@
 	<div class="logo-area">
 		<img src="images/ematch_banner.png">
 	</div>
+	<!-- <% if (typeof errors == 'object' && errors) { %>
+		<p><%=errors%></p>
+	<% } %> -->
 </div>
 
 <div class="container">
@@ -21,13 +24,13 @@
 					<div class="col-md-12">
 						<div class="form-box">
 							<label><i class="fa fa-tag"></i>First name :</label><br>
-							<input type="text" name="">
+							<input data-validation="length alphanumeric" data-validation-length="min4" class="first-name" placeholder="required">
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-box">
 							<label><i class="fa fa-tag"></i>Last name :</label><br>
-							<input type="text" name="">
+							<input type="text" class="last-name" placeholder="required">
 						</div>
 					</div>
 				</div>
@@ -35,7 +38,7 @@
 					<div class="col-md-12">
 						<div class="form-box">
 							<label><i class="fa fa-envelope"></i>Email :</label><br>
-							<input type="email" name="">
+							<input type="email" class="envelope" placeholder="required">
 						</div>
 					</div>
 				</div>
@@ -45,19 +48,19 @@
 					<div class="col-md-12">
 						<div class="form-box">
 							<label><i class="fa fa-user-circle"></i>Username :</label><br>
-							<input type="text" name="">
+							<input type="text" class="username" placeholder="required">
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-box">
 							<label><i class="fa fa-key"></i>Password :</label><br>
-							<input type="password" name="">
+							<input type="password" class="password">
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-box">
 							<label><i class="fa fa-lock"></i>Confirm password :</label><br>
-							<input type="password" name="">
+							<input type="password" class="c-password">
 						</div>
 					</div>
 				</div>
@@ -74,7 +77,7 @@
 					<div class="col-md-12">
 						<div class="form-box">
 							<!-- <label>Choose</label><br> -->
-							<input type="file" name="file" id="choose-pro-img">
+							<input type="file" name="file" id="choose-pro-img" class="user-avatar">
 						</div>
 					</div>
 				</div>

@@ -101,7 +101,10 @@ input:focus::placeholder {
 
 .login-content,
 .home-content,
-.register-content {
+.register-content,
+.settings-content,
+.rankings-content,
+.people-view-content {
 	width: auto;
 	margin: 0 auto;
 	position: absolute;
@@ -173,10 +176,17 @@ input:focus::placeholder {
 
 .user-home-settings ul li{
 	list-style: none;
-    width: 20%;
+    width: 16%;
     display: inline-block;
     cursor: pointer;
     font-family: none;
+}
+
+.user-home-settings li a i {
+	color: #34a8bf;
+    font-size: 30px;
+    position: relative;
+    top: 4px;
 }
 
 /* user settings*/
@@ -204,11 +214,11 @@ input:focus::placeholder {
 .logo-area {
     text-align: center;
     position: relative;
-    top: -30px;
+    top: 18px;
 }
 
 .logo-area img {
-	width: 30%;
+	width: 40%;
 }
 
 .duel-lobby-text {
@@ -218,12 +228,11 @@ input:focus::placeholder {
     margin-top: 65px;
 }
 
-.duel-member-list {
+.duel-member-list,
+.ranking-view-table {
 	width: 400px;
-	min-height: 200px;
 	border: 5px solid #002a33;
 	background-color: #fff;
-	border-radius: 20px;
 	margin-bottom: 65px;
 	padding: 15px 15px 15px 10px;
 }
@@ -236,12 +245,15 @@ input:focus::placeholder {
 	text-align: right;
 }
 
-.duel-member-list table  .duel-profile-image img {
-	width: 50px;
+.duel-member-list table  .duel-profile-image img,
+.ranking-view-table table  .duel-profile-image img {
+	width: 40px;
 }
 
 .duel-name p{
 	font-size: 22px;
+	position: relative;
+    top: 6px;
 }
 
 .duel-player-btn {
@@ -256,7 +268,8 @@ input:focus::placeholder {
 	font-family: duel-level;
 	color: green;
 }
-.duel-member-list table td p {
+.duel-member-list table td p,
+.ranking-view-table table td p{
 	margin-right: 10px;
 	margin-bottom: 0px;
 }
@@ -460,6 +473,7 @@ input:focus::placeholder {
     z-index: 1;
     background-color: #000;
     opacity: 0.8;
+    display: none;
 }
 
 .page-loading img {
@@ -543,6 +557,200 @@ input:focus::placeholder {
     display: block;
 }
 
+/*style for edit user info */
+
+.edit-user-info {
+	font-family: railway_font;
+    width: 400px;
+}
+
+.edit-user-info label,
+.edit-user-info input {
+	font-size: 12px !important;
+}
+
+.edit-head-box .hide-content {
+	display: none;
+}
+
+.edit-title-box span {
+	background-color: #002b34;
+    display: block;
+    color: #fff;
+    text-align: left;
+    padding: 3px 0px;
+    padding-left: 10px;
+    margin-bottom: 11px;
+    font-size: 16px;
+}
+
+.edit-title-box span:after {
+    content:'\25C0';
+    position: absolute;
+    right: 26px;
+}
+
+.edit-title-box span.active {
+	border-bottom: 3px solid #e7edef;
+}
+
+.edit-title-box span.active:after {
+    content:'\25BC';
+    position: absolute;
+    right: 26px;
+}
+
+.save-changes-box{
+	margin: 15px 0px;
+}
+
+/* style for rankings*/
+.ranking-view-table {
+	font-family: railway_font;
+}
+
+ 
+
+.ranking-view-table table td,
+.duel-member-list table td {
+  padding-top:0px;
+  padding-bottom:10px;
+  padding-right:0px;   
+}
+
+.ranking-view-table table td:first-child,
+.duel-member-list table td:first-child {
+  padding-left:0px;
+  padding-right:0;
+}
+
+.ranking-view-table .player-details p:first-child {
+	font-family: umberto_font;
+}
+
+.player-details .player-level{
+	color: #57a90f;
+    font-family: Arial !important;
+}
+
+.ranking-view-table .duel-profile-image {
+	width: 80px !important;
+}
+
+.ranking-view-table h3 {
+	color: #e47d06;
+	text-align: left;
+	font-family: umberto_font;
+	padding-left: 10px;
+    font-size: 44px;
+}
+.ranking-view-table .rank-medal-img {
+	width: 28px !important;
+}
+
+.ranking-specialty {
+	border: none;
+    font-size: 16px;
+    font-family: Arial;
+    color: #9a9696;
+    margin-left: 8px;
+}
+
+.user-rank-points {
+	width: 65px;
+    padding: 5px;
+    background-color: #e47d06;
+    float: right;
+    border-radius: 5px;
+    font-family: Ar;
+    color: #fff;
+    text-align: center;
+}
+
+.user-rank-points img {
+	width: 17px !important;
+}
+
+.medal-overlap {
+	position: absolute;
+    top: -80px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: -1;
+}
+
+/*peope view */
+.people-box {
+	font-family: railway_font !important;
+    padding: 10px 0px;
+    background: #23515a;
+    border: 5px solid #002b34;
+    width: 420px;
+}
+
+.search-person-input {
+	border-bottom: 2px solid whitesmoke;
+    padding: 0px 10px 10px 10px;
+    padding-bottom: 18px;
+}
+
+.people-table {
+	padding: 10px 15px;
+}
+
+.people-table table td {
+	color: #fff;
+    border-top: none;
+    padding: 7px;
+    font-size: 14px;
+}
+
+.people-table .online-status i.online{
+ 	color: #85ea2d;
+    padding-right: 5px;
+}
+
+.people-table .online-status i.offline{
+ 	color: #a7241b;
+    padding-right: 7px;
+}
+
+
+/*popup-logged-user*/
+.popup-logged-user {
+	display: inline-block;
+    position: relative;
+    top: 60px;
+}
+
+.notify-user-logged {
+	background-color: #003845;
+    display: inline-block;
+    padding-left: 16px;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 0px 15px 15px 0px;
+    position: relative;
+    left: -190px;
+    transition: all ease 1s;
+    -o-transition: all ease 1s;
+    -moz-transition: all ease 1s;
+    z-index: 99999;
+}
+
+.notify-user-logged.show {
+	left: 0px;
+	transition: all ease 1s;
+    -o-transition: all ease 1s;
+    -moz-transition: all ease 1s;
+}
+
+.popup-logged-user img {
+	width: 30px;
+    margin-left: 10px;
+}
+
 @media screen and (max-width: 992px) {
     .main-wrapper {
 		width: 70%;
@@ -555,14 +763,11 @@ input:focus::placeholder {
 	}
 }
 
-@media screen and (max-width: 400px) {
-    .duel-member-list {
-		width: 300px;
-	    min-height: 100px;
-	    max-height: 300px;
-	    border: 5px solid #002a33;
-	    background-color: #fff;
-	    border-radius: 20px;
+@media screen and (max-width: 460px) {
+    .duel-member-list,
+    .ranking-view-table {
+		width: 330px;
+	    max-height: 600px;
 	    margin-bottom: 65px;
 	    padding: 15px;
 	}
@@ -631,5 +836,60 @@ input:focus::placeholder {
 	.register-inputs {
 	    width: 310px;
 	}
+
+	/*settings*/
+	.edit-user-info {
+	    font-family: railway_font;
+	    width: 350px;
+	}
+
+	/*randking*/
+	.ranking-view-table h3 {
+	    font-size: 37px;
+	}
+
+	/*people view*/
+	.people-box {
+	    width: 360px !important;
+	}
 }
 
+@media (max-height: 600px) and (max-width: 460px) {
+	
+	.login-content img:first-child, 
+	.home-content img:first-child {
+		width: 90%;
+	}
+
+	.login-content p {
+	    font-size: 15px;
+	    margin-bottom: 35px;
+	    cursor: pointer;
+	}
+
+	#login-btn{
+		width: 54%;
+	}
+
+	.login-form-input input {
+	    margin-bottom: 11px;
+	    border-radius: 50px;
+	    font-size: 10px !important;
+	}
+
+	.profile-details {
+	    margin-top: 15px;
+	    margin-bottom: 15px;
+	}
+
+	.profile-details img {
+		width: 36%;
+	}
+	.user-options img {
+		width: 70% !important;
+	}
+
+	.match-players-info img{
+		width: 30% !important;
+	}
+}

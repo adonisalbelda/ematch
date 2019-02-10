@@ -2,7 +2,7 @@
 	<img src="images/ematch_banner.png">
 	<div class="profile-details">
 		<p class="user-profile-name">
-			ESHARK
+			<%= user ?  user.username : "empty" %>
 		</p>
 		<img src="images/profile.png">
 		<div class="user-level-status">
@@ -13,8 +13,5 @@
 	<div class="user-options">
 		<img src="images/find_battle.png" id="battle-btn"><br>
 		<img src="images/duel_player.png" id="duel-btn">
-		<p><%= message %></p>
 	</div>
 </div>
-
-<% include demo %>

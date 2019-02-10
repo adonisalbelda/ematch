@@ -1,0 +1,37 @@
+<div class="duel-top-option">
+	<div class="back-btn">
+		<img src="images/home.png" id="match-dir-home"><br>
+	</div>
+	<div class="logo-area">
+		<img src="images/settings.png">
+	</div>
+</div>
+<div class="people-view-content">
+	<div class="people-box">
+		<div class="form-box search-person-input">
+			<label for="">Find person <i class="fa fa-search"></i></label>
+			<input type="text">
+		</div>
+		<div class="people-table">
+			<table class="table">
+				<tbody>
+					<% for(var i=0; i < data.length; i++) { %>
+						<% if (data[i].id != user['id']) {%>
+						   	<tr class="<%= data[i].id %>-user" data-value="<%= data[i].id %>">
+								<td><%= data[i].username %></td>
+								<td class="text-center">3 hours ago</td>
+								<td class="text-right online-status">
+									<% if (data[i].is_online == 1) {%>
+										<i class="fa fa-circle online"></i>online
+									<% } else { %>
+										<i class="fa fa-circle offline"></i>offline
+									<% } %>
+								</td>
+						   	</tr>
+						<% } %>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

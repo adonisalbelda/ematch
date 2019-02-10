@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- <embed name="GoodEnough" src="/sounds/background_music.mp3" loop="true" autostart="true" height="0" class="back-music"> -->
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+	<script type="text/javascript" src="/js/socket.io.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/css/popup.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<script type="text/javascript">
+		var host = "http://localhost:3000/";
+		var isLogin = "<%= user ? user['id'] : '' %>";
+		var email = "<%= user ? user['email'] : '' %>";
+		var username = "<%= user ? user['username'] : '' %>";
+	</script>
+</head>
+<body>
+	<div class="main-wrapper">
+		<!-- <audio controls  loop hidden id="myAudio">
+			<source src="/sounds/background_music.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio> -->
+		<div class="popup-logged-user">
+		</div>
+		<div class="page-loading">
+			<img src="../images/load.gif" alt="">
+		</div>
+		<div class="searching-enemy-loading">
+			<p>
+				finding battle...
+			</p>
+		</div>
+		<div class="child-wrapper">
+			<% if(user['email']){ %>
+			     <% include home %> 
+			<% } else{ %>  
+				<div class="login-content">
+					<img src="images/ematch_banner.png">
+					<p>PvP Online Quiz Battle</p><%=user['id']%>
+					<div class="login-form-input form-box">
+						<input type="text" name="" placeholder="Username" class="log-username"><br>
+						<input type="password" name="" placeholder= "Password" class="log-password">
+					</div>
+					<img src="images/login_btn.png" id="login-btn">
+					<p class="signup-btn" id="register-btn">SIGN UP</p>
+				</div>
+			<% } %>
+		</div>
+		<div>
+			<% if(user['email']){ %>
+			     <% include demo %> 
+			<% } %>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/popup.js"></script>
+<script type="text/javascript" src="/js/ematch.js"></script>
+<script type="text/javascript" src="/js/countimer.js"></script>
+<script type="text/javascript" src="/js/moment.min.js"></script>
+</html>

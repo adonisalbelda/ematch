@@ -1,0 +1,95 @@
+<div class="duel-top-option">
+	<div class="back-btn">
+		<img src="images/prev_arrow.png" id="register-dir-login"><br>
+		Back
+	</div>
+	<div class="logo-area">
+		<img src="images/ematch_banner.png">
+	</div>
+	<!-- <% if (typeof errors == 'object' && errors) { %>
+		<p><%=errors%></p>
+	<% } %> -->
+</div>
+
+<div class="container">
+	<div class="register-content">
+		<div class="register-inputs">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="register-status">PERSONAL INFO</h1>
+				</div>
+			</div>
+			<div class="personal-info">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-tag"></i>First name :</label><br>
+							<input data-validation="length alphanumeric" data-validation-length="min4" class="first-name" placeholder="required">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-tag"></i>Last name :</label><br>
+							<input type="text" class="last-name" placeholder="required">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-envelope"></i>Email :</label><br>
+							<input type="email" class="envelope" placeholder="required">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="security-info status-hide">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-user-circle"></i>Username :</label><br>
+							<input type="text" class="username" placeholder="required">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-key"></i>Password :</label><br>
+							<input type="password" class="password" placeholder="required">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-box">
+							<label><i class="fa fa-lock"></i>Confirm password :</label><br>
+							<input type="password" class="c-password" placeholder="required">
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="profile-info status-hide">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-box text-center mb-3">
+							<img src="images/profile.png" id="profile-img-tag"><br>
+							<label>Ematch profile picture</label>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-box">
+							<!-- <label>Choose</label><br> -->
+							<input type="file" name="file" id="choose-pro-img" class="user-avatar">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 text-center">
+				<div class="register-form-submit">
+					<button id="form-prev-status" data-value="0">PREV</button>
+					<button id="form-next-status" data-value="0">NEXT</button><br>
+					<a href="" id="register-dir-login">I have an acoount already!</a>
+					<a href="" id="forgot-pass-btn">I forgot my account!</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
