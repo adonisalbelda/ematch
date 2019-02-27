@@ -7,9 +7,9 @@ $(document).ready(function(){
 
 	$(document).on('click', 'body', function() {
 		var myAudio = document.getElementById('myAudio');
-		// if (!myAudio.currentTime) {
-		// 	$('#myAudio').trigger('play');
-		// }
+		if (!myAudio.currentTime) {
+			$('#myAudio').trigger('play');
+		}
 	});
 
 
