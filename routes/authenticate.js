@@ -116,6 +116,22 @@ router.post('/login',[
 	}
 });
 
+router.post('/logout', (req, res) => {
+	mysqlConf.getConnection(function(error, tempCount){
+		if (!!error){
+			tempCount.release();
+			console.log("error in the query");
+		} else {
+			console.log("query successed");
+			tempCount.query("UPDATE  tbl_students SET is_online = '0' WHERE id = '"+req.body.id+"'", function(error, rows, fields){
+				req.session.destroy();
+				tempCount.release();
+				return res.send({success: req.body.id});
+			});
+		}
+	});
+});
+
 router.post('/register', function(req, res){
 	res.render('register');	
 });

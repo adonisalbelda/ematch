@@ -19,7 +19,7 @@ function ematchModel(argument) {
 
 	this.socket.on('message', function(data){
 		var user_id = data.user_id;
-		var user_row = $('.people-table table').find('.'+user_id+"-user");
+		var user_row = $('.people-table').find('.'+user_id+"-user");
 		$(user_row).find('.online-status i').removeClass('offline').addClass('online');
 		$('.total-online').text(data.online - 1);
 	});
@@ -181,6 +181,13 @@ function ematchModel(argument) {
 		}, msg);
 	});
 
+	this.socket.on('update-users', function(data){
+		var user_id = data.id;
+		var user_row = $('.people-table').find('.'+user_id+"-user");
+		$(user_row).find('.online-status i').removeClass('online').addClass('offline');
+		$('.total-online').text(data.online - 1);
+	});
+
 	this.socket.on('updateStatus', function(data){
 		$('.match-players-info .user-'+data['data'].id+ '').find('.match-question-status span').removeClass('selected');
 		$('.match-players-info .user-'+data['data'].id +'').find('.match-question-status').find('span').eq(data['data'].item).addClass('selected');
@@ -234,10 +241,37 @@ function ematchModel(argument) {
 	        data : JSON.stringify(this.formData),
 	        processData: false,
 			contentType: "application/json",
-	        success: function(data) {
+	        success: function(data) {	
 	        	popup.hide_loader();
 				if (data.hasOwnProperty("success")) {
 					elem.socket.emit('send-alert', {room: "users", username: elem.formData['username'], email: elem.formData['email'] });
+					elem.formData = {};
+					location.reload();	
+				} else {
+					dialog.showErrors(data, "Invalid authentication.");	    		
+				}
+
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	        	popup.hide_loader();
+	            alert('error ' + textStatus + " " + errorThrown);
+	        }
+    	});
+	}
+
+	this.userLogout = function (id) {
+		var popup = this;
+		this.show_loader();
+		$.ajax({
+	        url: "/authenticate/logout",
+	        method:"POST",
+	        data : JSON.stringify(this.formData),
+	        processData: false,
+			contentType: "application/json",
+	        success: function(data) {
+	        	popup.hide_loader();
+				if (data.hasOwnProperty("success")) {
+					elem.socket.emit('send-notification', {room: "users", id: id});
 					elem.formData = {};
 					location.reload();	
 				} else {

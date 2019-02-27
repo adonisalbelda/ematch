@@ -13,6 +13,13 @@ $(document).ready(function(){
 	});
 
 
+	$(document).on('click', '.game-status-option', function(){
+		ematch.formData['id'] = isLogin;
+		dialog.confirm("Are you sure you want to sign out ?", function(){
+			ematch.show_loader();
+			ematch.userLogout(isLogin);
+		}, "Confirm ?");
+	});
 
 	$(document).on('click', '#login-btn', function(e) {
 		e.preventDefault();

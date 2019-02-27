@@ -681,6 +681,35 @@ input:focus::placeholder {
 	display: none;
 }
 
+.game-status-option {
+	background-color: #24798d;
+	margin-bottom: 10px;
+}
+
+.game-status-option p {
+	margin-bottom: 0px;
+    color: #ece8e8;
+    font-family: Arial;
+    text-align: left;
+    padding: 5px 0px;
+    padding-left: 10px;
+    font-size: 15px;
+}
+
+.game-status-option i {
+	color: #fff !important;
+    position: absolute;
+    right: 25px;
+    top: 8px;
+    font-size: 15px;
+}
+
+.edit-head-box .form-box input {
+	border-radius: 0px;
+    padding: 5px 0px;
+	padding-left: 5px;
+}
+
 .edit-title-box span {
 	background-color: #002b34;
     display: block;
@@ -804,10 +833,53 @@ input:focus::placeholder {
     padding-bottom: 18px;
 }
 
+.search-person-input input {
+    border-radius: 0px;
+}
+
+.search-person-input i {
+	position: absolute;
+    right: 18px;
+    top: 26px;
+    font-size: 15px;
+}
+
 .people-table {
 	padding: 0px 15px;
 	height: 350px;
     overflow-y: auto;
+}
+
+.members-status {
+	overflow: hidden;
+    background-color: #244951;
+    padding: 5px 5px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.members-status img{
+	width: 40px;
+    float: left;
+    margin-right: 10px;
+}
+
+.members-status p {
+	text-align: left;
+    margin-left: 40px;
+    margin-bottom: 0px;
+    font-size: 15px;
+}
+
+.members-status p.member-activity-status {
+	font-size: 8px !important;
+}
+
+.members-status-option {
+	position: absolute;
+    top: 12px;
+    right: 7px;
+    font-size: 12px;
 }
 
 /* width */

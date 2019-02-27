@@ -345,6 +345,13 @@ io.on('connection', function(socket){
 		});
 	});
 
+	socket.on("send-notification", ({room, id}) => {
+		socket.to(room).emit("update-users", {
+			id: id,
+			online: connections.length,
+		});
+	});
+
 	socket.on("typing", room => {
 		socket.to(room).emit("typing", "someone is typing");
 	});

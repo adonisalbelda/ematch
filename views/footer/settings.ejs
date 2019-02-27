@@ -15,6 +15,14 @@
 	</div>
 	<div class="edit-user-info">
 		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="game-status-option">
+						<i class="fa fa-user-circle"></i>
+						<p>I want to sign-out</p>
+					</div>
+				</div>
+			</div>
 			<div class="edit-personal-info edit-head-box">
 				<div class="row">
 					<div class="col-12 edit-title-box">
@@ -24,28 +32,24 @@
 				<div class="row edit-box-content">
 					<div class="col-6">
 						<div class="form-box">
-							<label><i class="fa fa-tag"></i>First name :</label><br>
-							<input data-validation="length alphanumeric" class="first-name" placeholder="required" value="<%=data['fname']%>">
+							<input data-validation="length alphanumeric" class="first-name" placeholder="first name" value="<%=data['fname']%>">
 						</div>
 					</div>
 					<div class="col-6">
 						<div class="form-box">
-							<label><i class="fa fa-tag"></i>Last name :</label><br>
-							<input type="text" class="last-name" placeholder="required" 
+							<input type="text" class="last-name" placeholder="last name" 
 							value="<%=data['lname']%>">
 						</div>
 					</div>
 					<div class="col-6">
 						<div class="form-box">
-							<label><i class="fa fa-envelope"></i>Email :</label><br>
-							<input type="email" class="envelope" placeholder="required"
+							<input type="email" class="envelope" placeholder="email"
 							value="<%=data['email']%>">
 						</div>
 					</div>
 					<div class="col-6">
 						<div class="form-box">
-							<label><i class="fa fa-envelope"></i>Email :</label><br>
-							<input type="email" class="envelope" placeholder="required" value="<%=data['course']%>">
+							<input type="email" class="envelope" placeholder="Email" value="<%=data['course']%>">
 						</div>
 					</div>
 					<div class="col-12 text-right save-changes-box">
@@ -63,21 +67,18 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="form-box">
-								<label><i class="fa fa-user-circle"></i>Username :</label><br>
-								<input type="text" class="username" placeholder="required"
+								<input type="text" class="username" placeholder="username"
 								value="<%=data['username']%>">
 							</div>
 						</div>
 						<div class="col-6">
 							<div class="form-box">
-								<label><i class="fa fa-key"></i>Password :</label><br>
-								<input type="password" class="password" placeholder="required">
+								<input type="password" class="password" placeholder="password">
 							</div>
 						</div>
 						<div class="col-6">
 							<div class="form-box">
-								<label><i class="fa fa-lock"></i>Confirm password :</label><br>
-								<input type="password" class="c-password" placeholder="required">
+								<input type="password" class="c-password" placeholder="confirm password">
 							</div>
 						</div>
 						<div class="col-12 text-right save-changes-box">
@@ -96,19 +97,16 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="form-box">
-								<label><i class="fa fa-user-circle"></i>Username :</label><br>
 								<input type="text" class="username" placeholder="required">
 							</div>
 						</div>
 						<div class="col-6">
 							<div class="form-box">
-								<label><i class="fa fa-key"></i>Password :</label><br>
 								<input type="password" class="password" placeholder="required">
 							</div>
 						</div>
 						<div class="col-6">
 							<div class="form-box">
-								<label><i class="fa fa-lock"></i>Confirm password :</label><br>
 								<input type="password" class="c-password" placeholder="required">
 							</div>
 						</div>
