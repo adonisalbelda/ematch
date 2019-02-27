@@ -1049,7 +1049,7 @@ input:focus::placeholder {
 
 @media screen and (max-width: 992px) {
     .main-wrapper {
-		width: 70%;
+		width: 100%;
 	}
 }
 
@@ -1179,7 +1179,7 @@ input:focus::placeholder {
 	}
 }
 
-@media (max-height: 600px) and (max-width: 460px) {
+@media screen and (max-width: 460px) {
 	
 	.login-content img:first-child, 
 	.home-content img:first-child {
@@ -1216,5 +1216,11 @@ input:focus::placeholder {
 
 	.match-players-info img{
 		width: 30% !important;
+	}
+}
+
+@media screen and (max-width: 350px) {
+	.main-wrapper {
+	    width: 100%;
 	}
 }
