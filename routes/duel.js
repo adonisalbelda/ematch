@@ -15,10 +15,7 @@ router.post('/duel', function(req, res){
 					return res.send({errors: error});
 				} else {
 					// res.render("login", {value: rows[0]});
-					if (rows.length > 0) {
-						return res.render('duel', {data: rows});
-					}
-					return res.send({errors : [{msg: "This account does not exist."}]});
+					return res.render('duel', {data: rows});
 				}		
 			});
 		}	

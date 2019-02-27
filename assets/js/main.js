@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	
-	ematch.hide_loader();
 	$(window).on('load', function() {
 		ematch.hide_loader();
 		$('body').trigger('click');
@@ -83,43 +82,124 @@ $(document).ready(function(){
         ematch.formData["fileToUpload"] =  file;
 	});
 
+	var next = false ;
+	var number_ofItems = 3;
+	var nextItem = 1;
+	$(document).on('click', '.next-arr-btn', function(){
+		
+		if (next == false) {
+			return false;
+		}
+
+		if ($('.answer-option').hasClass('selected')) {
+			var answer = $('.answer-option.selected').attr("data-value");
+			if (parseInt(answer) == 1) {
+				correct_answer++;
+			} else {
+				wrong_answer++;
+			}
+
+			item_finished++;
+			nextItem++;
+			$('.item-left').text(number_ofItems - item_finished);
+			$('.level-count-status span').text(nextItem);
+		}
+
+		if (item_finished == (number_ofItems-1)) {
+			$('.next-arr-btn').text("Done ").append('<img src="images/next_arrow.png">');
+		}
+
+		$('.answer-option').find('.choice-selected').remove();
+		$('.answer-option').removeClass('selected');
+
+		questions = JSON.parse(localStorage.getItem('questions'));
+        current_question++;
+
+        if ( item_finished == number_ofItems) {
+        	var room = $('.match-content').attr("data-room");
+        	var info = {
+        		email: email, 
+        		room: room, 
+        		score: correct_answer, 
+        		id:isLogin, 
+        		username: username, 
+        		points: localStorage.getItem('my_points') === null ? points : localStorage.getItem('my_points'),
+        		rank: localStorage.getItem('my_rank') === null ? rank : localStorage.getItem('my_rank'), 
+        		timer: (minute * 60) + seconds,
+        	}
+
+			ematch.socket.emit('duel-result', info);
+			return false;
+		}
+
+        if (current_question == number_ofItems) {
+        	current_question = 0;
+        }
+
+        $('.match-question').text(questions[current_question]['question']);
+        ematch.getquestionChoices(questions[current_question]['id']);
+
+        var room = $('.match-content').attr('data-room');
+        ematch.show_loader();
+        ematch.socket.emit('updateItemStatus', {room: room, item: current_question, email: email, id: isLogin });
+		
+		next = false;
+	});
+
+	$(document).on('click', '.hide-pr', function(){
+		$('.preview-result-overlay').fadeOut(500);
+	});
+
+	$(document).on('click', '.duel-done-btn', function() {
+		alert("dad");
+	});
+	// console.log(JSON.parse(localStorage.getItem('questions')), 'ds');
+
 	$(document).on('click', '#battle-btn', function() {
-		var mytext = "hello world";
-		$('.searching-enemy-loading').removeClass('hide').addClass('show');
 
 		$.ajax({
-	        url: "/match",
-	        method:"POST",
-	        data : {
-	        	text : mytext
-	        },
+	        url: "/findCategory",
+	        method:"GET",
 	        contentType: "application/x-www-form-urlencoded",
 	        success: function(data) {
-	            $('.child-wrapper').html(data);
-            	$('.searching-enemy-loading').addClass('hide').removeClass('show');
-	            $('#match-dir-home').attr("data-value", "home");
+	           if (data.hasOwnProperty("skills")) {
+					dialog.findMatch(data['skills'], function(data) {
+						$('.searching-enemy-loading').addClass('show');
+						ematch.findMatch("findMatch", data);
+					});
+				} else {
+					dialog.showErrors(data, "Erros found.")
+				}
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
 	            alert('error ' + textStatus + " " + errorThrown);
 	        }
     	});
+
+
 	});
 
+	$(document).on('click', '.answer-option', function() {
+		next = true;
+		$('.answer-option').removeClass('selected');
+		$('.answer-option').find('.choice-selected').remove();
+		$(this).append('<span class="choice-selected"><i class="fa fa-check"></i></span>');
+		$(this).addClass('selected');
+	});
+
+	$(document).on('click', '.close-find-match', function() {
+		removeInterval = true;
+		$('.searching-enemy-loading').removeClass('show');
+	});
 
 	$(document).on('click', '#duel-btn', function() {
-		var mytext = "hello world";
 		ematch.show_loader();
-
 		$.ajax({
 	        url: "/duel",
 	        method:"POST",
-	        data : {
-	        	text : mytext
-	        },
 	        contentType: "application/x-www-form-urlencoded",
 	        success: function(data) {
 	            $('.child-wrapper').html(data);
-	            $('.searching-enemy-loading').addClass('hide').removeClass('show');
 	            $('#duel-dir-home').attr("data-value", "home");
 	            ematch.hide_loader();
 	        },
@@ -140,7 +220,6 @@ $(document).ready(function(){
 		var url = "people";
 		ematch.home_Directory(url, {}, function(data) {
 			ematch.socket.emit('message', {room: "users", message: isLogin});
-
 		});
 	});
 
@@ -149,8 +228,16 @@ $(document).ready(function(){
 		ematch.home_Directory(url, {});
 	});
 
+	$(document).on('click', '.find-skills-list div', function(){
+		$('.find-skills-list div i').remove();
+		$('.find-skills-list div').removeClass('selected');
+		$(this).prepend('<i class="fa fa-check"></i>');
+		$(this).addClass('selected');
+	});
+	// dialog.duelCountdown();
+
 	$(document).on('click', '#duel-selected-player', function() {
-		var id = $(this).closest('td').attr("data-value");
+		var id = $(this).closest('td').attr("data-value");	
 		var name = $(this).closest('tr').find('.duel-name').text();
 		
 		var data = {
@@ -161,13 +248,14 @@ $(document).ready(function(){
 			}
 
 		ematch.socket.emit("request-duel", data);
-		dialog.request_Duel("Waiting for "+ name +" to accept your request");
+		dialog.request_Duel("Waiting for "+ name +" to accept your request", function(){
+			ematch.socket.emit("cancel-request", data);
+		});
 		
 		$('.timer').countimer({
 			autoStart : true
 		});
 	});
-
 
 	$(document).on('click', '.edit-title-box', function() {
 		var popup = this;

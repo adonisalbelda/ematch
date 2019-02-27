@@ -61,27 +61,60 @@ function CustomModal() {
 		);
 	};
 
-	this.request_Duel = function($message) {
+	this.reject_Duel = function($message) {
 		this.init();
-		var dialog = '<div class="dialog request-dialog"></div>';
+		var dialog = '<div class="dialog dialog-show-request"></div>';
 		popup = this;
 
 		$('.dialog-wrapper').html(
-			$(dialog).append('<div class="dialog-head"> Time elapsed : <span class="timer well"></span></div>')
-			.append('<div class="dialog-body request-overlay">' + $message + '...</div>')
+			$(dialog).append($('<div class="dialog-body"></div>').append(
+				"<div><img src='../images/profile.png' class='duel-waiting-player'>"+
+				"<span class='user-tag-text'>You</span><div>"
+			).append($('<div class="duel-actions"></div>')
+			.append('<p>'+$message+'.</p>')
 			.append(
-				$('<div class="dialog-foot"></div>').html(
-					$('<button class="btn btn-primary popup-btn">Cancel request</button>').click(function() {
-						popup.closePopup();
+					$('<button class="btn btn-default popup-decline-btn">Okay</button>').click(function() {
+						$('.dialog-wrapper').fadeOut(500, function() {
+							$(this).remove();
+						});
 					})
-				)
-			)
+			))
+			.append(
+				"<div><img src='../images/profile.png' class='duel-sender-player'>"+
+				"<span class='opponent-tag-text'>Rival</span></div>"
+			))
+		);
+	};
+
+	this.request_Duel = function($message, callback) {
+		this.init();
+		var dialog = '<div class="dialog dialog-show-request"></div>';
+		popup = this;
+
+		$('.dialog-wrapper').html(
+			$(dialog).append($('<div class="dialog-body"></div>').append(
+				"<div><img src='../images/profile.png' class='duel-waiting-player'>"+
+				"<span class='user-tag-text'>You</span><div>"
+			).append($('<div class="duel-actions"> Time elapsed : <span class="timer well"></span></div>')
+			.append('<p>'+$message+'.</p>')
+			.append(	
+					$('<button class="btn btn-default popup-decline-btn">Cancel</button>').click(function() {
+						$('.dialog-wrapper').fadeOut(500, function() {
+							$(this).remove();
+							callback();
+						});
+					})
+			))
+			.append(
+				"<div><img src='../images/profile.png' class='duel-sender-player'>"+
+				"<span class='opponent-tag-text'>Rival</span></div>"
+			))
 		);
 	};
 
 	this.confirm = function($msg, callback ,$heading = '') {
 		this.init();
-		var dialog = '<div class="dialog"></div>';
+		var dialog = '<div class="dialog "></div>';
 		popup = this;
 
 		$('.dialog-wrapper').html(
@@ -108,43 +141,135 @@ function CustomModal() {
 
 	this.show_request = function($msg, callback ,$heading = '', reject) {
 		this.init();
-		var dialog = '<div class="dialog"></div>';
+		var dialog = '<div class="dialog dialog-show-request"></div>';
 		popup = this;
 
 		$('.dialog-wrapper').html(
-			$(dialog).append('<div class="dialog-head">' + $heading + '</div>')
-			.append('<div class="dialog-body">' + $msg + '</div>')
+			$(dialog).append($('<div class="dialog-body"></div>').append(
+				"<div><img src='../images/profile.png' class='duel-waiting-player'>"+
+				"<span class='user-tag-text'>You</span><div>"
+			).append($('<div class="duel-actions"></div>')
+			.append('<span>'+$msg+'.</span>')
 			.append(
-				$('<div class="dialog-foot"></div>')
-				.append(
-					$('<button class="btn btn-default popup-btn">Decline</button>').click(function() {						
-						popup.closePopup();
-						reject();
-					})
-				)
-				.append(
-					$('<button class="btn btn-primary popup-btn">Accept</button>').click(function() {
+					$('<button class="btn btn-primary popup-accept-btn">Accept</button>').click(function() {
 						$('.dialog-wrapper').fadeOut(500, function() {
 							$(this).remove();
 							callback();
 						});
 					})
+			)
+			.append(
+					$('<button class="btn btn-default popup-decline-btn">Decline</button>').click(function() {						
+						popup.closePopup();
+						reject();
+					})
 				)
 			)
+			.append(
+				"<div><img src='../images/profile.png' class='duel-sender-player'>"+
+				"<span>Dueller</span></div>"
+			))
 		);
 	};
 
 	this.duelCountdown = function() {
 		this.init();
 		var dialog = "<div class='duelTimer'> " +
-					 "<p>THE GAME WILL <br></br> START IN</p>" +
+					 "<p>DUEL ACCEPTED</p>" +
 					 "<p class='timerCount'>5</p>" +
-					 "<p class='timer-reminder text-left'><span>Reminder: </span> Use Messages for web to send SMS, MMS and chat messages from your computer."+ 
-					 "Open the Messages app on your Android phone to get started.</p>" +
+					 "<p>THE GAME WILL START IN</p>"
 					 "</div>";
 
 		$('.dialog-wrapper').html(dialog);
 	};
+
+	this.findMatch = function(skills, callback) {
+		this.init();
+		var dialog = '<div class="dialog-find-match"></div>';
+		popup = this;
+		var list_of_skills = "";
+		console.log(skills);
+		for (var i = 0; i < skills.length; i++) {
+			list_of_skills += "<div data-value='"+skills[i].id+"'>"+skills[i].name+"</div>";
+		}
+
+		$('.dialog-wrapper').html(
+			$(dialog).append($('<div class="dialog-body"></div>')
+			.append($('<div id="close-findmatch-box"><img src="../images/close.png"></div><br>').click(function(){
+				popup.closePopup();
+			})
+			)
+			.append($("<div class='find-skills-list'>" +
+						"<p class='categories-list'>CHOOSE MASTERY</p>"+
+						list_of_skills +
+					"</div>"
+			))
+			.append($('<div class="duel-actions"></div>')
+			.append(
+					$('<button class="btn btn-default popup-accept-btn">Find Match</button>').click(function() {						
+						if ($('div.selected').text() != "") {
+							popup.closePopup();
+							var data = {
+								id : $('div.selected').attr("data-value"),
+								text : $('div.selected').text(),
+							}
+
+							callback(data);
+						}
+					})
+				)
+			))
+		);
+	}
+
+	this.matchReady = function(callback , reject) {
+		this.init();
+		var dialog = '<div class="dialog dialog-show-request"></div>';
+		popup = this;
+
+		$('.dialog-wrapper').html(
+			$(dialog).append($('<div class="dialog-body"></div>')
+			.append($('<div class="match-actions"></div>')
+			.append('<span>Your game is ready.</span>')
+			.append(
+					$('<button class="btn btn-primary popup-accept-btn">Accept</button>').click(function() {
+						$('.dialog-wrapper').fadeOut(500, function() {
+							$(this).remove();
+							callback();
+						});
+					})
+			)
+			.append(
+					$('<button class="btn btn-default popup-decline-btn">Decline</button>').click(function() {						
+						popup.closePopup();
+						reject();
+					})
+				)
+			))
+		);
+	}
+
+	this.waitingResult = function(callback, msg) {
+		this.init();
+		var dialog = '<div class="dialog dialog-show-request"></div>';
+		popup = this;
+
+		$('.dialog-wrapper').html(
+			$(dialog).append($('<div class="dialog-body"></div>')
+			.append($('<div class="match-actions"></div>')
+			.append('<span>'+msg+' .</span>')
+			)
+			.append(
+					$('<button class="btn btn-primary popup-accept-btn notify-me-hide">Just notify me.</button>').click(function() {
+						$('.dialog-wrapper').fadeOut(500, function() {
+							$(this).remove();
+							callback();
+						});
+					})
+			)
+			)
+		);
+	}
 
 	this.promt = function($msg, callback ,$heading = '') {
 		this.init();

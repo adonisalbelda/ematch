@@ -2,18 +2,28 @@
 <html>
 <head>
 	<title></title>
-	<!-- <embed name="GoodEnough" src="/sounds/background_music.mp3" loop="true" autostart="true" height="0" class="back-music"> -->
-	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+	<!-- <embed name="GoodEnough" src="/sounds/background_music.mp3" loop="true" autostart="true" height="0" class="back-music">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/> -->
 	<script type="text/javascript" src="/js/socket.io.js"></script>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/css/popup.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/bootstrap.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	<script type="text/javascript">
 		var host = "http://localhost:3000/";
 		var isLogin = "<%= user ? user['id'] : '' %>";
 		var email = "<%= user ? user['email'] : '' %>";
 		var username = "<%= user ? user['username'] : '' %>";
+		var points = "<%= user ? user['points'] : '' %>";
+		var rank = "<%= user ? user['rank'] : '' %>";
+		var questions = "";
+		var current_question = 0;
+		var correct_answer = 0;
+		var wrong_answer = 0;
+		var item_finished = 0;
+		var minute = 1;
+		var seconds = 60;
+		var removeInterval = false;
 	</script>
 </head>
 <body>
@@ -28,9 +38,15 @@
 			<img src="../images/load.gif" alt="">
 		</div>
 		<div class="searching-enemy-loading">
-			<p>
-				finding battle...
-			</p>
+			<span>
+				FINDING MATCH
+			</span>
+			<span>
+				<img src="images/match-loading.gif" alt="">
+			</span>
+			<span class="close-find-match">
+				<i class="fa fa-times">d</i>
+			</span>
 		</div>
 		<div class="child-wrapper">
 			<% if(user['email']){ %>
@@ -61,4 +77,5 @@
 <script type="text/javascript" src="/js/ematch.js"></script>
 <script type="text/javascript" src="/js/countimer.js"></script>
 <script type="text/javascript" src="/js/moment.min.js"></script>
+<script type="text/javascript" src="/js/animatenumber.min.js"></script>
 </html>

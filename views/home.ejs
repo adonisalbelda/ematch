@@ -2,12 +2,21 @@
 	<img src="images/ematch_banner.png">
 	<div class="profile-details">
 		<p class="user-profile-name">
-			<%= user ?  user.username : "empty" %>
+			<%= user ?  user.username : "" %>
 		</p>
-		<img src="images/profile.png">
+		<div class="home-profile-img">
+			<img src="images/profile.png">
+			<div class="home-user-points">
+				<span>
+					<img src="images/trophy.png">
+					<small>
+						<%= user ?  user.points : "1000" %>
+					</small>
+				</span>
+			</div>
+		</div>
 		<div class="user-level-status">
-			<span>Level 6</span>
-			<span>Rank: 150</span>
+			<span>RANK <span class="user-rank"><%= user ?  user.rank : "not rank" %></span> </span>
 		</div>
 	</div>
 	<div class="user-options">

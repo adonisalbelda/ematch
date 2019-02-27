@@ -23,8 +23,6 @@ router.post('/addMember',[
 	check('c_password', "Your password do not match.").not().isEmpty(),
 	] , (req, res) => {
 
-	console.log(req.body);
-
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
@@ -33,6 +31,10 @@ router.post('/addMember',[
 		
 		if (req.body.password !== req.body.c_password) {
 			return res.json({errors : "Password do not match"});
+		}
+
+		if (req.body.username.length > 7 ) {
+			return res.json({errors : "Username must not above 8 characters"});
 		}
 
 		mysqlConf.getConnection(function(error, tempCount){
@@ -55,6 +57,7 @@ router.post('/addMember',[
 					req.session.username = req.body.username;
 					req.session.email = req.body.email;
 					req.session.course = 'bscs';
+					req.session.points = 1000;
 
 					return res.send({success: "done"});
 				}		
@@ -94,6 +97,8 @@ router.post('/login',[
 						req.session.username = rows[0]['username'];
 						req.session.email = rows[0]['email'];
 						req.session.course = rows[0]['course'];
+						req.session.points = rows[0]['points'];
+						req.session.rank = rows[0]['rank'];
 
 						tempCount.query("UPDATE  tbl_students SET is_online = '1' WHERE id = '"+rows[0]['id']+"'", function(error, rows, fields){
 							if (!!error){

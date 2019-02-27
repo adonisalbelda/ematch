@@ -22,8 +22,187 @@
     box-shadow: 1px 1px 19px 1px #0ff;
 }
 
+.dialog-wrapper .dialog-show-request,
+.dialog-wrapper .dialog-show-request .dialog-body {
+    background-color: #ff9000 !important;
+    width: 340px;
+    box-shadow: none;
+    padding: 0px !important;
+}
+
 .dialog-wrapper .request-dialog {
     width: 300px;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body div {
+    float: left;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body div:first-child, 
+.dialog-wrapper .dialog-show-request .dialog-body div:last-child {
+    width: 20%;
+    padding-top: 38px;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body div.duel-actions, 
+.dialog-wrapper .dialog-show-request .dialog-body div.match-actions {
+    width: 60%;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body div.match-actions {
+    width: 100%;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body div.match-actions .popup-accept-btn {
+    position: relative;
+    top: 16px;
+    padding: 10px 50px 0px 50px;
+}
+
+.dialog-wrapper .dialog-show-request .notify-me-hide {
+    margin-top: 45px !important;
+    margin-bottom: 20px !important;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body img {
+    width: 50px;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body .duel-waiting-player {
+    float: right;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body .duel-sender-player {
+    border: 3px solid #38ae34;
+    border-radius: 50px;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body .user-tag-text {
+    margin-left: 15px;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body .opponent-tag-text {
+    margin-left: 12px;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body button {
+    display: block;
+    margin: 0 auto;
+}
+
+.dialog-wrapper .duel-actions  .popup-accept-btn {
+    color: #fff;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: 20px;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body p{
+    font-family: umberto_font !important;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    letter-spacing: 1px;
+}
+
+.dialog-wrapper .dialog-find-match{
+    width: 335px;
+    background-color: #616d62;
+    box-shadow: none; 
+    margin: auto;
+    margin-top: 230px;
+    box-shadow: none;
+}
+
+.dialog-wrapper .dialog-find-match .dialog-body {
+    background-color: #edf0f1;
+    border: 8px solid #003d4a;
+    position: relative;
+    width: 100%;
+}
+
+#close-findmatch-box {
+    position: absolute;
+    top: -28px;
+    left: -28px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.dialog-find-match .find-skills-list div {
+    width: 50%;
+    float: left;
+    text-align: center;
+    color: #33a033;
+    cursor: pointer;
+    font-family: umberto_font;
+    letter-spacing: 2px;
+    font-size: 16px;
+}
+
+.dialog-find-match .find-skills-list div:hover {
+    color: #000;
+}
+
+.categories-list {
+    text-align: center;
+    color: #191818;
+    font-size: 24px;
+    font-family: umberto_font;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body .popup-decline-btn {
+    background-color: transparent;
+    margin-top: 20px;
+}
+
+.dialog-wrapper .dialog-show-request .dialog-body .popup-accept-btn, 
+.dialog-wrapper .duel-actions  .popup-accept-btn {
+    background-color: #38ae34;
+    font-family: umberto_font;
+    padding: 10px 25px 0px 25px;
+    border: none;
+    font-size: 19px;
+    margin-top: -5px;
+
+    animation-name: flash;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    //Firefox 1+
+    -webkit-animation-name: flash;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    //Safari 3-4
+    -moz-animation-name: flash;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+}
+
+@keyframes flash {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}
+
+//Firefox 1+
+@-webkit-keyframes flash {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}
+
+//Safari 3-4
+@-moz-keyframes flash {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
 }
 
 .dialog-wrapper .dialog .dialog-head {
@@ -40,6 +219,7 @@
     padding: 20px 20px;
     color: #f3efef;
     font-size: 14px;
+    overflow: hidden;
 }
 
 .dialog-wrapper .dialog .dialog-body ul li {
@@ -51,8 +231,8 @@
 }
 
 .duelTimer {
-    color: #797878;
-    background-color: #00414f;
+    color: #fff;
+    background-color: #ff9000;
     width: 80%;
     position: absolute;
     left: 50%;
@@ -60,23 +240,44 @@
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
-    padding: 60px 0px;
-    box-shadow: 1px 1px 19px 1px #0ff;
+    padding: 25px 0px;
 }
 
 .duelTimer p:first-child {
-    font-size: 20px;
+    font-size: 34px;
     font-weight: bold;
-    color: #ccd1d2;
     font-family: railwayBold_font;
     letter-spacing: 6px;
-    line-height: 13px;
+    line-height: 33px;
 }
 
 .duelTimer p.timerCount {
     font-size: 120px;
     margin-bottom: 20px 0px;
     color: #fff;
+    -webkit-animation: zoom 1s infinite; /* Chrome, Safari, Opera */
+    animation: zoom 1s infinite;
+}
+
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(1,1);
+    }
+    to {
+        -webkit-transform: scale(1.5,1.5);
+    }
+}
+
+/* Standard syntax */
+@keyframes zoom {
+   from {
+        transform: scale(1,1);
+   }
+   to {
+        transform: scale(1.5,1.5);
+   }
 }
 
 .duelTimer p.timer-reminder {

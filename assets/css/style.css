@@ -154,9 +154,10 @@ input:focus::placeholder {
 }
 
 .user-level-status span {
-	margin-left: 20px;
 	display: inline-block;
-	padding: 5px 0px;
+    padding-top: 10px;
+    letter-spacing: 4px;
+    text-align: center;
 }
 
 .user-profile-name {
@@ -189,12 +190,49 @@ input:focus::placeholder {
     top: 4px;
 }
 
+.home-user-points {
+	background-color: #e57e07;
+    width: 63px;
+    font-size: 10px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: -13px;
+    border: 2px solid #ff9e12;
+    border-radius: 5px;
+}
+
+.home-user-points img {
+	width: 14px;
+}
+.home-user-points small {
+	font-size: 12px;
+    position: relative;
+    top: 3px;
+    font-family: Arial;
+    top: 1px;
+    left: -3px;
+}
+
 /* user settings*/
 .user-home-settings {
 	width: 100%;
     text-align: center;
     position: absolute;
-    bottom: 15px;
+    bottom: 30px;
+}
+
+.user-home-settings span {
+	background-color: #d81212;
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 50px;
+    color: #fff;
+    position: relative;
+    top: -10px;
+    left: -12px;
+    font-size: 12px;
 }
 
 /*style for duel */
@@ -206,7 +244,7 @@ input:focus::placeholder {
 .back-btn {
 	position: relative;
 	left: 40px;
-	top: 20px;
+	top: -5px;
 	color: #fff;
 	z-index: 1;
 }
@@ -214,16 +252,24 @@ input:focus::placeholder {
 .logo-area {
     text-align: center;
     position: relative;
-    top: 18px;
+    top: -56px;
 }
 
 .logo-area img {
 	width: 40%;
 }
 
+.footer-logo-area {
+	top: 0px;
+}
+
+.duel-logo-area {
+	top: 5px;;
+}
+
 .duel-lobby-text {
 	letter-spacing: 5px;
-    font-size: 35px;
+    font-size: 56px;
     color: orange;
     margin-top: 65px;
 }
@@ -231,14 +277,21 @@ input:focus::placeholder {
 .duel-member-list,
 .ranking-view-table {
 	width: 400px;
-	border: 5px solid #002a33;
-	background-color: #fff;
-	margin-bottom: 65px;
-	padding: 15px 15px 15px 10px;
+    max-height: 392px;
+    overflow-y: auto;
+    border: 5px solid #236f7f;
+    background-color: #fff;
+    margin-bottom: 65px;
+    padding: 15px 0px 0px 0px;
 }
 
 .duel-member-list table tbody tr {
-	margin-bottom: 10px;
+    border-bottom: 1px solid #bec6c7;
+    line-height: 50px;
+}
+
+.duel-member-list table tbody tr td:last-child {
+	margin-right: 5px;
 }
 
 .duel-profile-image {
@@ -342,6 +395,7 @@ input:focus::placeholder {
 	line-height: 7px;
     font-size: 32px;
     color: orange;
+    margin-bottom: 0px;
 }
 
 .player-details p {
@@ -350,11 +404,11 @@ input:focus::placeholder {
     margin: 0px;
 }
 
-.right-player .player-details p:last-child {
+.right-player .player-details p {
 	text-align: right;
 }
 
-.left-player .player-details p:last-child {
+.left-player .player-details p {
 	text-align: left;
 }
 
@@ -371,10 +425,6 @@ input:focus::placeholder {
     box-sizing: border-box;
 }
 
-.match-question-status span{
-	 float: left;
-}
-
 .right-info .match-question-status span {
 	 float: right;
 }
@@ -387,6 +437,12 @@ input:focus::placeholder {
     border-radius: 50px;
     margin-right: 5px;
     margin-top: 5px;
+    float: left;
+}
+
+.match-question-status span.selected {
+	border: 1px solid #fff;
+	background-color: #34a8bf;
 }
 
 .match-question-area {
@@ -396,12 +452,18 @@ input:focus::placeholder {
     border: 5px solid #00343f;
     color: #000;
     position: relative;
+    padding: 20px 10px 30px 10px;
 }
 
 .match-question {
     font-family: railwayBold_font;
-    margin-bottom: 40px;
-    margin-top: 35px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+    padding-top: 11px;
+    font-size: 16px;
+    border-top: 2px solid #c7d0d2;
+    line-height: 18px;
+    color: green;
 }
 
 .question-multiple-type {
@@ -410,37 +472,76 @@ input:focus::placeholder {
 }
 
 .answer-option {
-	float: left;
-    width: 48%;
-    background-color: #d4d4dc;
+    width: 100%;
+    background-color:#dfe2e2;
     text-align: center;
-    border-radius: 3px;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
     padding: 5px 2px;
     box-sizing: border-box;
     margin-right: 1%;
-    font-family: railway_font;
+    color: #080808;
+    font-family: Arial;
+    font-size: 14px;
+    position: relative;
+}
+
+.answer-option span:first-child {
+	position: absolute;
+    left: 6px;
+    color: green;
+}
+
+.answer-option .question-choice {
+	display: block;
+    text-align: left;
+    padding-left: 25px;
+    font-weight: normal;
+}
+
+.answer-option .choice-selected {
+	position: absolute;
+    right: 6px;
+    top: -6px;
+    font-size: 40px;
 }
 
 .next-arr-btn {
 	position: absolute;
-	right: 10px;
-	top:10px;
+    right: 10px;
+    top: 10px;
+    color: orange;
+}
+
+.next-arr-btn img {
+	position: relative;
+	top: -8px;
+}
+
+.question-item-left {
+	font-family: Arial;
+	font-size: 12px;
+	position: absolute;
+	left: 12px;
+	top: 5px;
+	color: green;
+}
+
+.item-left {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 /*style for searching_enemy*/
 .searching-enemy-loading {
 	width: 100%;
-	height: 100vh;
-	background-color: #000;
-	position: absolute;
-	top: 0;
-	z-index: 999;
-	background-image: url("../images/matching.gif");
-	background-size: cover;
-	background-repeat: no-repeat;
-	display: table;
+    height: 40px;
+    background-color: #e37c06;
+    position: absolute;
+    bottom: 0;
+    z-index: 999;
+    padding: 12px;
 	visibility: hidden;
+	color: #fff;
 }
 
 .searching-enemy-loading.show {
@@ -452,16 +553,23 @@ input:focus::placeholder {
 	transition: all ease 2.5s;
 }
 
-.searching-enemy-loading p {
-	text-align: center;
-	color: #fff;
-	padding: 20px 0px;
-	display: table-cell;
-    text-align: center;
-	vertical-align: middle;
-	font-family: railway_font;
-	font-size: 18px;
+.searching-enemy-loading span {
+	font-family: umberto_font;
+	letter-spacing: 2px;
+	color: #fff;	
+}
 
+.close-find-match i{
+	color: #fff;
+    position: absolute;
+    right: 12px;
+}
+
+.searching-enemy-loading img {
+	width: 40px;
+    position: absolute;
+    top: 0px;
+    left: 160px;
 }
 
 /*style for page loading*/
@@ -607,6 +715,7 @@ input:focus::placeholder {
 /* style for rankings*/
 .ranking-view-table {
 	font-family: railway_font;
+	padding: 0px 10px 0px 5px;
 }
 
  
@@ -685,7 +794,7 @@ input:focus::placeholder {
 	font-family: railway_font !important;
     padding: 10px 0px;
     background: #23515a;
-    border: 5px solid #002b34;
+    border: 5px solid #25788a;
     width: 420px;
 }
 
@@ -696,7 +805,29 @@ input:focus::placeholder {
 }
 
 .people-table {
-	padding: 10px 15px;
+	padding: 0px 15px;
+	height: 350px;
+    overflow-y: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #db7303; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
 
 .people-table table td {
@@ -737,6 +868,7 @@ input:focus::placeholder {
     -o-transition: all ease 1s;
     -moz-transition: all ease 1s;
     z-index: 99999;
+    margin-bottom: 10px;
 }
 
 .notify-user-logged.show {
@@ -749,6 +881,98 @@ input:focus::placeholder {
 .popup-logged-user img {
 	width: 30px;
     margin-left: 10px;
+}
+
+.vanquished-content div:first-child p {
+	font-family: Arial;
+    font-size: 40px;
+    color: #000;
+}
+
+.vanquished-opponent {
+	overflow: hidden;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.vanquished-opponent img {
+	float: left;
+	width: 50px;
+	margin-right: 5px;
+}
+
+.vanquished-opponent p {
+	margin-bottom: 0px;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.vanquished-opponent p:last-child {
+	font-family: Arial !important;
+    position: relative;
+    top: -12px;
+    font-size: 12px;
+}
+
+.preview-result-overlay {
+	display: flex;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0 ;
+	background-color: rgba(0,0,0,0.7);
+	justify-content: center;
+    align-items: center;
+}
+
+.preview-result {
+	width: 310px;
+    height: auto;
+    background-color: #001418;
+    text-align: center;
+    padding: 15px;
+    color: #fff;
+    position: relative;
+    box-shadow: 3px 3px 3px #206271;
+}
+
+.preview-result h4 {
+	margin-bottom: 30px;
+	letter-spacing: 6px;
+	color: #f5be40;
+}
+
+.player-points-update img {
+	width: 60px;
+}
+
+.player-points-update{
+	margin-top: 25px;	
+}
+
+.player-earned-points {
+	font-size: 60px;
+	color: #f8d53f;
+}
+
+.hide-pr {
+	position: absolute;
+    top: -31px;
+    right: -21px;
+}
+
+.question-timer {
+	text-align: left;
+    font-family: Arial;
+    font-size: 15px;
+    position: absolute;
+    bottom: 3px;
+    right: 10px;
+    background-color: orange;
+    padding: 0px 10px;
+    color: #fff;
+    text-align: right;
 }
 
 @media screen and (max-width: 992px) {
@@ -766,10 +990,9 @@ input:focus::placeholder {
 @media screen and (max-width: 460px) {
     .duel-member-list,
     .ranking-view-table {
-		width: 330px;
-	    max-height: 600px;
-	    margin-bottom: 65px;
-	    padding: 15px;
+		width: 380px;
+    	max-height: 380px;
+    	overflow-y: auto;
 	}
 
 	.duel-name p {
@@ -789,18 +1012,42 @@ input:focus::placeholder {
 	    width: 45px;
 	}
 
+	.empty-online {
+		background-color: #01313d;
+	    padding: 60px 20px;
+	    width: 300px;
+	    border: 1px solid #fff;
+	}
+
+	.empty-online p {
+		letter-spacing: 2px;
+		color: #c5bebe;
+	}
+
+	.empty-online img {
+		position: absolute;
+		width: 30%;
+	    top: -31px;
+	    right: 12px;
+	}
+
+	/*user menu */
+	.user-home-settings ul li {
+   		width: 18%;
+	}
+
 	/* duel */
 	.match-content {
 	    width: auto;
 	}
 
+	.duel-lobby-text {
+	    font-size: 42px;
+	}
+
 	/* match */
 	.match-players-info .match-player img {
 	    width: 32px;
-	}
-
-	.match-question {
-	    font-size: 16px;
 	}
 
 	.match-category {
@@ -814,9 +1061,14 @@ input:focus::placeholder {
 	    font-size: 14px;
 	}
 
+	#close-findmatch-box {
+	    top: -35px;
+	    left: -29px;
+	}
+
 	.match-question-area {
-		width: 280px;
-		padding: 40px 10px 30px 20px;
+		width: 335px;
+		padding: 20px 10px 30px 10px;
 	}
 
 	.left-player,
@@ -851,6 +1103,7 @@ input:focus::placeholder {
 	/*people view*/
 	.people-box {
 	    width: 360px !important;
+	    max-height: 450px;
 	}
 }
 

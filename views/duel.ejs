@@ -9,6 +9,7 @@
 </div>
 <div class="home-content">
 	<div class="duel-content">
+		<% if (data.length > 1) { %>
 		<p class="duel-lobby-text">DUEL LOBBY</p>
 		<div class="duel-member-list">
 			<table>
@@ -25,7 +26,7 @@
 								<td class="duel-level">
 									<p>Lvl 7</p>
 								</td>
-								<td class="duel-player-btn" data-value="<%=data[i].email%>">
+								<td class="duel-player-btn text-center" data-value="<%=data[i].email%>">
 									<img src="images/duel_player.png" id="duel-selected-player">
 								</td>
 							</tr>
@@ -34,6 +35,12 @@
 				</tbody>
 			</table>
 		</div>
+		<% } else {%>
+			<div class="empty-online">
+				<img src="images/no_online.png" alt="">
+				<p>No students are online at this time, wait for them to connect</p>
+			</div>
+		<% } %>
 	</div>
 </div>
 <!-- <% include demo %> -->
