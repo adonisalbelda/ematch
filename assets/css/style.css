@@ -144,7 +144,7 @@ input:focus::placeholder {
 
 .signup-btn {
 	color: #e37c06;
-    margin-top: 5px;
+    margin-top: 12px;
 }
 
 /*style for home user-profile*/
@@ -1058,9 +1058,22 @@ input:focus::placeholder {
     .main-wrapper {
 		width: 100%;
 	}
+	
+    .home-content > img {
+    	width: 50%;
+    }
+
+    .home-profile-img img {
+    	width: 38%;
+    }
+
+    .user-options img {
+	    width: 50%;
+	}
 }
 
 @media screen and (max-width: 460px) {
+
     .duel-member-list,
     .ranking-view-table {
 		width: 380px;
@@ -1182,10 +1195,7 @@ input:focus::placeholder {
 	    width: 360px !important;
 	    max-height: 450px;
 	}
-}
 
-@media screen and (max-width: 460px) {
-	
 	.login-content img:first-child, 
 	.home-content img:first-child {
 	    width: 60%;
@@ -1312,5 +1322,33 @@ input:focus::placeholder {
 
 	.ranking-view-table {
     	 margin-bottom: 0px; 
+	}
+
+	#login-btn {
+	    width: 50%;
+	}
+
+	.login-form-input.form-box {
+	    width: 220px;
+	}
+
+	.register-inputs .register-status {
+    	margin-bottom: 20px;
+	}
+
+	.duel-member-list {
+	    width: 305px;
+	}
+
+	.duel-lobby-text {
+	    font-size: 30px;
+	}
+
+	.duel-member-list table tbody tr td:last-child {
+	    width: 120px;
+	}
+
+	.duel-member-list table tbody tr td:last-child img {
+		width: 80%;
 	}
 }
