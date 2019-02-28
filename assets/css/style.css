@@ -500,10 +500,10 @@ input:focus::placeholder {
 }
 
 .answer-option .choice-selected {
-	position: absolute;
+    position: absolute;
     right: 6px;
-    top: -6px;
-    font-size: 40px;
+    top: 2px;
+    font-size: 16px;
 }
 
 .next-arr-btn {
@@ -1197,8 +1197,8 @@ input:focus::placeholder {
 	    max-height: 450px;
 	}
 
-	.login-content img:first-child, 
-	.home-content img:first-child {
+	.login-content > img:first-child, 
+	.home-content > img:first-child {
 	    width: 60%;
 	}
 
@@ -1230,7 +1230,7 @@ input:focus::placeholder {
 		width: 70% !important;
 	}
 
-	.match-players-info img{
+	.match-players-info > img{
 		width: 30% !important;
 	}
 
@@ -1280,6 +1280,10 @@ input:focus::placeholder {
 
 	.ranking-view-table {
     	 margin-bottom: 0px; 
+	}
+
+	.match-players-info > img {
+	    width: 15% !important;
 	}
 }
 
