@@ -1287,7 +1287,7 @@ input:focus::placeholder {
 	}
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 390px) {
 	.main-wrapper {
 	    width: 100%;
 	}
@@ -1342,7 +1342,7 @@ input:focus::placeholder {
 	}
 
 	.profile-details img {
-    	width: 25%;
+    	width: 50%;
 	}
 
 	.ranking-view-table {
