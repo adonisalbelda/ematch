@@ -1058,7 +1058,7 @@ input:focus::placeholder {
     .main-wrapper {
 		width: 100%;
 	}
-	
+
     .home-content > img {
     	width: 50%;
     }
@@ -1182,7 +1182,7 @@ input:focus::placeholder {
 	/*settings*/
 	.edit-user-info {
 	    font-family: railway_font;
-	    width: 350px;
+	    width: 310px;
 	}
 
 	/*randking*/
@@ -1239,6 +1239,46 @@ input:focus::placeholder {
 
 	.empty-online p {
 	    font-size: 14px;
+	}
+
+	.login-form-input.form-box {
+	    width: 240px;
+	}
+
+	.people-box {
+   		width: 300px !important;
+	}
+
+	.members-status img {
+	    width: 30px;
+	}
+
+	.people-table {
+	    height: 310px;
+	}
+
+	.ranking-view-table {
+	    width: 290px;
+	}
+
+	.ranking-view-table h3 {
+    	font-size: 34px;
+	}
+
+	.ranking-view-table .rank-medal-img {
+    	width: 20px !important;
+	}
+
+	.user-rank-points img {
+	    width: 10px !important;
+	}
+
+	.user-rank-points {
+    	padding: 1px;
+	}
+
+	.ranking-view-table {
+    	 margin-bottom: 0px; 
 	}
 }
 
