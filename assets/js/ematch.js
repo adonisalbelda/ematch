@@ -304,6 +304,7 @@ function ematchModel(argument) {
 						this.formData = {};
 					});
 				} else {
+					console.log(data);
 					dialog.showErrors(data, "Erros found.")
 				}
 

@@ -620,6 +620,7 @@ input:focus::placeholder {
 .form-box {
 	text-align: left;
 	margin-bottom: 10px;
+	z-index: 99;
 }
 
 .form-box input {

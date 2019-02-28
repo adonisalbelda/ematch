@@ -30,11 +30,19 @@ router.post('/addMember',[
 	} else {
 		
 		if (req.body.password !== req.body.c_password) {
-			return res.json({errors : "Password do not match"});
+			return res.json(
+				{ 
+					errors : [{msg: "Password do not match"}]
+				}
+			);
 		}
 
 		if (req.body.username.length > 7 ) {
-			return res.json({errors : "Username must not above 8 characters"});
+			return res.json(
+				{ 
+					errors : [{msg: "Username must not above 8 characters"}]
+				}
+			);
 		}
 
 		mysqlConf.getConnection(function(error, tempCount){
