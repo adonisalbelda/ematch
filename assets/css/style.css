@@ -204,8 +204,9 @@ input:focus::placeholder {
 }
 
 .home-user-points img {
-	width: 14px;
+	width: 14px !important;
 }
+
 .home-user-points small {
 	font-size: 12px;
     position: relative;
@@ -1086,7 +1087,7 @@ input:focus::placeholder {
 
 	.empty-online {
 		background-color: #01313d;
-	    padding: 60px 20px;
+	    padding: 40px 20px;
 	    width: 300px;
 	    border: 1px solid #fff;
 	}
@@ -1099,13 +1100,17 @@ input:focus::placeholder {
 	.empty-online img {
 		position: absolute;
 		width: 30%;
-	    top: -31px;
+	    top: -60px;
 	    right: 12px;
 	}
 
 	/*user menu */
 	.user-home-settings ul li {
    		width: 18%;
+	}
+
+	.user-home-settings ul li img {
+		width: 40%;
 	}
 
 	/* duel */
@@ -1183,7 +1188,7 @@ input:focus::placeholder {
 	
 	.login-content img:first-child, 
 	.home-content img:first-child {
-		width: 90%;
+	    width: 60%;
 	}
 
 	.login-content p {
@@ -1217,10 +1222,95 @@ input:focus::placeholder {
 	.match-players-info img{
 		width: 30% !important;
 	}
+
+	.home-content .empty-online img {
+	    width: 30%;
+	}
+
+	.empty-online p {
+	    font-size: 14px;
+	}
 }
 
 @media screen and (max-width: 350px) {
 	.main-wrapper {
 	    width: 100%;
+	}
+
+	.dialog-wrapper .dialog-find-match {
+	    width: 240px !important;
+	    margin-top: 170px !important;
+	}
+
+	.categories-list {
+	    font-size: 18px !important;
+	}
+
+	.dialog-find-match .find-skills-list div {
+	    font-size: 12px !important;
+	}
+
+	.home-content .empty-online img {
+	    width: 30%;
+	}
+
+	.empty-online {
+	    width: 260px;
+	}
+
+	.empty-online p {
+	    font-size: 14px;
+	}
+
+	.people-box {
+	    width: 290px !important;
+	}
+
+	.members-status img {
+	    width: 30px;
+	}
+
+	.people-table {
+	    height: 280px;
+	}
+
+	.search-person-input input {
+	    font-size: 10px !important;
+	}
+
+	.edit-user-info {
+	    width: 290px;
+	}
+
+	.edit-title-box span {
+	    font-size: 10px;
+	}
+
+	.profile-details img {
+    	width: 25%;
+	}
+
+	.ranking-view-table {
+	    width: 290px;
+	}
+
+	.ranking-view-table h3 {
+    	font-size: 34px;
+	}
+
+	.ranking-view-table .rank-medal-img {
+    	width: 20px !important;
+	}
+
+	.user-rank-points img {
+	    width: 10px !important;
+	}
+
+	.user-rank-points {
+    	padding: 1px;
+	}
+
+	.ranking-view-table {
+    	 margin-bottom: 0px; 
 	}
 }
