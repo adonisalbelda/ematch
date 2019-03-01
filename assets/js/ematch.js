@@ -127,6 +127,9 @@ function ematchModel(argument) {
 		item_finished = 0;
 		minute = 4;
 		seconds = 50;
+		next = false ;
+		number_ofItems = 3;
+		nextItem = 1;
 		removeInterval = true;
 		elem.show_loader();
 		console.log(data);
@@ -419,7 +422,6 @@ function ematchModel(argument) {
     			}
 
     			minute--;
-
 				seconds = 60;	
 				$('.set-minute-timer').text(minute);
     		} else {

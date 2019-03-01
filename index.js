@@ -218,7 +218,6 @@ io.on('connection', function(socket){
 	socket.on("duel-result", ({email, room, score, time = 0, id, username, points, rank, timer = 0 }) => {
 			
 		if (results.hasOwnProperty(room)) {
-			socket.leave(room);
 			var winner = {};
 			in_matchPeople.splice(in_matchPeople.indexOf(email), 1);
 			in_matchPeople.splice(in_matchPeople.indexOf(results[room].email), 1);
@@ -309,6 +308,8 @@ io.on('connection', function(socket){
 
 			winner = {};
 			results[room] = {};
+
+			socket.leave(room);
 
 		} else {
 			results[room] = {
@@ -448,7 +449,7 @@ function select_questions(callback) {
 			tempCount.release();
 			console.log("error in the query");
 		} else {
-			tempCount.query("SELECT DISTINCT * FROM tbl_questions ORDER BY RAND() LIMIT 3", function(error, rows, fields){
+			tempCount.query("SELECT DISTINCT * FROM tbl_questions ORDER BY RAND() LIMIT 10", function(error, rows, fields){
 				callback(rows);
 			});
 			tempCount.release();

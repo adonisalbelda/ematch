@@ -99,7 +99,7 @@ $(document).ready(function(){
 	});
 
 	var next = false ;
-	var number_ofItems = 3;
+	var number_ofItems = 10;
 	var nextItem = 1;
 	$(document).on('click', '.next-arr-btn', function(){
 		
