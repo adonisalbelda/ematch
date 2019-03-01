@@ -292,11 +292,12 @@ function ematchModel(argument) {
 		$.ajax({
 	        url: "/authenticate/addMember",
 	        method:"POST",
-	        data : JSON.stringify(this.formData),
+	        data : JSON.stringify(elem.formData),
 	        processData: false,
 			contentType: "application/json",
 	        success: function(data) {
 				popup.hide_loader();
+				console.log(data);
 				if (data.hasOwnProperty("success")) {
 					dialog.alert("Successfuly registered.", "Status", function() {
 						elem.socket.emit('send-alert', {room: "users", username: elem.formData['username']});

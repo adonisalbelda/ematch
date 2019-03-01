@@ -135,6 +135,12 @@ input:focus::placeholder {
     border-radius: 50px;
 }
 
+.login-content > img:first-child {
+	position: relative;
+    top: -30px;
+    width: 70%;
+}
+
 .login-content h3{
 	letter-spacing: 5px;
 	font-family: umberto_font;
@@ -1068,8 +1074,21 @@ input:focus::placeholder {
     	width: 38%;
     }
 
-    .user-options img {
-	    width: 50%;
+
+	.profile-details img {
+	    width: 60%;
+	}
+
+	.home-content > img:first-child {
+	    width: 100%;
+	}
+
+	.user-options img {
+	    width: 70% !important;
+	}
+
+	.settings-content .profile-details img {
+		width: 30%;
 	}
 }
 
@@ -1196,16 +1215,21 @@ input:focus::placeholder {
 	    width: 360px !important;
 	    max-height: 450px;
 	}
-
-	.login-content > img:first-child, 
+ 
 	.home-content > img:first-child {
-	    width: 60%;
+	    width: 100%;
 	}
 
 	.login-content p {
-	    font-size: 15px;
+	    font-size: 25px;
 	    margin-bottom: 35px;
 	    cursor: pointer;
+	}
+
+	.login-content > img:first-child {
+		position: relative;
+	    top: -30px;
+	    width: 60%;
 	}
 
 	#login-btn{
@@ -1221,13 +1245,6 @@ input:focus::placeholder {
 	.profile-details {
 	    margin-top: 15px;
 	    margin-bottom: 15px;
-	}
-
-	.profile-details img {
-		width: 36%;
-	}
-	.user-options img {
-		width: 70% !important;
 	}
 
 	.match-players-info > img{

@@ -51,9 +51,9 @@ router.post('/addMember',[
 			console.log("error in the query");
 		} else {
 			console.log("query successed");
-			tempCount.query("INSERT INTO tbl_students (fname, lname, course, email, username, password)" +
-				"VALUES ('"+req.body.first_name+"','"+req.body.last_name+"', 'bscs', "+
-				"'"+req.body.email+"', '"+req.body.username+"', '"+req.body.password+"')", function(error, rows, fields){
+			tempCount.query("INSERT INTO tbl_students (fname, lname, course, email, username, password, points, rank, is_online)" +
+				"VALUES ('"+req.body.first_name+"','"+req.body.last_name+"', '<b></b>scs', "+
+				"'"+req.body.email+"', '"+req.body.username+"', '"+req.body.password+"', '1000', 'D', '1')", function(error, rows, fields){
 				tempCount.release();
 				if (!!error){
 					return res.send({errors: error});
@@ -66,6 +66,7 @@ router.post('/addMember',[
 					req.session.email = req.body.email;
 					req.session.course = 'bscs';
 					req.session.points = 1000;
+					req.session.rank = 'D';
 
 					return res.send({success: "done"});
 				}		
