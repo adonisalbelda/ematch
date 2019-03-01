@@ -218,6 +218,7 @@ io.on('connection', function(socket){
 	socket.on("duel-result", ({email, room, score, time = 0, id, username, points, rank, timer = 0 }) => {
 			
 		if (results.hasOwnProperty(room)) {
+			socket.leave(room);
 			var winner = {};
 			in_matchPeople.splice(in_matchPeople.indexOf(email), 1);
 			in_matchPeople.splice(in_matchPeople.indexOf(results[room].email), 1);
@@ -231,7 +232,7 @@ io.on('connection', function(socket){
 				winner['winner_username'] = username;
 				winner['losser_username'] = results[room].username
 				winner['losser_id'] = results[room].id;
-				winner['label'] = "Vanqiushed";
+				winner['label'] = "Vanquished";
 			} else if ( score < results[room].score) {
 				winner['winner_id'] = results[room].id;
 				winner['winner_email'] = results[room].email;
@@ -240,16 +241,17 @@ io.on('connection', function(socket){
 				winner['losser_oldpoints'] = points;
 				winner['losser_username'] = username;
 				winner['losser_id'] = id;
-				winner['label'] = "Vanqiushed";
+				winner['label'] = "Vanquished";
 			} else {
 				if (results[room].timer > timer) {
 					winner['winner_id'] = results[room].id;
 					winner['winner_email'] = results[room].email;
-					winner['winner_username'] = username;
-					winner['winner_oldpoints'] = points;
 					winner['winner_username'] = results[room].username;
+					winner['winner_oldpoints'] = results[room].points;
+					winner['losser_oldpoints'] = points;
 					winner['losser_username'] = username;
-					winner['label'] = "Vanqiushed";
+					winner['losser_id'] = id;
+					winner['label'] = "Vanquished";
 				} else {
 					winner['winner_id'] = id;
 					winner['winner_email'] = email;
@@ -259,7 +261,7 @@ io.on('connection', function(socket){
 					winner['winner_username'] = username;
 					winner['losser_username'] = results[room].username
 					winner['losser_id'] = results[room].id;
-					winner['label'] = "Vanqiushed";
+					winner['label'] = "Vanquished";
 				}
 			}
 
@@ -279,10 +281,10 @@ io.on('connection', function(socket){
 			rate_Elo(validate_result, winner['winner_id'], function(data){
 				console.log(data);
 				winner['winner_newpoints'] = data['winner'];
-				winner['loser_newpoints'] = data['losser'];
+				winner['losser_newpoints'] = data['losser'];
 				winner['winner_rank'] = data['winner_Rank'];
 				winner['losser_rank'] = data['losser_Rank'];
-				updatePoints(winner['winner_newpoints'], winner['winner_rank'], winner['loser_newpoints'], winner['losser_rank'], winner['winner_id'], winner['losser_id']);
+				updatePoints(winner['winner_newpoints'], winner['winner_rank'], winner['losser_newpoints'], winner['losser_rank'], winner['winner_id'], winner['losser_id']);
 				save_gameHistory(winner['winner_id'], winner['loser_id'], winner['winner_id'], parseInt(winner['winner_newpoints']) - parseInt(winner['winner_oldpoints']));
 			});
 
@@ -337,11 +339,12 @@ io.on('connection', function(socket){
 	});
 
 	// notify all user upon your signib-in
-	socket.on("send-alert", ({room, username, email}) => {
+	socket.on("send-alert", ({room, username, email, rank}) => {
 		socket.to(room).emit("alert-users", {
 			username: username,
 			email: email,
 			online: connections.length,
+			rank: rank
 		});
 	});
 

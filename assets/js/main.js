@@ -3,6 +3,8 @@ $(document).ready(function(){
 	$(window).bind('load', function() {
 		ematch.hide_loader();
 		$('body').trigger('click');
+		$('.login-content > img:first-child').addClass('animated bounce');
+		$('.home-content > img:first-child ').addClass('animated shake');
 	});
 
 	$(document).on('click', 'body', function() {
@@ -168,6 +170,8 @@ $(document).ready(function(){
 		alert("dad");
 	});
 	// console.log(JSON.parse(localStorage.getItem('questions')), 'ds');
+
+	localStorage.clear();
 
 	$(document).on('click', '#battle-btn', function() {
 

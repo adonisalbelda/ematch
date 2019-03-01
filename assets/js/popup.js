@@ -16,7 +16,7 @@ function CustomModal() {
 
 	this.alert = function($msg, $heading = '', callback) {
 		this.init();
-		var dialog = '<div class="dialog"></div>';
+		var dialog = '<div class="dialog animated slideInRight"></div>';
 		popup = this;
 
 		$('.dialog-wrapper').html(
@@ -38,7 +38,7 @@ function CustomModal() {
 
 	this.showErrors = function($data, $heading = '') {
 		this.init();
-		var dialog = '<div class="dialog"></div>';
+		var dialog = '<div class="dialog animated slideInRight"></div>';
 		popup = this;
 		var msgs = "";
 
@@ -63,7 +63,7 @@ function CustomModal() {
 
 	this.reject_Duel = function($message) {
 		this.init();
-		var dialog = '<div class="dialog dialog-show-request"></div>';
+		var dialog = '<div class="dialog dialog-show-request animated slideInRight"></div>';
 		popup = this;
 
 		$('.dialog-wrapper').html(
@@ -88,7 +88,7 @@ function CustomModal() {
 
 	this.request_Duel = function($message, callback) {
 		this.init();
-		var dialog = '<div class="dialog dialog-show-request"></div>';
+		var dialog = '<div class="dialog dialog-show-request animated slideInRight"></div>';
 		popup = this;
 
 		$('.dialog-wrapper').html(
@@ -99,6 +99,7 @@ function CustomModal() {
 			.append('<p>'+$message+'.</p>')
 			.append(	
 					$('<button class="btn btn-default popup-decline-btn">Cancel</button>').click(function() {
+						$(this).attr('disabled','disabled');
 						$('.dialog-wrapper').fadeOut(500, function() {
 							$(this).remove();
 							callback();
@@ -114,7 +115,7 @@ function CustomModal() {
 
 	this.confirm = function($msg, callback ,$heading = '') {
 		this.init();
-		var dialog = '<div class="dialog "></div>';
+		var dialog = '<div class="dialog animated slideInRight"></div>';
 		popup = this;
 
 		$('.dialog-wrapper').html(
@@ -141,7 +142,7 @@ function CustomModal() {
 
 	this.show_request = function($msg, callback ,$heading = '', reject) {
 		this.init();
-		var dialog = '<div class="dialog dialog-show-request"></div>';
+		var dialog = '<div class="dialog dialog-show-request animated slideInRight"></div>';
 		popup = this;
 
 		$('.dialog-wrapper').html(
@@ -152,6 +153,7 @@ function CustomModal() {
 			.append('<span>'+$msg+'.</span>')
 			.append(
 					$('<button class="btn btn-primary popup-accept-btn">Accept</button>').click(function() {
+						$(this).attr('disabled','disabled');	
 						$('.dialog-wrapper').fadeOut(500, function() {
 							$(this).remove();
 							callback();
@@ -185,7 +187,7 @@ function CustomModal() {
 
 	this.findMatch = function(skills, callback) {
 		this.init();
-		var dialog = '<div class="dialog-find-match"></div>';
+		var dialog = '<div class="dialog-find-match animated slideInLeft"></div>';
 		popup = this;
 		var list_of_skills = "";
 		console.log(skills);
@@ -224,7 +226,7 @@ function CustomModal() {
 
 	this.matchReady = function(callback , reject) {
 		this.init();
-		var dialog = '<div class="dialog dialog-show-request"></div>';
+		var dialog = '<div class="dialog dialog-show-request animated slideInRight"></div>';
 		popup = this;
 
 		$('.dialog-wrapper').html(
@@ -251,7 +253,7 @@ function CustomModal() {
 
 	this.waitingResult = function(callback, msg) {
 		this.init();
-		var dialog = '<div class="dialog dialog-show-request"></div>';
+		var dialog = '<div class="dialog dialog-show-request animated slideInRight"></div>';
 		popup = this;
 
 		$('.dialog-wrapper').html(
@@ -273,7 +275,7 @@ function CustomModal() {
 
 	this.promt = function($msg, callback ,$heading = '') {
 		this.init();
-		var dialog = '<div class="dialog"></div>';
+		var dialog = '<div class="dialog animated slideInRight"></div>';
 		popup = this;
 
 		$('.dialog-wrapper').html(

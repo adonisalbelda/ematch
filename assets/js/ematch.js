@@ -9,12 +9,15 @@ function ematchModel(argument) {
 	}
 
 	this.show_loader = function() {
-		$('.page-loading').css('display', 'block');
+		$('.page-loading').css('display', 'flex');
 	}
 
 	if (email != "") {
 		this.socket.emit('join_room', {room: "users", data: email});
 		this.socket.emit('message', {room: "users", message: isLogin, username:username});
+		elem.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
+	} else {
+		localStorage.clear();
 	}
 
 	this.socket.on('message', function(data){
@@ -72,7 +75,7 @@ function ematchModel(argument) {
 					"<p>"+data.username+"</p>" +
 				"</td>"+
 				"<td class='duel-level'>" +
-					"<p>Lvl 7</p>" +
+					"<p>"+data.rank+"</p>" +
 				"</td>" +
 				"<td class='duel-player-btn text-center' data-value='"+data.email+"'>" +
 					"<img src='../images/duel_player.png' id='duel-selected-player'>" +
@@ -141,16 +144,16 @@ function ematchModel(argument) {
 			} else {
 				$('.preview-result p').text("You lost!");
 				$('.points-indicator').text("-");
-				C_number = parseInt(data['data']['losser_oldpoints'] ) - parseInt(data['data']['loser_newpoints'] )
-				localStorage.setItem('my_points',data['data']['loser_newpoints']);
+				C_number = parseInt(data['data']['losser_oldpoints'] ) - parseInt(data['data']['losser_newpoints'] )
+				localStorage.setItem('my_points',data['data']['losser_newpoints']);
 				localStorage.setItem('my_rank',data['data']['losser_rank']);
 			}
 
 			$('.player-earned-points').animateNumber(
 				{ 
-					number: C_number
+					number: parseInt(C_number)
 				},
-				(C_number * 100)
+				2000
 			);
 
 			$('.result-winner-points').animateNumber(
@@ -161,7 +164,7 @@ function ematchModel(argument) {
 
 			$('.result-losser-points').animateNumber(
 				{ 
-					number: data['data']['loser_newpoints']
+					number: data['data']['losser_newpoints']
 				}
 			);
 
@@ -244,7 +247,6 @@ function ematchModel(argument) {
 	        success: function(data) {	
 	        	popup.hide_loader();
 				if (data.hasOwnProperty("success")) {
-					elem.socket.emit('send-alert', {room: "users", username: elem.formData['username'], email: elem.formData['email'] });
 					elem.formData = {};
 					location.reload();	
 				} else {
@@ -394,9 +396,12 @@ function ematchModel(argument) {
     			clearInterval(interval);
     		}
 
+    		if (minute == 1) {
+    			$('.question-timer').css('background-color', '#820920');
+    		}
+
     		if (seconds == 0 ) {
     			if (minute == 0) {
-    				alert("end time");
     				var room = $('.match-content').attr("data-room");
 
 		        	var info = {

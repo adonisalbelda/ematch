@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/popup.css">
 	<link rel="stylesheet" href="/css/bootstrap.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/animate.css">
 	<script type="text/javascript">
 		var host = "https://e-match.herokuapp.com/";
 		// var host = "http://localhost:3000";
@@ -23,7 +24,7 @@
 		var correct_answer = 0;
 		var wrong_answer = 0;
 		var item_finished = 0;
-		var minute = 1;
+		var minute = 4;
 		var seconds = 60;
 		var removeInterval = false;
 	</script>
@@ -37,7 +38,10 @@
 		<div class="popup-logged-user">
 		</div>
 		<div class="page-loading">
-			<img src="../images/load.gif" alt="">
+			<div>
+				<img src="../images/main_logo.png" alt="" class="animated bounce"><br>
+				<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+			</div>
 		</div>
 		<div class="searching-enemy-loading">
 			<span>
@@ -47,7 +51,7 @@
 				<img src="images/match-loading.gif" alt="">
 			</span>
 			<span class="close-find-match">
-				<i class="fa fa-times">d</i>
+				<i class="fa fa-times"></i>
 			</span>
 		</div>
 		<div class="child-wrapper">

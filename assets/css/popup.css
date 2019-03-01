@@ -168,19 +168,19 @@
     margin-top: -5px;
 
     animation-name: flash;
-    animation-duration: 1s;
+    animation-duration: 5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 
     //Firefox 1+
     -webkit-animation-name: flash;
-    -webkit-animation-duration: 1s;
+    -webkit-animation-duration: 5s;
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite;
 
     //Safari 3-4
     -moz-animation-name: flash;
-    -moz-animation-duration: 1s;
+    -moz-animation-duration: 5s;
     -moz-animation-timing-function: linear;
     -moz-animation-iteration-count: infinite;
 }
