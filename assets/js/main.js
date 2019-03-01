@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	$(window).on('load', function() {
+	$(window).bind('load', function() {
 		ematch.hide_loader();
 		$('body').trigger('click');
 	});
@@ -12,6 +12,13 @@ $(document).ready(function(){
 		}
 	});
 
+	$(document).on('focus', 'input', function(){
+  		$('.duel-top-option').css('display', 'none');
+	});
+
+	$(document).on('focusout', 'input', function(){
+  		$('.duel-top-option').css('display', 'block');
+	});
 
 	$(document).on('click', '.game-status-option', function(){
 		ematch.formData['id'] = isLogin;
