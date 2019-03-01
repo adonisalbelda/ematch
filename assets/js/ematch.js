@@ -16,7 +16,9 @@ function ematchModel(argument) {
 		this.socket.emit('join_room', {room: "users", data: email});
 		this.socket.emit('message', {room: "users", message: isLogin, username:username});
 		elem.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
+		this.hide_loader();
 	} else {
+		this.hide_loader();
 		localStorage.clear();
 	}
 
