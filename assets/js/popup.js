@@ -209,6 +209,7 @@ function CustomModal() {
 			.append($('<div class="duel-actions"></div>')
 			.append(
 					$('<button class="btn btn-default popup-accept-btn">Find Match</button>').click(function() {						
+						$(this).attr('disabled','disabled');
 						if ($('div.selected').text() != "") {
 							popup.closePopup();
 							var data = {
@@ -235,6 +236,7 @@ function CustomModal() {
 			.append('<span>Your game is ready.</span>')
 			.append(
 					$('<button class="btn btn-primary popup-accept-btn">Accept</button>').click(function() {
+						$(this).attr('disabled','disabled');
 						$('.dialog-wrapper').fadeOut(500, function() {
 							$(this).remove();
 							callback();
@@ -263,6 +265,7 @@ function CustomModal() {
 			)
 			.append(
 					$('<button class="btn btn-primary popup-accept-btn notify-me-hide">Just notify me.</button>').click(function() {
+						$(this).attr('disabled','disabled');
 						$('.dialog-wrapper').fadeOut(500, function() {
 							$(this).remove();
 							callback();

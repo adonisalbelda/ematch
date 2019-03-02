@@ -57,6 +57,26 @@ router.post('/findMatch', function(req, res){
 	});
 });
 
+router.post('/updatePoints', (req, res) => {
+	mysqlConf.getConnection(function(error, tempCount){
+		if (!!error){
+			tempCount.release();
+		} else {
+
+			tempCount.query("SELECT * FROM tbl_students where id = '"+req.body.id+"'", function(error, rows, fields){
+				tempCount.release();
+				var data = {
+				  	points : rows[0]['points'],
+				  	rank : rows[0]['rank'],
+				}
+				
+				return res.send({success: data});
+			});
+
+		}
+	});
+});
+
 router.get('/result', function(req, res){
 	res.render('result');	
 });

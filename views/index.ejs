@@ -12,8 +12,8 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	<link rel="stylesheet" href="/css/animate.css">
 	<script type="text/javascript">
-		var host = "https://e-match.herokuapp.com/";
-		// var host = "http://localhost:3000";
+		// var host = "https://e-match.herokuapp.com/";
+		var host = "http://localhost:3000";
 		var isLogin = "<%= user ? user['id'] : '' %>";
 		var email = "<%= user ? user['email'] : '' %>";
 		var username = "<%= user ? user['username'] : '' %>";
@@ -27,6 +27,7 @@
 		var minute = 4;
 		var seconds = 60;
 		var removeInterval = false;
+		var gameDone = false;
 	</script>
 </head>
 <body>
@@ -62,8 +63,8 @@
 					<img src="images/main_logo.png">
 					<p>PvP Online Quiz Battle</p><%=user['id']%>
 					<div class="login-form-input form-box">
-						<input type="text" name="" placeholder="Username" class="log-username animated slideInRight"><br>
-						<input type="password" name="" placeholder= "Password" class="log-password animated slideInLeft">
+						<input type="text" name="" placeholder="Username" class="log-username"><br>
+						<input type="password" name="" placeholder= "Password" class="log-password">
 					</div>
 					<img src="images/login_btn.png" id="login-btn">
 					<p class="signup-btn" id="register-btn">SIGN UP</p>

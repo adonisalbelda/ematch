@@ -3,8 +3,13 @@ $(document).ready(function(){
 	$(window).bind('load', function() {
 		ematch.hide_loader();
 		$('body').trigger('click');
-		$('.login-content > img:first-child').addClass('animated bounce');
-		$('.home-content > img:first-child ').addClass('animated shake');
+		setTimeout(function() {
+			$('.login-content > img:first-child').addClass('animated bounce');
+			$('.home-content > img:first-child ').addClass('animated shake');
+			$('.login-form-input input:first-child').addClass('animated slideInLeft');
+			$('.login-form-input input:last-child').addClass('animated slideInRight');
+			$('.login-content > p').addClass('animated fadeInUp');
+		},200);
 	});
 
 	$(document).on('click', 'body', function() {
@@ -139,11 +144,12 @@ $(document).ready(function(){
         		score: correct_answer, 
         		id:isLogin, 
         		username: username, 
-        		points: localStorage.getItem('my_points') === null ? points : localStorage.getItem('my_points'),
-        		rank: localStorage.getItem('my_rank') === null ? rank : localStorage.getItem('my_rank'), 
+        		points: points ,
+        		rank: rank , 
         		timer: (minute * 60) + seconds,
         	}
 
+        	console.log(info, "info");
 			ematch.socket.emit('duel-result', info);
 			return false;
 		}

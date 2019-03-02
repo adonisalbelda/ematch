@@ -8,15 +8,45 @@ function ematchModel(argument) {
 		$('.page-loading').css('display', 'none');
 	}
 
+	this.updatePoints =  function(id) {
+		elem.formData["id"] = id;
+		$.ajax({
+	        url: "/updatePoints",
+	        method:"POST",
+	        data : JSON.stringify(elem.formData),
+	        processData: false,
+			contentType: "application/json",
+	        success: function(data) {
+	        	elem.formData = {};
+	        	points = parseInt(data['success'].points);
+	        	rank = data['success'].rank;
+	        	console.log(data);
+
+	        	$('.home-user-points small').animateNumber(
+					{ 
+						number: parseInt(data['success'].points)
+					},
+					2000
+				);
+
+	        	$('.user-level-status .user-rank').text(data['success'].rank);
+	        },	
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            alert('error ' + textStatus + " " + errorThrown);
+	        }
+    	});
+	}
+
 	this.show_loader = function() {
 		$('.page-loading').css('display', 'flex');
 	}
 
 	if (email != "") {
+		this.hide_loader();
 		this.socket.emit('join_room', {room: "users", data: email});
 		this.socket.emit('message', {room: "users", message: isLogin, username:username});
 		elem.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
-		this.hide_loader();
+		this.updatePoints(isLogin);
 	} else {
 		this.hide_loader();
 		localStorage.clear();
@@ -77,7 +107,7 @@ function ematchModel(argument) {
 					"<p>"+data.username+"</p>" +
 				"</td>"+
 				"<td class='duel-level'>" +
-					"<p>"+data.rank+"</p>" +
+					"<p> Rank"+data.rank+"</p>" +
 				"</td>" +
 				"<td class='duel-player-btn text-center' data-value='"+data.email+"'>" +
 					"<img src='../images/duel_player.png' id='duel-selected-player'>" +
@@ -109,6 +139,7 @@ function ematchModel(argument) {
 	});
 
 	this.socket.on('show-random-questions', function(data){
+		console.log(data);
 		$('.dialog-wrapper').remove();
 		elem.show_loader();
 		localStorage.setItem('questions', JSON.stringify(data['questions']));
@@ -122,19 +153,19 @@ function ematchModel(argument) {
 	this.socket.on('display-duel-result', function(data){
 		$('.dialog-wrapper').remove();
 		localStorage.clear();
-		questions = "";
-		current_question = 0;
-		correct_answer = 0;
-		wrong_answer = 0;
-		item_finished = 0;
-		minute = 4;
-		seconds = 50;
-		next = false ;
-		number_ofItems = 3;
-		nextItem = 1;
-		removeInterval = true;
-		elem.show_loader();
+		// questions = "";
+		// current_question = 0;
+		// correct_answer = 0;
+		// wrong_answer = 0;
+		// item_finished = 0;
+		// minute = 4;
+		// seconds = 50;
+		// next = false ;
+		// number_ofItems = 3;
+		// nextItem = 1;
+		// removeInterval = true;
 		console.log(data);
+		elem.show_loader();
 		
 		elem.home_Directory("result", {}, function(){
 
@@ -153,6 +184,8 @@ function ematchModel(argument) {
 				localStorage.setItem('my_points',data['data']['losser_newpoints']);
 				localStorage.setItem('my_rank',data['data']['losser_rank']);
 			}
+
+			console.log(C_number, 'c_number');
 
 			$('.player-earned-points').animateNumber(
 				{ 
@@ -177,7 +210,7 @@ function ematchModel(argument) {
 			$('.result-label').text(data['data']['label']);
 			$('.result-winner-rank').text(data['data']['winner_rank']);
 			$('.result-losser').text(data['data']['losser_username']);
-
+			gameDone = true;
 		});
 	});
 
@@ -447,11 +480,22 @@ function ematchModel(argument) {
 				} else {
 					elem.hide_loader();
 					elem.formData = {};
-					var ctr = 0;
-					$('.answer-option').each(function(){
-						$(this).eq(0).find('.question-choice').text(data['choices'][ctr]['label']);
-						$(this).attr("data-value", data['choices'][ctr]['answer']);
-						ctr++;
+					console.log(data);
+					// var ctr = 0;
+					// $('.answer-option').each(function(){
+					// 	$(this).eq(0).find('.question-choice').text(data['choices'][ctr]['label']);
+					// 	$(this).attr("data-value", data['choices'][ctr]['answer']);
+					// 	ctr++;
+					// });
+					var letter = ['a)', 'b)', 'c)', 'd)'];
+					$('.question-multiple-type').empty();
+					$.each(data['choices'], function( key, value ) {
+					   	$('.question-multiple-type').append(
+					   		'<div class="answer-option animated slideInLeft" data-value="'+value.answer+'">'+
+								'<span>'+letter[key]+'</span>'+
+								'<span class="question-choice">'+value.label+'</span>'+
+							'</div>'
+					   	);
 					});
 				}
 
@@ -490,10 +534,15 @@ function ematchModel(argument) {
 	            $('.child-wrapper').html(data);
 	            $('#match-dir-home').attr("data-value", "home");
 
-	            if (localStorage.getItem('my_points')) {
-	            	$('.home-user-points small').text(localStorage.getItem('my_points'));
-	            	$('.user-level-status .user-rank').text(localStorage.getItem('my_rank'));
+	            if (gameDone) {
+	            	gameDone = false;
+	            	location.reload();
 	            }
+
+	            // if (localStorage.getItem('my_points')) {
+	            // 	$('.home-user-points small').text(localStorage.getItem('my_points'));
+	            // 	$('.user-level-status .user-rank').text(localStorage.getItem('my_rank'));
+	            // }
 
 	            if (callback != "") {
 		            callback();
@@ -540,6 +589,26 @@ function ematchModel(argument) {
 	    	});
 		}, 1000);
 
+	}
+
+
+	this.update_Points = function (id) {
+		alert("dasd");
+		// elem.formData["id"] = id;
+		// $.ajax({
+	 //        url: "/updatePoints",
+	 //        method:"POST",
+	 //        data : JSON.stringify(elem.formData),
+	 //        processData: false,
+		// 	contentType: "application/json",
+	 //        success: function(data) {
+	 //        	console.log(data);
+	 //        	elem.formData = {};
+	 //        },
+	 //        error: function(jqXHR, textStatus, errorThrown) {
+	 //            alert('error ' + textStatus + " " + errorThrown);
+	 //        }
+  //   	});
 	}
 
 	this.readURL = function readURL(input) {

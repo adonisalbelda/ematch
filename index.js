@@ -176,7 +176,7 @@ io.on('connection', function(socket){
 	});
 
 	// user enter to a private room
-	socket.on("enter-room", ({room, username, email, points, id, skill_id = 0, skill = ""}) => {
+	socket.on("enter-room", ({room, username, email, points, id, skill_id = false, skill = ""}) => {
 		socket.join(room);
 		var selected_room = io.sockets.adapter.rooms[room];
 		var data = {
@@ -202,7 +202,7 @@ io.on('connection', function(socket){
 		});
 		
 		if (selected_room.length == 2) {
-			select_questions(function(questions){
+			select_questions(skill_id, function(questions){
 				socket.nsp.to(room).emit("show-random-questions", {
 					data: players,
 					questions : questions,
@@ -442,17 +442,25 @@ function updatePoints($winner_pnt, $winner_rank, $loser_pnt, $loser_rank, $winne
 	});
 }
 
-function select_questions(callback) {
+function select_questions(id, callback) {
 	var questions = "";
+	console.log(id, "id");
 	mysqlConf.getConnection(function(error, tempCount){
 		if (!!error){
 			tempCount.release();
 			console.log("error in the query");
 		} else {
-			tempCount.query("SELECT DISTINCT * FROM tbl_questions ORDER BY RAND() LIMIT 10", function(error, rows, fields){
-				callback(rows);
-			});
-			tempCount.release();
+			if (!id) {
+				tempCount.query("SELECT DISTINCT * FROM tbl_questions ORDER BY RAND() LIMIT 10", function(error, rows, fields){
+					tempCount.release();
+					callback(rows);
+				});
+			} else {
+				tempCount.query("SELECT DISTINCT * FROM tbl_questions WHERE skill = '"+id+"' ORDER BY RAND() LIMIT 10", function(error, rows, fields){
+					tempCount.release();
+					callback(rows);
+				});
+			}
 
 		}	
 	});
