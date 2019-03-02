@@ -20,14 +20,15 @@ function ematchModel(argument) {
 	        	elem.formData = {};
 	        	points = parseInt(data['success'].points);
 	        	rank = data['success'].rank;
-	        	console.log(data);
 
-	        	$('.home-user-points small').animateNumber(
-					{ 
-						number: parseInt(data['success'].points)
-					},
-					2000
-				);
+	        	setTimeout(function() {
+		        	$('.home-user-points small').animateNumber(
+						{ 
+							number: parseInt(data['success'].points)
+						},
+						2000
+					);
+				},1000);
 
 	        	$('.user-level-status .user-rank').text(data['success'].rank);
 	        },	
