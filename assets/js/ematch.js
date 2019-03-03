@@ -539,7 +539,7 @@ function ematchModel(argument) {
 	            	gameDone = false;
 	            	location.reload();
 	            } else {
-	            	this.updatePoints(isLogin);
+	            	elem.updatePoints(isLogin);
 	            }
 	            if (callback != "") {
 		            callback();
