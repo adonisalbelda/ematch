@@ -538,9 +538,7 @@ function ematchModel(argument) {
 	            if (gameDone) {
 	            	gameDone = false;
 	            	location.reload();
-	            } else {
-	            	elem.updatePoints(isLogin);
-	            }
+	            } 
 	            if (callback != "") {
 		            callback();
 	            }
