@@ -451,7 +451,7 @@ function select_questions(id, callback) {
 			console.log("error in the query");
 		} else {
 			if (!id) {
-				tempCount.query("SELECT DISTINCT * FROM tbl_questions ORDER BY RAND() LIMIT 10", function(error, rows, fields){
+				tempCount.query("SELECT DISTINCT * FROM tbl_questions ORDER BY RAND() LIMIT 3", function(error, rows, fields){
 					tempCount.release();
 					callback(rows);
 				});

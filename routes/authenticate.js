@@ -88,8 +88,8 @@ router.post('/login',[
 	} else {
 		mysqlConf.getConnection(function(error, tempCount){
 		if (!!error){
+			console.log(error);
 			tempCount.release();
-			console.log("error in the query");
 		} else {
 			console.log("query successed");
 			tempCount.query("SELECT * FROM tbl_students where username = '"+req.body.username+"' and "+
@@ -106,7 +106,7 @@ router.post('/login',[
 						req.session.username = rows[0]['username'];
 						req.session.email = rows[0]['email'];
 						req.session.course = rows[0]['course'];
-						req.session.points = rows[0]['points'];
+						req.session.points = rows[0]['points'];	
 						req.session.rank = rows[0]['rank'];
 
 						tempCount.query("UPDATE  tbl_students SET is_online = '1' WHERE id = '"+rows[0]['id']+"'", function(error, rows, fields){

@@ -9,12 +9,21 @@ var mysql = require('mysql');
 
 // });
 
+// var connection = mysql.createPool({
+// 	connectionLimit: 50,
+// 	host: 'remotemysql.com',
+// 	user: 'U7jBmzPtGd',
+// 	password : 'M7g5bEFE9X',
+// 	database: 'U7jBmzPtGd'
+
+// });
+
 var connection = mysql.createPool({
 	connectionLimit: 50,
-	host: 'remotemysql.com',
-	user: 'U7jBmzPtGd',
-	password : 'M7g5bEFE9X',
-	database: 'U7jBmzPtGd'
+	host: 'sql12.freesqldatabase.com',
+	user: 'sql12281559',
+	password : 'ppm86NjM5k',
+	database: 'sql12281559'
 
 });	
 

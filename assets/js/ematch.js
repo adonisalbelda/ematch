@@ -538,13 +538,9 @@ function ematchModel(argument) {
 	            if (gameDone) {
 	            	gameDone = false;
 	            	location.reload();
+	            } else {
+	            	this.updatePoints(isLogin);
 	            }
-
-	            // if (localStorage.getItem('my_points')) {
-	            // 	$('.home-user-points small').text(localStorage.getItem('my_points'));
-	            // 	$('.user-level-status .user-rank').text(localStorage.getItem('my_rank'));
-	            // }
-
 	            if (callback != "") {
 		            callback();
 	            }
