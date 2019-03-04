@@ -596,6 +596,7 @@ input:focus::placeholder {
     top: 0;
     z-index: 1;
     background-color: #000;
+    display: none;
 }
 
 .page-loading img {
