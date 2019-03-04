@@ -305,7 +305,7 @@ function ematchModel(argument) {
 		return "duel_match-"+random;
 	};
 
-	this.isUserExist = function (callback) {
+	this.isUserExist = function () {
 		var popup = this;
 		this.show_loader();
 		$.ajax({
