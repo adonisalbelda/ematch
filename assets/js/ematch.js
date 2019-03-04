@@ -559,7 +559,6 @@ function ematchModel(argument) {
 
 	this.home_Directory = function (url, data, callback = "") {
 		var popup = this;
-		popup.show_loader();
 		$.ajax({
 	        url: "/"+url,
 	        method:"GET",
