@@ -318,7 +318,7 @@ function ematchModel(argument) {
 	        	popup.hide_loader();
 				if (data.hasOwnProperty("success")) {
 					elem.formData = {};
-					callback();	
+					location.reload();
 				} else {
 					dialog.showErrors(data, "Invalid authentication.");	    		
 				}
@@ -544,11 +544,11 @@ function ematchModel(argument) {
 	        success: function(data) {
 	            $('.child-wrapper').html(data);
 	            $('#register-dir-login').attr("data-value", "login");
-	            $('.main-wrapper').addClass('animated bounceInUp');
+	            // $('.main-wrapper').addClass('animated bounceInUp');
 	            popup.hide_loader();
-	            setTimeout(function() {
-	        		$('.main-wrapper').removeClass('animated bounceInUp');
-				},1000);
+	   //          setTimeout(function() {
+	   //      		$('.main-wrapper').removeClass('animated bounceInUp');
+				// },1000);
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
 	        	popup.hide_loader();
@@ -566,7 +566,7 @@ function ematchModel(argument) {
 	        contentType: "application/x-www-form-urlencoded",
 	        success: function(data) {
 	            $('.child-wrapper').html(data);
-	            $('.main-wrapper').addClass('animated bounceInDown')
+	            // $('.main-wrapper').addClass('animated bounceInDown')
 	            $('#match-dir-home').attr("data-value", "home");
 	            elem.animatePoints();
 	            if (gameDone) {
@@ -579,9 +579,9 @@ function ematchModel(argument) {
 	            }
 	            popup.hide_loader();
 
-	            setTimeout(function() {
-	        		$('.main-wrapper').removeClass('animated bounceInDown');
-				},1000);
+	   //          setTimeout(function() {
+	   //      		$('.main-wrapper').removeClass('animated bounceInDown');
+				// },1000);
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
 	        	popup.hide_loader();

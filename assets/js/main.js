@@ -69,10 +69,7 @@ $(document).ready(function(){
 		ematch.formData['username'] = $('.log-username').val();
 		ematch.formData['password'] = $('.log-password').val();
 
-		ematch.isUserExist(function(){
-			localStorage.setItem("logged_in", "yes");
-			location.reload();
-		});
+		ematch.isUserExist();
 		// ematch.home_Directory("home");
 	});
 
