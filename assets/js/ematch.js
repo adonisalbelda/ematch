@@ -536,7 +536,6 @@ function ematchModel(argument) {
 
 	this.redirect_To = function(url) {
 		var popup = this;
-		popup.show_loader();
 		$.ajax({
 	        url: "/"+url,
 	        method:"POST",
