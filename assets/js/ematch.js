@@ -536,6 +536,7 @@ function ematchModel(argument) {
 
 	this.redirect_To = function(url) {
 		var popup = this;
+		popup.show_loader();
 		$.ajax({
 	        url: "/"+url,
 	        method:"POST",
@@ -558,6 +559,7 @@ function ematchModel(argument) {
 
 	this.home_Directory = function (url, data, callback = "") {
 		var popup = this;
+		popup.show_loader();
 		$.ajax({
 	        url: "/"+url,
 	        method:"GET",
@@ -568,9 +570,10 @@ function ematchModel(argument) {
 	            $('#match-dir-home').attr("data-value", "home");
 	            elem.animatePoints();
 	            if (gameDone) {
+	            	gameDone = false;
 	            	location.reload();
 	            } 
-	            
+
 	            if (callback != "") {
 		            callback();
 	            }
