@@ -10,8 +10,36 @@ $(document).ready(function(){
 			$('.login-form-input input:last-child').addClass('animated slideInRight');
 			$('.login-content > p').addClass('animated fadeInUp');
 		},200);
+
+		if (email != "") {
+			ematch.hide_loader();
+			ematch.socket.emit('join_room', {room: "users", data: email});
+			ematch.socket.emit('message', {room: "users", message: isLogin, username:username});
+			if (localStorage.getItem('logged') === null) {
+				ematch.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
+				localStorage.setItem("logged", "yes");
+			}
+			ematch.updatePoints(isLogin);
+		} else {
+			localStorage.clear();
+			ematch.hide_loader();
+		}
+
+		if (localStorage.getItem("logged")) {
+			$(window).focus(function() {
+		   		ematch.socket.emit('in-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
+			}).blur(function() {
+			    ematch.socket.emit('out-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
+			});
+		}
+
 	});
 
+	$(window).on('load', function(){
+    	ematch.socket.emit('removeUserStatus', {email: email, id: isLogin });
+	});
+
+	// localStorage.clear();
 	$(document).on('click', 'body', function() {
 		var myAudio = document.getElementById('myAudio');
 		if (!myAudio.currentTime) {
@@ -41,7 +69,10 @@ $(document).ready(function(){
 		ematch.formData['username'] = $('.log-username').val();
 		ematch.formData['password'] = $('.log-password').val();
 
-		ematch.isUserExist();
+		ematch.isUserExist(function(){
+			localStorage.setItem("logged_in", "yes");
+			location.reload();
+		});
 		// ematch.home_Directory("home");
 	});
 
@@ -172,12 +203,9 @@ $(document).ready(function(){
 		$('.preview-result-overlay').fadeOut(500);
 	});
 
-	$(document).on('click', '.duel-done-btn', function() {
-		alert("dad");
-	});
 	// console.log(JSON.parse(localStorage.getItem('questions')), 'ds');
 
-	localStorage.clear();
+	// localStorage.clear();
 
 	$(document).on('click', '#battle-btn', function() {
 

@@ -93,12 +93,15 @@ io.on('connection', function(socket){
 		socket.emit('new message', {msg: data});
 	});
 
+	socket.on('removeUserStatus', function(data){
+		in_matchPeople.splice(in_matchPeople.indexOf(data.email), 1);
+	});
+
 	// socket.on('typing', function(data){
 	// 	socket.broadcast.emit('typing', data);
 	// });
 
 	socket.on("join_room", ({room, data}) => {
-		console.log("joined");
 		people[data] =  socket.id;
 		connections.push(socket);
 		socket.join(room);
@@ -346,6 +349,26 @@ io.on('connection', function(socket){
 			email: email,
 			online: connections.length,
 			rank: rank
+		});
+	});
+
+	// notify all user upon your signib-in
+	socket.on("in-focus", ({room, email, username, rank, id}) => {
+		socket.to(room).emit("update-in-focus", {
+			email: email,
+			username: username,
+			rank: rank,
+			id: id
+		});
+	});
+
+	// notify all user upon your signib-in
+	socket.on("out-focus", ({room, email, username, rank, id}) => {
+		socket.to(room).emit("update-out-focus", {
+			email: email,
+			username: username,
+			rank: rank,
+			id: id
 		});
 	});
 

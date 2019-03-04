@@ -8,6 +8,21 @@ function ematchModel(argument) {
 		$('.page-loading').css('display', 'none');
 	}
 
+	this.animatePoints = function() {
+		if (localStorage.getItem("my_points")) {
+        	setTimeout(function() {
+	        	$('.home-user-points small').animateNumber(
+					{ 
+						number: parseInt(localStorage.getItem("my_points")),
+					},
+					2000
+				);
+			},1000);
+
+        	$('.user-level-status .user-rank').text(localStorage.getItem("my_rank"));
+    	}
+	}
+
 	this.updatePoints =  function(id) {
 		elem.formData["id"] = id;
 		$.ajax({
@@ -21,16 +36,7 @@ function ematchModel(argument) {
 	        	points = parseInt(data['success'].points);
 	        	rank = data['success'].rank;
 
-	        	setTimeout(function() {
-		        	$('.home-user-points small').animateNumber(
-						{ 
-							number: parseInt(data['success'].points)
-						},
-						2000
-					);
-				},1000);
-
-	        	$('.user-level-status .user-rank').text(data['success'].rank);
+	        	elem.animatePoints();
 	        },	
 	        error: function(jqXHR, textStatus, errorThrown) {
 	            alert('error ' + textStatus + " " + errorThrown);
@@ -42,22 +48,15 @@ function ematchModel(argument) {
 		$('.page-loading').css('display', 'flex');
 	}
 
-	if (email != "") {
-		this.hide_loader();
-		this.socket.emit('join_room', {room: "users", data: email});
-		this.socket.emit('message', {room: "users", message: isLogin, username:username});
-		elem.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
-		this.updatePoints(isLogin);
-	} else {
-		this.hide_loader();
-		localStorage.clear();
-	}
-
 	this.socket.on('message', function(data){
 		var user_id = data.user_id;
 		var user_row = $('.people-table').find('.'+user_id+"-user");
 		$(user_row).find('.online-status i').removeClass('offline').addClass('online');
 		$('.total-online').text(data.online - 1);
+	});
+
+	this.socket.on('remove', function(data){
+		alert("dadda");
 	});
 
 	this.socket.on('duel-abort', function(data){
@@ -87,34 +86,77 @@ function ematchModel(argument) {
 		});
 	});
 
-	this.socket.on('alert-users', function(data){
-		$('.popup-logged-user').append("<span class='notify-user-logged'>" +
-				data.username + " is now online" +
-				"<img src='../images/profile.png'>" +
-				"</span><br>");
-		
-		setTimeout(function() {
-			$('.notify-user-logged').addClass('show').fadeOut(2000, function(){
-				$(this).removeClass('show');
+	this.socket.on('update-in-focus', function(data){
+		var row = "<tr data-value='"+data.username+"'>"+
+					"<td class='duel-profile-image'>" +
+						"<img src='images/profile.png'>"+
+					"</td>" +
+					"<td class='duel-name'>" +
+						"<p>"+data.username+"</p>" +
+					"</td>"+
+					"<td class='duel-level'>" +
+						"<p> Rank"+data.rank+"</p>" +
+					"</td>" +
+					"<td class='duel-player-btn text-center' data-value='"+data.email+"'>" +
+						"<img src='../images/duel_player.png' id='duel-selected-player'>" +
+					"</td>"+
+				"</tr>";
+		$('.duel-member-list tbody').append(row);
+
+		$('.people-table .members-status').each(function(){
+			var elem = this;
+			if ($(this).attr("data-value") == data.id) {
+				$(this).find('.members-status-option').text('active');
+			}
+		});
+
+	});
+
+	this.socket.on('update-out-focus', function(data){
+		$('.duel-member-list table tr').each(function(){
+			var elem = this;
+			if ($(this).attr("data-value") == data.username) {
 				$(this).remove();
-			});
-		},100);
+			}
+		});
 
-		var row = "<tr>"+
-				"<td class='duel-profile-image'>" +
-					"<img src='images/profile.png'>"+
-				"</td>" +
-				"<td class='duel-name'>" +
-					"<p>"+data.username+"</p>" +
-				"</td>"+
-				"<td class='duel-level'>" +
-					"<p> Rank"+data.rank+"</p>" +
-				"</td>" +
-				"<td class='duel-player-btn text-center' data-value='"+data.email+"'>" +
-					"<img src='../images/duel_player.png' id='duel-selected-player'>" +
-				"</td>"+
-			"</tr>";
+		$('.people-table .members-status').each(function(){
+			var elem = this;
+			if ($(this).attr("data-value") == data.id) {
+				$(this).find('.members-status-option').text('inactive');
+			}
+		});
 
+
+	});
+
+	this.socket.on('alert-users', function(data){
+			$('.popup-logged-user').append("<span class='notify-user-logged'>" +
+					data.username + " is now online" +
+					"<img src='../images/profile.png'>" +
+					"</span><br>");
+			
+			setTimeout(function() {
+				$('.notify-user-logged').addClass('show').fadeOut(2000, function(){
+					$(this).removeClass('show');
+					$(this).remove();
+				});
+			},100);
+
+			var row = "<tr data-value='"+data.username+"'>"+
+					"<td class='duel-profile-image'>" +
+						"<img src='images/profile.png'>"+
+					"</td>" +
+					"<td class='duel-name'>" +
+						"<p>"+data.username+"</p>" +
+					"</td>"+
+					"<td class='duel-level'>" +
+						"<p> Rank"+data.rank+"</p>" +
+					"</td>" +
+					"<td class='duel-player-btn text-center' data-value='"+data.email+"'>" +
+						"<img src='../images/duel_player.png' id='duel-selected-player'>" +
+					"</td>"+
+				"</tr>";
 		if ($('.empty-online').is(":visible")) {
 			$('.empty-online').remove();
 
@@ -153,18 +195,7 @@ function ematchModel(argument) {
 
 	this.socket.on('display-duel-result', function(data){
 		$('.dialog-wrapper').remove();
-		localStorage.clear();
-		// questions = "";
-		// current_question = 0;
-		// correct_answer = 0;
-		// wrong_answer = 0;
-		// item_finished = 0;
-		// minute = 4;
-		// seconds = 50;
-		// next = false ;
-		// number_ofItems = 3;
-		// nextItem = 1;
-		// removeInterval = true;
+		localStorage.removeItem("questions");
 		console.log(data);
 		elem.show_loader();
 		
@@ -274,7 +305,7 @@ function ematchModel(argument) {
 		return "duel_match-"+random;
 	};
 
-	this.isUserExist = function () {
+	this.isUserExist = function (callback) {
 		var popup = this;
 		this.show_loader();
 		$.ajax({
@@ -287,7 +318,7 @@ function ematchModel(argument) {
 	        	popup.hide_loader();
 				if (data.hasOwnProperty("success")) {
 					elem.formData = {};
-					location.reload();	
+					callback();	
 				} else {
 					dialog.showErrors(data, "Invalid authentication.");	    		
 				}
@@ -314,6 +345,7 @@ function ematchModel(argument) {
 				if (data.hasOwnProperty("success")) {
 					elem.socket.emit('send-notification', {room: "users", id: id});
 					elem.formData = {};
+					localStorage.clear();
 					location.reload();	
 				} else {
 					dialog.showErrors(data, "Invalid authentication.");	    		
@@ -342,6 +374,7 @@ function ematchModel(argument) {
 				if (data.hasOwnProperty("success")) {
 					dialog.alert("Successfuly registered.", "Status", function() {
 						elem.socket.emit('send-alert', {room: "users", username: elem.formData['username']});
+						localStorage.setItem("logged_in", "true");
 						location.reload();
 						this.formData = {};
 					});
@@ -436,7 +469,7 @@ function ematchModel(argument) {
     		}
 
     		if (minute == 1) {
-    			$('.question-timer').css('background-color', '#820920');
+    			$('.question-timer').css('background-color', '#820920').addClass('animated infinite shake delay-3s');
     		}
 
     		if (seconds == 0 ) {
@@ -449,8 +482,8 @@ function ematchModel(argument) {
 		        		score: correct_answer, 
 		        		id:isLogin, 
 		        		username: username, 
-		        		points: localStorage.getItem('my_points') === null ? points : localStorage.getItem('my_points'),
-		        		rank: localStorage.getItem('my_rank') === null ? rank : localStorage.getItem('my_rank'), 
+		        		points:  points,
+		        		rank: rank, 
 		        		timer: 0
 		        	}
 					ematch.socket.emit('duel-result', info);
@@ -481,13 +514,6 @@ function ematchModel(argument) {
 				} else {
 					elem.hide_loader();
 					elem.formData = {};
-					console.log(data);
-					// var ctr = 0;
-					// $('.answer-option').each(function(){
-					// 	$(this).eq(0).find('.question-choice').text(data['choices'][ctr]['label']);
-					// 	$(this).attr("data-value", data['choices'][ctr]['answer']);
-					// 	ctr++;
-					// });
 					var letter = ['a)', 'b)', 'c)', 'd)'];
 					$('.question-multiple-type').empty();
 					$.each(data['choices'], function( key, value ) {
@@ -510,6 +536,7 @@ function ematchModel(argument) {
 
 	this.redirect_To = function(url) {
 		var popup = this;
+		popup.show_loader();
 		$.ajax({
 	        url: "/"+url,
 	        method:"POST",
@@ -517,9 +544,14 @@ function ematchModel(argument) {
 	        success: function(data) {
 	            $('.child-wrapper').html(data);
 	            $('#register-dir-login').attr("data-value", "login");
+	            $('.main-wrapper').addClass('animated bounceInUp');
 	            popup.hide_loader();
+	            setTimeout(function() {
+	        		$('.main-wrapper').removeClass('animated bounceInUp');
+				},1000);
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
+	        	popup.hide_loader();
 	            alert('error ' + textStatus + " " + errorThrown);
 	        }
     	});
@@ -527,26 +559,31 @@ function ematchModel(argument) {
 
 	this.home_Directory = function (url, data, callback = "") {
 		var popup = this;
+		popup.show_loader();
 		$.ajax({
 	        url: "/"+url,
 	        method:"GET",
 	        contentType: "application/x-www-form-urlencoded",
 	        success: function(data) {
 	            $('.child-wrapper').html(data);
+	            $('.main-wrapper').addClass('animated bounceInDown')
 	            $('#match-dir-home').attr("data-value", "home");
-
+	            elem.animatePoints();
 	            if (gameDone) {
-	            	gameDone = false;
 	            	location.reload();
-	            } else {
-	            	elem.updatePoints(isLogin);
-	            }
+	            } 
+
 	            if (callback != "") {
 		            callback();
 	            }
 	            popup.hide_loader();
+
+	            setTimeout(function() {
+	        		$('.main-wrapper').removeClass('animated bounceInDown');
+				},1000);
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
+	        	popup.hide_loader();
 	            alert('error ' + textStatus + " " + errorThrown);
 	        }
     	});
@@ -586,26 +623,6 @@ function ematchModel(argument) {
 	    	});
 		}, 1000);
 
-	}
-
-
-	this.update_Points = function (id) {
-		alert("dasd");
-		// elem.formData["id"] = id;
-		// $.ajax({
-	 //        url: "/updatePoints",
-	 //        method:"POST",
-	 //        data : JSON.stringify(elem.formData),
-	 //        processData: false,
-		// 	contentType: "application/json",
-	 //        success: function(data) {
-	 //        	console.log(data);
-	 //        	elem.formData = {};
-	 //        },
-	 //        error: function(jqXHR, textStatus, errorThrown) {
-	 //            alert('error ' + textStatus + " " + errorThrown);
-	 //        }
-  //   	});
 	}
 
 	this.readURL = function readURL(input) {

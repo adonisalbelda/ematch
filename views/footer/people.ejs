@@ -15,7 +15,7 @@
 		<div class="people-table">
 			<% for(var i=0; i < data.length; i++) { %>
 				<% if (data[i].id != user['id']) {%>
-					<div class="members-status <%= data[i].id %>-user" data-value="<%= data[i].id %> ">
+					<div class="members-status <%= data[i].id %>-user" data-value="<%= data[i].id%>">
 						<img src="images/profile.png">
 						<p><%= data[i].username %></p>
 						<p class="member-activity-status">2 minutes active</p>

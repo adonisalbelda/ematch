@@ -223,6 +223,11 @@ input:focus::placeholder {
 }
 
 /* user settings*/
+.settings-content {
+	background-color: #245a66;
+    border: 5px solid #25788a;
+}
+
 .user-home-settings {
 	width: 100%;
     text-align: center;
@@ -1043,13 +1048,22 @@ input:focus::placeholder {
     right: -21px;
 }
 
+.match-timer {
+	display: flex;
+	vertical-align: middle;
+	justify-content: center;
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left:0;
+}
+
 .question-timer {
 	text-align: left;
     font-family: Arial;
-    font-size: 15px;
-    position: absolute;
-    bottom: 3px;
-    right: 10px;
+    font-size: 20px;
+    display: inline-block;
+    margin: 0 auto;
     background-color: orange;
     padding: 0px 10px;
     color: #fff;
@@ -1275,6 +1289,9 @@ input:focus::placeholder {
  
 	.home-content > img:first-child {
 	    width: 100%;
+	    animation-duration: 2s;
+		animation-delay: 1s;
+		animation-iteration-count: infinite;
 	}
 
 	.login-content p {
