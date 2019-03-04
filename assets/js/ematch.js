@@ -572,7 +572,10 @@ function ematchModel(argument) {
 	            if (gameDone) {
 	            	location.reload();
 	            } 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 14fdedb78e6a1d06544957567c9ebd4a98d66c5e
 	            if (callback != "") {
 		            callback();
 	            }

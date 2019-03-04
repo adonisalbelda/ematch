@@ -15,7 +15,6 @@ var mysql = require('mysql');
 // 	user: 'U7jBmzPtGd',
 // 	password : 'M7g5bEFE9X',
 // 	database: 'U7jBmzPtGd'
-
 // });
 
 var connection = mysql.createPool({
@@ -24,7 +23,7 @@ var connection = mysql.createPool({
 	user: 'sql12281559',
 	password : 'ppm86NjM5k',
 	database: 'sql12281559'
-
 });	
+
 
 module.exports = connection;
