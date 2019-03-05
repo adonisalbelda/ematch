@@ -122,7 +122,6 @@ $(document).ready(function(){
 	var answers = [];
 	var ques_item_answers = {};
 	$(document).on('click', '.next-arr-btn', function(){
-		
 		$('#click_audio').trigger('play');
 
 		if (next == false) {
@@ -204,7 +203,7 @@ $(document).ready(function(){
 		$.each( questions, function( key, value ) {
 		   	$('.preview-questions-list').append('<div class="preview-question-item">'+
 			'<span class="pre-ques-sec">' +
-				'<span class="pre-ques-num">'+key+')</span>' +
+				'<span class="pre-ques-num">'+(key+1)+')</span>' +
 				'<span class="pre-ques-title">'+value.question+'</span>' +
 			'</span>' +
 			'<p class="pre-ques-cor">' +
