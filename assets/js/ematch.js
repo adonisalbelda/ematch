@@ -8,6 +8,28 @@ function ematchModel(argument) {
 		$('.page-loading').css('display', 'none');
 	}
 
+	if (email != "") {
+			ematch.hide_loader();
+			ematch.socket.emit('join_room', {room: "users", data: email});
+			ematch.socket.emit('message', {room: "users", message: isLogin, username:username});
+			if (localStorage.getItem('logged') === null) {
+				ematch.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
+				localStorage.setItem("logged", "yes");
+			}
+			ematch.updatePoints(isLogin);
+	} else {
+		localStorage.clear();
+		ematch.hide_loader();
+	}
+
+	if (localStorage.getItem("logged")) {
+		$(window).focus(function() {
+	   		ematch.socket.emit('in-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
+		}).blur(function() {
+		    ematch.socket.emit('out-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
+		});
+	}
+
 	this.animatePoints = function() {
 		if (localStorage.getItem("my_points")) {
         	setTimeout(function() {
@@ -77,10 +99,12 @@ function ematchModel(argument) {
 			}
 
 			elem.socket.emit('enter-room', info );
+
 			var msg = "Waiting for the opponent to accept the request";
 			dialog.waitingResult(function(){
 				elem.home_Directory("home", {});
 			}, msg);
+
 		}, function(){
 			elem.socket.emit('reject-match', {sender: data.sender, receiver: data.receiver, username: username});
 		});
@@ -196,7 +220,6 @@ function ematchModel(argument) {
 	this.socket.on('display-duel-result', function(data){
 		$('.dialog-wrapper').remove();
 		localStorage.removeItem("questions");
-		console.log(data);
 		elem.show_loader();
 		
 		elem.home_Directory("result", {}, function(){
@@ -525,6 +548,7 @@ function ematchModel(argument) {
 					   	);
 					});
 				}
+				elem.hide_loader();
 
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
