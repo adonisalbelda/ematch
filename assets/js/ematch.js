@@ -8,28 +8,6 @@ function ematchModel(argument) {
 		$('.page-loading').css('display', 'none');
 	}
 
-	if (email != "") {
-			elem.hide_loader();
-			elem.socket.emit('join_room', {room: "users", data: email});
-			elem.socket.emit('message', {room: "users", message: isLogin, username:username});
-			if (localStorage.getItem('logged') === null) {
-				elem.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
-				localStorage.setItem("logged", "yes");
-			}
-			elem.updatePoints(isLogin);
-	} else {
-		localStorage.clear();
-		elem.hide_loader();
-	}
-
-	if (localStorage.getItem("logged")) {
-		$(window).focus(function() {
-	   		elem.socket.emit('in-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
-		}).blur(function() {
-		    elem.socket.emit('out-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
-		});
-	}
-
 	this.animatePoints = function() {
 		if (localStorage.getItem("my_points")) {
         	setTimeout(function() {
@@ -70,6 +48,28 @@ function ematchModel(argument) {
 		$('.page-loading').css('display', 'flex');
 	}
 
+	if (email != "") {
+			elem.hide_loader();
+			elem.socket.emit('join_room', {room: "users", data: email});
+			elem.socket.emit('message', {room: "users", message: isLogin, username:username});
+			if (localStorage.getItem('logged') === null) {
+				elem.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
+				localStorage.setItem("logged", "yes");
+			}
+			elem.updatePoints(isLogin);
+	} else {
+		localStorage.clear();
+		elem.hide_loader();
+	}
+
+	if (localStorage.getItem("logged")) {
+		$(window).focus(function() {
+	   		elem.socket.emit('in-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
+		}).blur(function() {
+		    elem.socket.emit('out-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
+		});
+	}
+	
 	this.socket.on('message', function(data){
 		var user_id = data.user_id;
 		var user_row = $('.people-table').find('.'+user_id+"-user");
