@@ -160,7 +160,7 @@ input:focus::placeholder {
 
 .user-level-status span {
 	display: inline-block;
-    padding-top: 10px;
+    padding-top: 0px;
     letter-spacing: 4px;
     text-align: center;
 }
@@ -231,7 +231,7 @@ input:focus::placeholder {
 	width: 100%;
     text-align: center;
     position: absolute;
-    bottom: 30px;
+    bottom: 23px;
 }
 
 .user-home-settings span {
