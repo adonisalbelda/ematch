@@ -191,6 +191,13 @@ io.on('connection', function(socket){
 		}
 		players.push(data);
 
+		// if (match_players.hasOwnProperty(room)) {
+			
+		// 	match_players[room].push(data); 
+		// } else {
+		// 	match_players[room] = [data];
+		// }
+
 		mysqlConf.getConnection(function(error, tempCount){
 			if (!!error){
 				tempCount.release();
@@ -231,7 +238,6 @@ io.on('connection', function(socket){
 				winner['winner_username'] = username;
 				winner['winner_oldpoints'] = points;
 				winner['losser_oldpoints'] = results[room].points;
-				winner['winner_username'] = username;
 				winner['losser_username'] = results[room].username
 				winner['losser_id'] = results[room].id;
 				winner['label'] = "Vanquished";
@@ -260,7 +266,6 @@ io.on('connection', function(socket){
 					winner['winner_username'] = username;
 					winner['winner_oldpoints'] = points;
 					winner['losser_oldpoints'] = results[room].points;
-					winner['winner_username'] = username;
 					winner['losser_username'] = results[room].username
 					winner['losser_id'] = results[room].id;
 					winner['label'] = "Vanquished";
@@ -281,7 +286,6 @@ io.on('connection', function(socket){
 			];
 			
 			rate_Elo(validate_result, winner['winner_id'], function(data){
-				console.log(data);
 				winner['winner_newpoints'] = data['winner'];
 				winner['losser_newpoints'] = data['losser'];
 				winner['winner_rank'] = data['winner_Rank'];
@@ -311,7 +315,6 @@ io.on('connection', function(socket){
 
 			winner = {};
 			results[room] = {};
-
 			socket.leave(room);
 
 		} else {
@@ -439,7 +442,7 @@ function updateRank(points) {
 		rank = "C";
 	} else if ( points < 1599) {
 		rank = "B" ;
-	} else {
+	} else if (points >= 1600){
 		rank = "A";
 	}
 

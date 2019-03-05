@@ -11,7 +11,7 @@ function ematchModel(argument) {
 	this.animatePoints = function() {
 		if (localStorage.getItem("my_points")) {
         	setTimeout(function() {
-	        	$('.home-user-points small').animateNumber(
+	        	$('.home-user-points small.home-points').animateNumber(
 					{ 
 						number: parseInt(localStorage.getItem("my_points")),
 					},
@@ -69,7 +69,7 @@ function ematchModel(argument) {
 		    elem.socket.emit('out-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
 		});
 	}
-	
+
 	this.socket.on('message', function(data){
 		var user_id = data.user_id;
 		var user_row = $('.people-table').find('.'+user_id+"-user");
@@ -86,6 +86,7 @@ function ematchModel(argument) {
 	});
 
 	this.socket.on('confirm-match', function(data){
+		$('#ready_audio').trigger('play');
 		dialog.matchReady(function(){
 
 			var info = {
@@ -193,6 +194,7 @@ function ematchModel(argument) {
 	});
 
 	this.socket.on('duel-confirmation', function(data){
+		$('#ready_audio').trigger('play');
 		dialog.show_request(data.username + " wants wants to Duel you!", function() {
 			var room = elem.generate_Room();
 			elem.socket.emit('accept-duel', {sender: data.sender, room: room, receiver: data.receiver});
@@ -219,28 +221,28 @@ function ematchModel(argument) {
 
 	this.socket.on('display-duel-result', function(data){
 		$('.dialog-wrapper').remove();
-		localStorage.removeItem("questions");
 		elem.show_loader();
 		
 		elem.home_Directory("result", {}, function(){
 
 			var C_number = 0;
+			gameDone = true;
 
+			localStorage.removeItem('my_points');
+			localStorage.removeItem('my_rank');
+
+			C_number = parseInt(data['data']['winner_newpoints']) - parseInt(data['data']['winner_oldpoints'])
 			if (parseInt(data['data']['winner_id']) == parseInt(isLogin)) {
 				$('.preview-result p').text("You win!");
 				$('.points-indicator').text("+");
-				C_number = parseInt(data['data']['winner_newpoints']) - parseInt(data['data']['winner_oldpoints'] )
-				localStorage.setItem('my_points',data['data']['winner_newpoints']);
-				localStorage.setItem('my_rank',data['data']['winner_rank']);
+				localStorage.setItem('my_points', data['data']['winner_newpoints']);
+				localStorage.setItem('my_rank', data['data']['winner_rank']);
 			} else {
 				$('.preview-result p').text("You lost!");
 				$('.points-indicator').text("-");
-				C_number = parseInt(data['data']['losser_oldpoints'] ) - parseInt(data['data']['losser_newpoints'] )
 				localStorage.setItem('my_points',data['data']['losser_newpoints']);
 				localStorage.setItem('my_rank',data['data']['losser_rank']);
 			}
-
-			console.log(C_number, 'c_number');
 
 			$('.player-earned-points').animateNumber(
 				{ 
@@ -249,23 +251,12 @@ function ematchModel(argument) {
 				2000
 			);
 
-			$('.result-winner-points').animateNumber(
-				{ 
-					number: data['data']['winner_newpoints']
-				}
-			);
-
-			$('.result-losser-points').animateNumber(
-				{ 
-					number: data['data']['losser_newpoints']
-				}
-			);
-
+			$('.result-winner-points').text(data['data']['winner_newpoints']); 
+			$('.result-losser-points').text(data['data']['losser_newpoints'])
 			$('.result-winner').text(data['data']['winner_username']);
 			$('.result-label').text(data['data']['label']);
 			$('.result-winner-rank').text(data['data']['winner_rank']);
 			$('.result-losser').text(data['data']['losser_username']);
-			gameDone = true;
 		});
 	});
 
