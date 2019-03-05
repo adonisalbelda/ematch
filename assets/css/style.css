@@ -156,7 +156,6 @@ input:focus::placeholder {
 /*style for home user-profile*/
 .profile-details {
 	margin-top: 40px;
-	margin-bottom: 40px;
 }
 
 .user-level-status span {
