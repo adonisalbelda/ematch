@@ -9,24 +9,24 @@ function ematchModel(argument) {
 	}
 
 	if (email != "") {
-			ematch.hide_loader();
-			ematch.socket.emit('join_room', {room: "users", data: email});
-			ematch.socket.emit('message', {room: "users", message: isLogin, username:username});
+			elem.hide_loader();
+			elem.socket.emit('join_room', {room: "users", data: email});
+			elem.socket.emit('message', {room: "users", message: isLogin, username:username});
 			if (localStorage.getItem('logged') === null) {
-				ematch.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
+				elem.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
 				localStorage.setItem("logged", "yes");
 			}
-			ematch.updatePoints(isLogin);
+			elem.updatePoints(isLogin);
 	} else {
 		localStorage.clear();
-		ematch.hide_loader();
+		elem.hide_loader();
 	}
 
 	if (localStorage.getItem("logged")) {
 		$(window).focus(function() {
-	   		ematch.socket.emit('in-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
+	   		elem.socket.emit('in-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
 		}).blur(function() {
-		    ematch.socket.emit('out-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
+		    elem.socket.emit('out-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
 		});
 	}
 
