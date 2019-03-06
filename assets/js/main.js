@@ -35,9 +35,12 @@ $(document).ready(function(){
 
 	$(document).on('click', '.game-status-option', function(){
 		ematch.formData['id'] = isLogin;
-		dialog.confirm("Are you sure you want to sign out ?", function(){
+	});
+
+	$(document).on('click', '.game-status-reset', function(){
+		dialog.confirm("Are you sure you want reset ?", function(){
 			ematch.show_loader();
-			ematch.userLogout(isLogin);
+			location.reload();
 		}, "Confirm ?");
 	});
 
@@ -302,6 +305,19 @@ $(document).ready(function(){
 	$(document).on('click', '#rankings-view', function() {
 		var url = "ranking";
 		ematch.home_Directory(url, {});
+	});
+
+	$(document).on('click', '.mem-online-prof', function(){
+		$('.members-conversation').css('display', 'block');
+		$('.members-list-online').css('display', 'none');
+		var chat = $(this).attr("data-value");
+		$('.members-msg').text("You and "+ chat);
+	});
+
+	$(document).on('click', '.mes-onl-mem .action', function(){
+		$('.members-conversation').css('display', 'none');
+		$('.members-list-online').css('display', 'block');
+		$('.members-msg').text("All");
 	});
 
 	$(document).on('click', '.find-skills-list div', function(){

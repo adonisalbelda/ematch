@@ -3,89 +3,52 @@
 		<img src="images/home.png" id="match-dir-home"><br>
 	</div>
 	<div class="logo-area footer-logo-area">
-		<img src="images/rankings.png">
+		<h1 class="footer-header-title">MESSAGES</h1>
 	</div>
 </div>
-<div class="rankings-content">
-	<img src="images/trophy.png" class="medal-overlap">
-	<div class="ranking-view-table">
-		<div class="form-box">
-			<select name="" id="" class="ranking-specialty">
-				<option value="">Specialty</option>
-			</select>
+<div class="message-content">
+	<div class="messages">
+		<div class="mes-onl-mem">
+			<div class="action">
+				<span>
+					<i class="fa fa-arrow-left"></i>
+				</span>
+				<span class="members-msg">
+					ALL
+				</span>
+			</div>
 		</div>
-		<h3>MASTER OF C++</h3>
-		<table>
-			<tbody>
-				<tr>
-					<td class="duel-profile-image">
-						<img src="images/medal.png" class="rank-medal-img">
-						<img src="images/profile.png">
-					</td>
-					<td class="duel-name">
-						<div class="player-details">
-							<p>
-								CSHARK
-							</p>
-							<p class="player-level">
-								Level 6
-							</p>
+		<div class="mem-onl-prof">
+			<div class="members-list-online">
+				<% for(var i=0; i < data.length; i++) { %>
+					<% if (data[i].id != user['id']) {%>
+						<div class="mem-online-prof" data-value="<%=data[i].username%>" data-selector="<%=data[i].email%>">
+							<img src="images/profile.png">
+							<span class="mem-username-onl"><%=data[i].username%></span><br>
+							<span class="mem-lastmsg-onl">"hi"</span>
+							<span class="unread-msg">
+								10
+							</span>
 						</div>
-					</td>
-					<td class="duel-player-btn">
-						<div class="user-rank-points">
-							<img src="images/rank_tropy.png">
-							<span>400</span>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="duel-profile-image">
-						<img src="images/medal.png" class="rank-medal-img">
-						<img src="images/profile.png">
-					</td>
-					<td class="duel-name">
-						<div class="player-details">
-							<p>
-								CSHARK
-							</p>
-							<p class="player-level">
-								Level 6
-							</p>
-						</div>
-					</td>
-					<td class="duel-player-btn">
-						<div class="user-rank-points">
-							<img src="images/rank_tropy.png">
-							<span>400</span>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="duel-profile-image">
-						<img src="images/medal.png" class="rank-medal-img">
-						<img src="images/profile.png">
-					</td>
-					<td class="duel-name">
-						<div class="player-details">
-							<p>
-								CSHARK
-							</p>
-							<p class="player-level">
-								Level 6
-							</p>
-						</div>
-					</td>
-					<td class="duel-player-btn">
-						<div class="user-rank-points">
-							<img src="images/rank_tropy.png">
-							<span>400</span>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+					<% } %>
+				<% } %> 
+			</div>
+			<div class="members-conversation">
+				<div class="msg-sender">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+				</div>
+				<div class="msg-reciever">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+				</div>
+				<div class="type-msg">
+					<p>
+						<input type="text">
+						<i class="fa fa-paper-plane"></i>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>	
 </div>
 
 <!-- <% include ../demo %> -->
