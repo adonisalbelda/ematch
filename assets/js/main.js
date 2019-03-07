@@ -335,8 +335,8 @@ $(document).ready(function(){
 		chat = $(this).attr("data-value");
 		receiver_email = $(this).attr("data-selector");
 		receiver_id = $(this).attr("data-value");
-		username = $(this).attr("data-name");
-		$('.members-msg').text( username + " and Your "+ "conversation");
+		name = $(this).attr("data-name");
+		$('.members-msg').text( name + " and Your "+ "conversation");
 
 		ematch.retrieveConvo(isLogin, receiver_id);
 	});
