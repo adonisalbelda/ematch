@@ -1351,7 +1351,7 @@ input:focus::placeholder {
 
 .members-conversation {
 	width: 100%;
-    min-height: 56vh;
+    min-height: 57vh;
     background-color: #011f27;
     top: 0px;
     overflow: hidden;
