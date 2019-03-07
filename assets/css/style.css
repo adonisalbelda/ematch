@@ -1247,7 +1247,7 @@ input:focus::placeholder {
 .mem-onl-prof {
 	position: relative;
 	overflow-y: auto;
-	max-height: 59vh;
+	max-height: 56vh;
 }
 
 .mem-online-prof {
