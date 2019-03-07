@@ -1,5 +1,16 @@
 $(document).ready(function(){
 	
+	var _originalSize = $(window).width() + $(window).height()
+	$(window).resize(function(){
+		if($(window).width() + $(window).height() != _originalSize){
+			$('.duel-top-option').css('display', 'none'); 
+			$('.user-home-settings').css('display', 'none'); 
+		} else {
+			$('.duel-top-option').css('display', 'block');  
+			$('.user-home-settings').css('display', 'block');  
+		}
+	});
+	
 	$(window).bind('load', function() {
 		ematch.hide_loader();
 		$('body').trigger('click');
@@ -24,6 +35,7 @@ $(document).ready(function(){
 			$('#myAudio').trigger('play');
 		}
 	});
+
 
 	$(document).on('focus', 'input', function(){
   		$('.duel-top-option').css('display', 'none');
