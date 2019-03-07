@@ -1266,7 +1266,7 @@ input:focus::placeholder {
 
 .action {
 	position: relative;
-    top: -14px;
+    top: -12px;
     font-size: 25px;
     color: #f6930e;
 }
@@ -1317,7 +1317,7 @@ input:focus::placeholder {
     font-size: 12px;
     padding: 5px 10px;
     display: block;
-    border-radius: 20px 6px;
+    border-radius: 0px 6px;
     max-width: 70%;
     margin-bottom: 10px;
     float: right;
@@ -1337,7 +1337,7 @@ input:focus::placeholder {
     font-size: 12px;
     padding: 5px 10px;
     display: inline-block;
-    border-radius: 20px 6px;
+    border-radius: 0px 6px;
     max-width: 70%;
     margin-bottom: 10px;
     float: left;
