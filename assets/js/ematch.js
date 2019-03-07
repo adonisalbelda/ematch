@@ -109,7 +109,7 @@ function ematchModel(argument) {
 			var objDiv = $(".msg-convo-list");
 			var h = objDiv.get(0).scrollHeight;
     	 	objDiv.animate({scrollTop: h});
-    	 	
+
 		}
 	});
 
@@ -387,6 +387,7 @@ function ematchModel(argument) {
 
 	this.userLogout = function (id) {
 		var popup = this;
+		this.formData["id"] = id;
 		this.show_loader();
 		$.ajax({
 	        url: "/authenticate/logout",
