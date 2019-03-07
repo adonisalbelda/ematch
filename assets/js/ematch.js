@@ -79,14 +79,17 @@ function ematchModel(argument) {
 
 	this.socket.on('recieve-msg', function(data){
 		if ($('.msg-convo-list').is(":visible")) {
-			('.msg-reciever.user-typing').remove();
 			$('.msg-convo-list').append(
 				'<div class="msg-reciever">' +
 					'<p>'+data.msg+'</p>' +
 				'</div>'
 			);
 
-			elem.socket.emit('msg-seen', {id: data.msg_id});
+			var objDiv = $(".msg-convo-list");
+			var h = objDiv.get(0).scrollHeight;
+    	 	objDiv.animate({scrollTop: h});
+
+			$('.msg-reciever.user-typing').remove();
 		}
 
 		if ($('.members-list-online').is(":visible")) {
@@ -102,6 +105,11 @@ function ematchModel(argument) {
 					'<p>'+data.username+ " is typing.."+'</p>' +
 				'</div>'
 			);
+
+			var objDiv = $(".msg-convo-list");
+			var h = objDiv.get(0).scrollHeight;
+    	 	objDiv.animate({scrollTop: h});
+    	 	
 		}
 	});
 

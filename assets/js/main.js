@@ -315,8 +315,10 @@ $(document).ready(function(){
 		$('.members-conversation').css('display', 'block');
 		$('.members-list-online').css('display', 'none');
 		
-		var mydiv = $(".msg-convo-list");
-		mydiv.scrollTop = mydiv.scrollHeight - mydiv.clientHeight;
+		$(".msg-convo-list").empty();
+		var objDiv = $(".msg-convo-list");
+		var h = objDiv.get(0).scrollHeight;
+	 	objDiv.animate({scrollTop: h});
 
 		chat = $(this).attr("data-value");
 		receiver_email = $(this).attr("data-selector");
@@ -326,9 +328,6 @@ $(document).ready(function(){
 
 		ematch.retrieveConvo(isLogin, receiver_id);
 	});
-
-
-	
 
 	$(document).on('click', '#send-msg', function(){
 		var msg = $('.msg-content').val();

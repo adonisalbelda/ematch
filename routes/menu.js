@@ -47,7 +47,7 @@ router.post('/conversation', function(req, res){
 			console.log("error in the query");
 		} else {
 			console.log("query successed");
-			tempCount.query("SELECT * FROM tbl_messages WHERE (sender = '"+req.body.sender+"' and reciever = '"+req.body.receiver+"') or (sender = '"+req.body.receiver+"' and reciever = '"+req.body.sender+"') ORDER BY date DESC", function(error, rows, fields){
+			tempCount.query("SELECT * FROM tbl_messages WHERE (sender = '"+req.body.sender+"' and reciever = '"+req.body.receiver+"') or (sender = '"+req.body.receiver+"' and reciever = '"+req.body.sender+"') ORDER BY date ASC", function(error, rows, fields){
 				if (!!error){
 					return res.send({errors: error});
 				} else {
