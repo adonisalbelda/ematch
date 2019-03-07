@@ -22,28 +22,20 @@
 			<div class="members-list-online">
 				<% for(var i=0; i < data.length; i++) { %>
 					<% if (data[i].id != user['id']) {%>
-						<div class="mem-online-prof" data-value="<%=data[i].username%>" data-selector="<%=data[i].email%>">
+						<div class="mem-online-prof" data-value="<%=data[i].id%>" data-selector="<%=data[i].email%>" data-name="<%=data[i].username%>">
 							<img src="images/profile.png">
 							<span class="mem-username-onl"><%=data[i].username%></span><br>
-							<span class="mem-lastmsg-onl">"hi"</span>
-							<span class="unread-msg">
-								10
-							</span>
+							<span class="unread-msg">0</span>
 						</div>
 					<% } %>
 				<% } %> 
 			</div>
 			<div class="members-conversation">
-				<div class="msg-sender">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-				</div>
-				<div class="msg-reciever">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-				</div>
+				<div class="msg-convo-list"></div>
 				<div class="type-msg">
 					<p>
-						<input type="text">
-						<i class="fa fa-paper-plane"></i>
+						<input type="text" class="msg-content">
+						<i class="fa fa-paper-plane" id="send-msg"></i>
 					</p>
 				</div>
 			</div>

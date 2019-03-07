@@ -77,6 +77,38 @@ function ematchModel(argument) {
 		$('.total-online').text(data.online - 1);
 	});
 
+	this.socket.on('recieve-msg', function(data){
+		if ($('.msg-convo-list').is(":visible")) {
+			('.msg-reciever.user-typing').remove();
+			$('.msg-convo-list').append(
+				'<div class="msg-reciever">' +
+					'<p>'+data.msg+'</p>' +
+				'</div>'
+			);
+
+			elem.socket.emit('msg-seen', {id: data.msg_id});
+		}
+
+		if ($('.members-list-online').is(":visible")) {
+			var unread = parseInt($('.mem-online-prof[data-value="'+data.id+'"]').find('.unread-msg').text());
+			$('.mem-online-prof[data-value="'+data.id+'"]').find('.unread-msg').css('display', 'inline-block').text(unread+1);
+		}
+	});
+
+	this.socket.on('show-typing', function(data){
+		if ($('.msg-convo-list').is(":visible")) {
+			$('.msg-convo-list').append(
+				'<div class="msg-reciever user-typing">' +
+					'<p>'+data.username+ " is typing.."+'</p>' +
+				'</div>'
+			);
+		}
+	});
+
+	this.socket.on('hide-typing', function(data){
+		$('.msg-reciever.user-typing').remove();
+	});
+
 	this.socket.on('remove', function(data){
 		alert("dadda");
 	});
@@ -639,6 +671,43 @@ function ematchModel(argument) {
 	    	});
 		}, 1000);
 
+	}
+
+	this.retrieveConvo = function (sender, receiver) {
+		var popup = this;
+		elem.formData["sender"] = sender;
+		elem.formData['receiver'] = receiver;
+		$.ajax({
+	        url: "/conversation",
+	        method:"POST",
+	        data : JSON.stringify(elem.formData),
+	        processData: false,
+			contentType: "application/json",
+	        success: function(data) {
+	        	elem.formData = {};
+	            if (data.hasOwnProperty("success")) {
+	            	console.log(data);
+					$.each(data['success'], function( key, value ) {
+					   	if(parseInt(value.sender) == isLogin) {
+					   		$('.msg-convo-list').append(
+								'<div class="msg-sender" data-value>' +
+									'<p>'+value.message+'</p>' +
+								'</div>'
+							);
+					   	} else {
+					   		$('.msg-convo-list').append(
+								'<div class="msg-reciever">' +
+									'<p>'+value.message+'</p>' +
+								'</div>'
+							);
+					   	}
+					});
+				} 
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            alert('error ' + textStatus + " " + errorThrown);
+	        }
+    	});
 	}
 
 	this.readURL = function readURL(input) {

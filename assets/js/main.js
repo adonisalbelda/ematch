@@ -34,7 +34,9 @@ $(document).ready(function(){
 	});
 
 	$(document).on('click', '.game-status-option', function(){
-		ematch.formData['id'] = isLogin;
+		dialog.confirm("Are you sure you log out ?", function(){
+			ematch.userLogout(isLogin);
+		}, "Confirm ?");
 	});
 
 	$(document).on('click', '.game-status-reset', function(){
@@ -307,11 +309,49 @@ $(document).ready(function(){
 		ematch.home_Directory(url, {});
 	});
 
+	var receiver_email = "";
+	var receiver_id = 0;
 	$(document).on('click', '.mem-online-prof', function(){
 		$('.members-conversation').css('display', 'block');
 		$('.members-list-online').css('display', 'none');
-		var chat = $(this).attr("data-value");
-		$('.members-msg').text("You and "+ chat);
+		
+		var mydiv = $(".msg-convo-list");
+		mydiv.scrollTop = mydiv.scrollHeight - mydiv.clientHeight;
+
+		chat = $(this).attr("data-value");
+		receiver_email = $(this).attr("data-selector");
+		receiver_id = $(this).attr("data-value");
+		username = $(this).attr("data-name");
+		$('.members-msg').text( username + " and Your "+ "conversation");
+
+		ematch.retrieveConvo(isLogin, receiver_id);
+	});
+
+
+	
+
+	$(document).on('click', '#send-msg', function(){
+		var msg = $('.msg-content').val();
+		$('.msg-content').val("");
+
+		if (msg == "") {
+			return false;
+		}
+
+		$('.msg-convo-list').append(
+			'<div class="msg-sender">' +
+				'<p>'+msg+'</p>' +
+			'</div>'
+		);
+		ematch.socket.emit('send-message', {receiver: receiver_email, receiver_id: receiver_id, msg: msg, id: isLogin,});
+	});
+
+	$(document).on('focus', '.msg-content', function(){
+		ematch.socket.emit('user-typing', {receiver: receiver_email, username: username});
+	});
+
+	$(document).on('focusout', '.msg-content', function(){
+		ematch.socket.emit('stop-typing', {receiver: receiver_email, username: username});
 	});
 
 	$(document).on('click', '.mes-onl-mem .action', function(){

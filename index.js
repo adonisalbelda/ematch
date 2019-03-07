@@ -89,8 +89,22 @@ io.on('connection', function(socket){
 		console.log('Disconnected : %s sockets connected', connections.length);
 	});
 
-	socket.on('send message', function(data){
-		socket.emit('new message', {msg: data});
+	socket.on('send-message', function(data){
+		saveMessage(data.msg, data.id, data.receiver_id, function(id){
+			socket.to(people[data.receiver]).emit('recieve-msg', {msg: data.msg, id: data.id, msg_id: id});
+		});
+	});
+
+	socket.on('msg-seen', function(data){
+		seenMessage(id)
+	});
+
+	socket.on('user-typing', function(data){
+		socket.to(people[data.receiver]).emit('show-typing', {username: data.username});
+	});
+
+	socket.on('stop-typing', function(data){
+		socket.to(people[data.receiver]).emit('hide-typing', {username: data.username});
 	});
 
 	socket.on('removeUserStatus', function(data){
@@ -221,7 +235,6 @@ io.on('connection', function(socket){
 
 				players = [];
 			});
-
 		} 
 	});
 
@@ -489,6 +502,35 @@ function select_questions(id, callback) {
 			}
 
 		}	
+	});
+}
+
+function seen(id) {
+	mysqlConf.getConnection(function(error, tempCount){
+		if (!!error){
+			tempCount.release();
+			console.log("error in the query");
+		} else {
+			tempCount.query("UPDATE tbl_messages SET is_seen = '1' WHERE id = '"+id+"'", function(error, rows, fields){
+				tempCount.release();
+			});
+		}	
+	});
+}
+
+function saveMessage(message, sender, receiver, callback) {
+	mysqlConf.getConnection(function(error, tempCount){
+		if (!!error){
+			tempCount.release();
+			console.log("error in the query");
+		} else {
+			console.log("query successed");
+			tempCount.query("INSERT INTO tbl_messages(message, sender, reciever, is_seen, date)" +
+				"VALUES ('"+message+"', '"+sender+"', '"+receiver+"', 0, '"+new Date().toISOString().slice(0, 19).replace('T', ' ')+"')", function(error, rows, fields){
+				tempCount.release();
+				callback(rows.insertId);
+			});
+		}
 	});
 }
 

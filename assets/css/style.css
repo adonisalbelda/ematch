@@ -1246,7 +1246,7 @@ input:focus::placeholder {
 
 .mem-onl-prof {
 	position: relative;
-	overflow-y: scroll;
+	overflow-y: auto;
 	max-height: 59vh;
 }
 
@@ -1261,6 +1261,7 @@ input:focus::placeholder {
     border-radius: 50px 10px;
     color: #fff;
     position: relative;
+    overflow: hidden;
 }
 
 .action {
@@ -1285,13 +1286,15 @@ input:focus::placeholder {
     margin-right: 7px;
     float: left;
     position: relative;
-    top: 5px
+    top: 0px
 }
 
 .mem-username-onl{
 	text-transform: uppercase;
     letter-spacing: 3px;
     color: #85ea2d;
+    position: relative;
+    top: 5px;
 }
 
 .mem-lastmsg-onl {
@@ -1303,12 +1306,33 @@ input:focus::placeholder {
     right: 11px;
     top: 0px;
     background-color: red;
-    padding: 5px;
+    padding: 2px 7px;
     text-align: center;
     border-radius: 50px;
+    display: none;
 }
 
 .msg-sender {
+	background-color: #03A9F4;
+    font-size: 12px;
+    padding: 5px 10px;
+    display: block;
+    border-radius: 20px 6px;
+    max-width: 70%;
+    margin-bottom: 10px;
+    float: right;
+    clear: both;
+    color: #fff;
+}
+
+.msg-reciever.user-typing {
+    border-radius: 0px;
+    background-color: #FF5722;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.msg-reciever {
 	background-color: #fff;
     font-size: 12px;
     padding: 5px 10px;
@@ -1316,18 +1340,8 @@ input:focus::placeholder {
     border-radius: 20px 6px;
     max-width: 70%;
     margin-bottom: 10px;
-}
-
-.msg-reciever {
-	background-color: #03A9F4;
-    font-size: 12px;
-    padding: 5px 10px;
-    display: inline-block;
-    border-radius: 20px 6px;
-    max-width: 70%;
-    margin-bottom: 10px;
-    float: right;
-    color: #fff;
+    float: left;
+    clear: both;
 }
 
 .msg-sender p,
@@ -1343,6 +1357,11 @@ input:focus::placeholder {
     overflow: hidden;
     position: relative;
     display: none;
+}
+
+.msg-convo-list {
+	max-height: 49vh;
+	overflow-y: auto;
 }
 
 .members-msg {
