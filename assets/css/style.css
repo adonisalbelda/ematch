@@ -915,7 +915,7 @@ input:focus::placeholder {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+ background: #011f27;
 }
 
 /* Handle */
@@ -1360,7 +1360,7 @@ input:focus::placeholder {
 }
 
 .msg-convo-list {
-	max-height: 49vh;
+	max-height: 47vh;
 	overflow-y: auto;
 }
 
