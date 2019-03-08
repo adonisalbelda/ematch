@@ -722,7 +722,6 @@ function ematchModel(argument) {
 	        success: function(data) {
 	        	elem.formData = {};
 	            if (data.hasOwnProperty("success")) {
-	            	console.log(data);
 					$.each(data['success'], function( key, value ) {
 					   	if(parseInt(value.sender) == isLogin) {
 					   		$('.msg-convo-list').append(
