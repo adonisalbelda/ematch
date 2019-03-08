@@ -39,6 +39,25 @@ router.get('/ranking', function(req, res){
 	});
 });
 
+router.post('/matches', function(req, res){
+	mysqlConf.getConnection(function(error, tempCount){
+		if (!!error){
+			tempCount.release();
+			console.log("error in the query");
+		} else {
+			console.log(req.body.id);
+			tempCount.query("SELECT * FROM tbl_matchhistory WHERE player1_id = '"+req.body.id+"' or player2_id = '"+req.body.id+"' ORDER By id DESC ", function(error, matches, fields){
+				tempCount.query("SELECT * FROM tbl_students ", function(error, members, fields){
+					tempCount.release();
+						// res.render("login", {value: rows[0]});
+					return res.render('footer/matches', {data:matches, members:members});	
+				});
+					
+			});
+		}	
+	});
+});
+
 router.post('/conversation', function(req, res){
 	console.log(req.body);
 	mysqlConf.getConnection(function(error, tempCount){

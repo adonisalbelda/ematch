@@ -1389,6 +1389,63 @@ input:focus::placeholder {
     right: 28px;
 }
 
+.matches-content {
+	width: 90%;
+    height: 63vh;
+    background-color: #002128;
+    position: absolute;
+    top: 120px;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+}
+
+.matches-table > p {
+    margin-bottom: 0px;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0px;
+    background-color: #244a53;
+    letter-spacing: 3px;
+}
+
+.matches-table thead {
+	color: #d4c5c5;
+    text-align: center;
+    background-color: #3c3535;
+    font-size: 12px;
+}
+
+.matches-table tbody {
+	display: block;
+  	max-height: 54vh;
+  	overflow-y: scroll;
+}
+
+.matches-table thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.points-earned-match {
+	padding: 3px 10px;
+    background-color: #f6930e;
+}
+
+.matches-table tbody tr {
+	color: #fff;
+    font-size: 12px;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+}
+
+.matches-table tbody td {
+	text-align: center;
+    padding: 12px;
+}
+
 @media screen and (max-width: 992px) {
     .main-wrapper {
 		width: 100%;

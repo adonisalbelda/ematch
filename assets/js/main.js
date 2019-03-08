@@ -31,9 +31,9 @@ $(document).ready(function(){
 	// localStorage.clear();
 	$(document).on('click', 'body', function() {
 		var myAudio = document.getElementById('myAudio');
-		if (!myAudio.currentTime) {
-			$('#myAudio').trigger('play');
-		}
+		// if (!myAudio.currentTime) {
+		// 	$('#myAudio').trigger('play');
+		// }
 	});
 
 
@@ -319,6 +319,10 @@ $(document).ready(function(){
 	$(document).on('click', '#rankings-view', function() {
 		var url = "ranking";
 		ematch.home_Directory(url, {});
+	});
+
+	$(document).on('click', '#matches-view', function() {
+		ematch.getMatches(isLogin);
 	});
 
 	var receiver_email = "";

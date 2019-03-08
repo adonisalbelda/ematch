@@ -590,6 +590,33 @@ function ematchModel(argument) {
     	});
 	};
 
+	this.getMatches = function(id) {
+		this.formData["id"] = id;
+		elem.show_loader();
+		$.ajax({
+	        url: "/matches",
+	        method:"POST",
+	        data : JSON.stringify(this.formData),
+	        processData: false,
+			contentType: "application/json",
+	        success: function(data) {
+				elem.formData = {};
+				console.log(data);
+				$('.child-wrapper').html(data);
+				$('#match-dir-home').attr("data-value", "home");
+				$('.main-wrapper').addClass('animated bounceInUp');
+				elem.hide_loader();
+				setTimeout(function() {
+	        		$('.main-wrapper').removeClass('animated bounceInUp');
+				},1000);
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	        	elem.hide_loader();
+	            alert('error ' + textStatus + " " + errorThrown);
+	        }
+    	});
+	};
+
 	this.redirect_To = function(url) {
 		var popup = this;
 		popup.show_loader();

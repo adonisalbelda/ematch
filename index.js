@@ -304,7 +304,7 @@ io.on('connection', function(socket){
 				winner['winner_rank'] = data['winner_Rank'];
 				winner['losser_rank'] = data['losser_Rank'];
 				updatePoints(winner['winner_newpoints'], winner['winner_rank'], winner['losser_newpoints'], winner['losser_rank'], winner['winner_id'], winner['losser_id']);
-				save_gameHistory(winner['winner_id'], winner['loser_id'], winner['winner_id'], parseInt(winner['winner_newpoints']) - parseInt(winner['winner_oldpoints']));
+				save_gameHistory(winner['winner_id'], winner['losser_id'], winner['winner_id'], parseInt(winner['winner_newpoints']) - parseInt(winner['winner_oldpoints']));
 			});
 
 			socket.nsp.to(room).emit("display-duel-result", {
@@ -405,23 +405,29 @@ io.on('connection', function(socket){
 });
 
 function rate_Elo($results, $winner, callback) {
-	console.log($winner, "winner");
-	console.log($results, "result");
 	var new_rating = {};
 	var index = 0;
 	var player1 = 0;
 	var player2 = 0;
+	var losser = 0
 
 	for (var i = 0; i < $results.length; i++) {
 		if ($results[i]['id'] == $winner) {
 			player2 = $results[i]['points'];
 		} else {
 			player1 = $results[i]['points'];
+			losser = player1;
 		}
 	}
 
 	var result = EloRating.calculate(parseInt(player1), parseInt(player2), false, 60);
-	new_rating['losser'] = result.playerRating;
+
+	if (result.playerRating < 100) {
+		new_rating['losser'] = losser;
+	} else {
+		new_rating['losser'] = result.playerRating;
+	}
+
 	new_rating['losser_Rank'] = updateRank(new_rating['losser']);
 	new_rating['winner'] = result.opponentRating;
 	new_rating['winner_Rank'] = updateRank(new_rating['winner']);
@@ -436,10 +442,9 @@ function save_gameHistory(player1_id, player2_id, winner_id, points) {
 			tempCount.release();
 			console.log("error in the query");
 		} else {
-			console.log("query successed");
-			tempCount.query("INSERT INTO tbl_matchhistory (player1_id, player2_id, winner_id, points_earned)" +
-				"VALUES ('"+player1_id+"','"+player2_id+"',"+
-				"'"+winner_id+"', '"+points+"')", function(error, rows, fields){
+			console.log("query successed save match");
+			tempCount.query("INSERT INTO tbl_matchhistory(player1_id, player2_id, winner_id, points_earned, date)" +
+				"VALUES('"+player1_id+"','"+player2_id+"', '"+winner_id+"', '"+points+"')", function(error, rows, fields){
 				tempCount.release();
 			});
 		}
@@ -455,8 +460,12 @@ function updateRank(points) {
 		rank = "C";
 	} else if ( points < 1599) {
 		rank = "B" ;
-	} else if (points >= 1600){
+	} else if (points < 1799){
 		rank = "A";
+	}else if (points < 1999){
+		rank = "Master";
+	}else if (points >= 1999){
+		rank = "Senior Master";
 	}
 
 	return rank;

@@ -1,0 +1,60 @@
+<div class="duel-top-option">
+	<div class="back-btn">
+		<img src="images/home.png" id="match-dir-home"><br>
+	</div>
+	<div class="logo-area footer-logo-area">
+		<h1 class="footer-header-title">MATCHES</h1>
+	</div>
+</div>
+<div class="matches-content">
+	<div class="matches-box">
+		<div class="matches-table">
+			<p>RECENT MATCHES</p>
+			<table>
+				<thead>
+					<th>Player1</th>
+					<th>Vs</th>
+					<th>Player2</th>
+					<th>Winner</th>
+					<th>Points</th>
+				</thead>
+				<tbody>
+					<% for(var i=0; i < data.length; i++) { %>
+						<tr>
+							<td>
+								<% for(var y=0; y < members.length; y++) { %>
+									<% if( data[i].player1_id == members[y].id) {%>
+									     <%=members[y].username%>
+									     <% break %> 
+									<% } else{ %>  
+								<% }} %>
+							</td>
+							<td>Vs</td>
+							<td>
+								<% for(var y=0; y < members.length; y++) { %>
+									<% if( data[i].player2_id == members[y].id) {%>
+									     <%=members[y].username%>
+									     <% break %> 
+									<% } else{ %>  
+								<% }} %>
+							</td>
+							<td>
+								<% for(var y=0; y < members.length; y++) { %>
+									<% if( data[i].winner_id == members[y].id) {%>
+									     <%=members[y].username%>
+									     <% break %> 
+									<% } else{ %>  
+								<% }} %>
+							<td>
+								<span class="points-earned-match">
+									<%= data[i].player1_id == data[i].winner_id ? '+' : '-'%> <%=data[i].points_earned%>
+								</span>
+							</td>
+						</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- <% include ../demo %> -->
