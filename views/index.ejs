@@ -28,6 +28,7 @@
 		var seconds = 60;
 		var removeInterval = false;
 		var gameDone = false;
+		var profile =  "<%= user ? user['profile'] : '' %>";
 	</script>
 </head>
 <body>
@@ -93,4 +94,6 @@
 <script type="text/javascript" src="/js/countimer.js"></script>
 <script type="text/javascript" src="/js/moment.min.js"></script>
 <script type="text/javascript" src="/js/animatenumber.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
 </html>

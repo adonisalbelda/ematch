@@ -48,6 +48,7 @@ app.use(function(req, res, next) {
   	email : req.session.email,
   	points : req.session.points,
   	rank : req.session.rank,
+  	profile : req.session.profile,
   }
   next();
 })

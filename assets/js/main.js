@@ -114,7 +114,7 @@ $(document).ready(function(){
 				ematch.formData["username"]  = $('.username').val();
 				ematch.formData["password"]  = $('.password').val();
 				ematch.formData["c_password"] =  $('.c-password').val();
-				ematch.formData["user-avatar"] = $('.user-avatar').val();
+				ematch.formData["user_avatar"] = $('.user-avatar').val();
 
 				ematch.insertData();
 			}, "Confirm ?");
@@ -147,7 +147,7 @@ $(document).ready(function(){
 
 		if ($('.answer-option').hasClass('selected')) {
 			var answer = $('.answer-option.selected').attr("data-value");
-			ques_item_answers['anwer'] = $('.answer-option.selected').text();
+			ques_item_answers['my_answer'] = $('.answer-option.selected').text();
 			if (parseInt(answer) == 1) {
 				correct_answer++;
 				ques_item_answers['status'] = "Checked";
@@ -164,7 +164,7 @@ $(document).ready(function(){
 
 		$('.answer-option').each(function(){
 			if ($(this).attr("data-value") == "1") {
-				ques_item_answers['my_answer'] = $(this).text();
+				ques_item_answers['correct_answer'] = $(this).text();
 			}
 		});
 
@@ -225,7 +225,7 @@ $(document).ready(function(){
 			'</span>' +
 			'<p class="pre-ques-cor">' +
 				'<span>Correct answer:</span>' +
-				'<span>'+answers[key]['anwer']+'</span' +
+				'<span>'+answers[key]['correct_answer']+'</span' +
 			'</p>' +
 			'<p class="pre-ques-ans">' +
 				'<span>Your answer:</span>' +

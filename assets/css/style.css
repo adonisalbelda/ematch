@@ -316,6 +316,8 @@ input:focus::placeholder {
 
 .duel-profile-image {
 	text-align: right;
+	width: 50px;
+    padding-left: 6px;
 }
 
 .duel-member-list table  .duel-profile-image img,
@@ -334,7 +336,7 @@ input:focus::placeholder {
 }
 
 .duel-player-btn img{
-	width: 120px;
+	width: 100px;
 }
 
 .duel-level {
@@ -1215,7 +1217,10 @@ input:focus::placeholder {
     position: absolute;
     color: #003d4a;
     right: 10px;
-   
+    max-width: 140px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .pre-image-close {
@@ -1367,10 +1372,13 @@ input:focus::placeholder {
 .members-msg {
 	position: absolute;
     right: 8px;
-    font-size: 18px;
-    top: 10px;
-    top: 7px;
+    font-size: 14px;
+    top: 9px;
     text-transform: uppercase;
+    max-width: 250px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .type-msg {

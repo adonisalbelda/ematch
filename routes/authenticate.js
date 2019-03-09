@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var mysqlConf = require('./config.js')
+var mysqlConf = require('./config.js');
+var fs = require("fs");
+var multer = require("multer");
+
+var upload = multer({ dest: 'uploads/' });
 
 /* API logic here */
 
@@ -14,7 +18,8 @@ const redirectHome = (req, res, next) => {
 	}
 }
 
-router.post('/addMember',[
+
+router.post('/addMember', [
 	check('first_name', "first name is required").not().isEmpty(),
 	check('last_name', "last name is required").not().isEmpty(),
 	check('username', "username is required").not().isEmpty(),
@@ -50,10 +55,9 @@ router.post('/addMember',[
 			tempCount.release();
 			console.log("error in the query");
 		} else {
-			console.log("query successed");
-			tempCount.query("INSERT INTO tbl_students (fname, lname, course, email, username, password, points, rank, is_online)" +
+			tempCount.query("INSERT INTO tbl_students (fname, lname, course, email, username, password, points, rank, profile, is_online)" +
 				"VALUES ('"+req.body.first_name+"','"+req.body.last_name+"', '<b></b>scs', "+
-				"'"+req.body.email+"', '"+req.body.username+"', '"+req.body.password+"', '1000', 'D', '1')", function(error, rows, fields){
+				"'"+req.body.email+"', '"+req.body.username+"', '"+req.body.password+"', '1000', 'D','', '1')", function(error, rows, fields){
 				tempCount.release();
 				if (!!error){
 					return res.send({errors: error});
@@ -74,6 +78,11 @@ router.post('/addMember',[
 		}
 	});
 	}
+});
+
+router.post('/add', upload.single('imagename'), function(req, res, next) {
+    var image = req.file.filename;
+   /** rest */ 
 });
 
 router.post('/login',[
@@ -108,6 +117,7 @@ router.post('/login',[
 						req.session.course = rows[0]['course'];
 						req.session.points = rows[0]['points'];	
 						req.session.rank = rows[0]['rank'];
+						req.session.profile = rows[0]['profile'];
 
 						tempCount.query("UPDATE  tbl_students SET is_online = '1' WHERE id = '"+rows[0]['id']+"'", function(error, rows, fields){
 							if (!!error){

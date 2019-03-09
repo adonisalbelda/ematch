@@ -16,7 +16,7 @@
 				<tbody>
 					<% for(var i=0; i < data.length; i++) { %>
 						<% if (data[i].id != user['id']) {%>
-							<tr data-value="<%=data[i].username%>">
+							<tr data-value="<%=data[i].username%>" data-id="<%=data[i].id%>">
 								<td class="duel-profile-image">
 									<img src="images/profile.png">
 								</td>

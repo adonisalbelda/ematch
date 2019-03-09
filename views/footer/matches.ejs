@@ -47,7 +47,7 @@
 								<% }} %>
 							<td>
 								<span class="points-earned-match">
-									<%= data[i].player1_id == data[i].winner_id ? '+' : '-'%> <%=data[i].points_earned%>
+									<%= user['id'] == data[i].winner_id ? '+' : '-'%> <%=data[i].points_earned%>
 								</span>
 							</td>
 						</tr>

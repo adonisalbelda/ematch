@@ -8,6 +8,8 @@ function ematchModel(argument) {
 		$('.page-loading').css('display', 'none');
 	}
 
+	console.log(profile);
+
 	this.animatePoints = function() {
 		if (localStorage.getItem("my_points")) {
         	setTimeout(function() {
@@ -152,7 +154,7 @@ function ematchModel(argument) {
 	});
 
 	this.socket.on('update-in-focus', function(data){
-		var row = "<tr data-value='"+data.username+"'>"+
+		var row = "<tr data-value='"+data.username+"' data-id='"+data.id+"'>"+
 					"<td class='duel-profile-image'>" +
 						"<img src='images/profile.png'>"+
 					"</td>" +
@@ -166,7 +168,9 @@ function ematchModel(argument) {
 						"<img src='../images/duel_player.png' id='duel-selected-player'>" +
 					"</td>"+
 				"</tr>";
-		$('.duel-member-list tbody').append(row);
+		if (!check_rowExists(data.id)) {
+			$('.duel-member-list tbody').append(row);
+		}
 
 		$('.people-table .members-status').each(function(){
 			var elem = this;
@@ -176,6 +180,17 @@ function ematchModel(argument) {
 		});
 
 	});
+
+	function check_rowExists(id) {
+		$('.duel-member-list tbody tr').each(function(){
+			console.log($(this).attr("data-id"));
+			if (parseInt($(this).attr("data-id")) == id ) {
+				return true;
+			}
+		});
+
+		return false;
+	}
 
 	this.socket.on('update-out-focus', function(data){
 		$('.duel-member-list table tr').each(function(){
