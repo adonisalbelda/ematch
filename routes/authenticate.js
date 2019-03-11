@@ -55,25 +55,40 @@ router.post('/addMember', [
 			tempCount.release();
 			console.log("error in the query");
 		} else {
-			tempCount.query("INSERT INTO tbl_students (fname, lname, course, email, username, password, points, rank, profile, is_online)" +
-				"VALUES ('"+req.body.first_name+"','"+req.body.last_name+"', '<b></b>scs', "+
-				"'"+req.body.email+"', '"+req.body.username+"', '"+req.body.password+"', '1000', 'D','', '1')", function(error, rows, fields){
-				tempCount.release();
+			tempCount.query("SELECT * FROM tbl_students where username = '"+req.body.username+"'", function(error, rows, fields){
 				if (!!error){
 					return res.send({errors: error});
 				} else {
 					// res.render("login", {value: rows[0]});
-					req.session.userId  = rows.insertId;
-					req.session.fname  = req.body.first_name;
-					req.session.lname  = req.body.last_name;
-					req.session.username = req.body.username;
-					req.session.email = req.body.email;
-					req.session.course = 'bscs';
-					req.session.points = 1000;
-					req.session.rank = 'D';
+					if (rows.length > 0) {
+						return res.json(
+							{ 
+								errors : [{msg: "Username is already taken"}]
+							}
+						);
+					} else {
+						tempCount.query("INSERT INTO tbl_students (fname, lname, course, email, username, password, points, `rank`, is_online)" +
+							"VALUES ('"+req.body.first_name+"','"+req.body.last_name+"', 'bscs', "+
+							"'"+req.body.email+"', '"+req.body.username+"', '"+req.body.password+"', 1000, 'D', '1')", function(error, rows, fields){
+							if (!!error){
+								return res.send({errors: error});
+							} else {
+								// res.render("login", {value: rows[0]});
+								req.session.userId  = rows.insertId;
+								req.session.fname  = req.body.first_name;
+								req.session.lname  = req.body.last_name;
+								req.session.username = req.body.username;
+								req.session.email = req.body.email;
+								req.session.course = 'bscs';
+								req.session.points = 1000;
+								req.session.rank = 'D';
 
-					return res.send({success: "done"});
+								return res.send({success: "done"});
+							}		
+						});
+					}
 				}		
+				tempCount.release();
 			});
 		}
 	});

@@ -8,8 +8,6 @@ function ematchModel(argument) {
 		$('.page-loading').css('display', 'none');
 	}
 
-	console.log(profile);
-
 	this.animatePoints = function() {
 		if (localStorage.getItem("my_points")) {
         	setTimeout(function() {

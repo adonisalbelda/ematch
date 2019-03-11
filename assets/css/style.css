@@ -173,6 +173,7 @@ input:focus::placeholder {
 
 .user-options {
     margin-bottom: 60px;
+    margin-top: 60px;
 }
 
 .user-options img {

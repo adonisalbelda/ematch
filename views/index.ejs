@@ -12,8 +12,8 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	<link rel="stylesheet" href="/css/animate.css">
 	<script type="text/javascript">
-		var host = "https://e-match.herokuapp.com/";
-		// var host = "http://localhost:3000";
+		// var host = "https://e-match.herokuapp.com/";
+		var host = "http://localhost:3000";
 		var isLogin = "<%= user ? user['id'] : '' %>";
 		var email = "<%= user ? user['email'] : '' %>";
 		var username = "<%= user ? user['username'] : '' %>";
@@ -28,15 +28,14 @@
 		var seconds = 60;
 		var removeInterval = false;
 		var gameDone = false;
-		var profile =  "<%= user ? user['profile'] : '' %>";
 	</script>
 </head>
 <body>
 	<div class="main-wrapper">
-		<!-- <audio controls  loop hidden id="myAudio">
+		<audio controls  loop hidden id="myAudio">
 			<source src="/sounds/background_music.mp3" type="audio/mpeg">
 			Your browser does not support the audio element.
-		</audio> -->
+		</audio>
 		<audio controls hidden id="click_audio">
 			<source src="/sounds/click.mp3" type="audio/mpeg">
 			Your browser does not support the audio element.
@@ -94,6 +93,4 @@
 <script type="text/javascript" src="/js/countimer.js"></script>
 <script type="text/javascript" src="/js/moment.min.js"></script>
 <script type="text/javascript" src="/js/animatenumber.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
 </html>
