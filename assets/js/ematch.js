@@ -705,6 +705,7 @@ function ematchModel(argument) {
 		        processData: false,
 				contentType: "application/json",
 		        success: function(data) {
+		        	console.log(data);
 		            if (data.hasOwnProperty("students")) {
 		            	if (data['students'].length > 0) {
 			            	$('.searching-enemy-loading').removeClass('show');

@@ -161,8 +161,11 @@ input:focus::placeholder {
 .user-level-status span {
 	display: inline-block;
     padding-top: 0px;
-    letter-spacing: 4px;
+    letter-spacing: 1px;
     text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .user-profile-name {
@@ -1629,6 +1632,10 @@ tbody tr {
 	    font-size: 25px;
 	    margin-bottom: 35px;
 	    cursor: pointer;
+	}
+
+	.login-logo-sec img {
+		width: 80%;
 	}
 
 	.login-content > img:first-child {

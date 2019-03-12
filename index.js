@@ -219,7 +219,7 @@ io.on('connection', function(socket){
 				console.log("error in the query");
 			} else {
 				console.log("query successed");
-				tempCount.query("INSERT INTO tbl_players_inmatch (room, student_id)" +
+				tempCount.query("INSERT INTO tbl_players_inmatch (`room`, `student_id`)" +
 					"VALUES ('"+room+"', '"+id+"')", function(error, rows, fields){
 					tempCount.release();
 				});
@@ -444,9 +444,10 @@ function save_gameHistory(player1_id, player2_id, winner_id, points) {
 			console.log("error in the query");
 		} else {
 			console.log("query successed save match");
-			tempCount.query("INSERT INTO tbl_matchhistory(player1_id, player2_id, winner_id, points_earned, date)" +
+			tempCount.query("INSERT INTO tbl_matchhistory(`player1_id`, `player2_id`, `winner_id`, `points_earned`)" +
 				"VALUES('"+player1_id+"','"+player2_id+"', '"+winner_id+"', '"+points+"')", function(error, rows, fields){
 				tempCount.release();
+				console.log(error)
 			});
 		}
 	});
@@ -483,7 +484,7 @@ function updatePoints($winner_pnt, $winner_rank, $loser_pnt, $loser_rank, $winne
 			console.log("error in the query");
 		} else {
 			for (var i = 0; i < 2; i++) {
-				tempCount.query("UPDATE tbl_students SET points = '"+points[i]+"', rank = '"+rank[i]+"' WHERE id = '"+ids[i]+"' ", function(error, rows, fields){
+				tempCount.query("UPDATE tbl_students SET `points` = '"+points[i]+"', `rank` = '"+rank[i]+"' WHERE id = '"+ids[i]+"' ", function(error, rows, fields){
 				});
 			}
 			tempCount.release();
