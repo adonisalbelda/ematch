@@ -391,6 +391,30 @@ io.on('connection', function(socket){
 		});
 	});
 
+	socket.on("forceExit", ({id}) => {
+		mysqlConf.getConnection(function(error, tempCount){
+			if (!!error){
+				tempCount.release();
+				console.log("error in the query");
+			} else {
+				tempCount.query("UPDATE  tbl_students SET is_online = '0' WHERE id = '"+id+"'", function(error, rows, fields){
+				});
+			}
+		});
+	});
+
+	socket.on("forceLogin", ({id}) => {
+		mysqlConf.getConnection(function(error, tempCount){
+			if (!!error){
+				tempCount.release();
+				console.log("error in the query");
+			} else {
+				tempCount.query("UPDATE  tbl_students SET is_online = '1' WHERE id = '"+id+"'", function(error, rows, fields){
+				});
+			}
+		});
+	});
+
 
 	// notify all user upon your signib-in
 	socket.on("out-focus", ({room, email, username, rank, id}) => {

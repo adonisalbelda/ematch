@@ -51,18 +51,15 @@ function ematchModel(argument) {
 	if (email != "") {
 		elem.hide_loader();
 
-		var interval;
 
-		ifvisible.setIdleDuration(30);
+		ifvisible.setIdleDuration(180);
 	
 		ifvisible.idle(function(){
-			interval = setInterval(function() {
-				ematch.userLogout(isLogin);
-			}, 60000);
+			elem.socket.emit('forceExit', {id: isLogin});
 		});
 
 		if( ifvisible.now() ){
-	        clearInterval(interval);
+			elem.socket.emit('forceLogin', {id: isLogin});
 		}
 
 		elem.socket.emit('join_room', {room: "users", data: email});

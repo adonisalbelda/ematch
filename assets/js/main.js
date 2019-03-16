@@ -72,7 +72,6 @@ $(document).ready(function(){
 		// ematch.home_Directory("home");
 	});
 
-
 	$(document).on('click', "#register-btn", function(e) {
 		$('#click_audio').trigger('play');
 		e.preventDefault();
