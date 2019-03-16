@@ -50,7 +50,7 @@ function ematchModel(argument) {
 
 	if (email != "") {
 		elem.hide_loader();
-		
+
 		ifvisible.setIdleDuration(10);
 	
 		ifvisible.idle(function(){
@@ -233,6 +233,7 @@ function ematchModel(argument) {
 				$('.notify-user-logged').addClass('show').fadeOut(2000, function(){
 					$(this).removeClass('show');
 					$(this).remove();
+					$('.popup-logged-user').empty();
 				});
 			},100);
 
