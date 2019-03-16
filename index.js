@@ -194,7 +194,7 @@ io.on('connection', function(socket){
 	});
 
 	// user enter to a private room
-	socket.on("enter-room", ({room, username, email, points, id, skill_id = false, skill = ""}) => {
+	socket.on("enter-room", ({room, username, email, points, id, skill_id = false, skill = "", rank = false}) => {
 		socket.join(room);
 		var selected_room = io.sockets.adapter.rooms[room];
 		var data = {
@@ -227,7 +227,7 @@ io.on('connection', function(socket){
 		});
 		
 		if (selected_room.length == 2) {
-			select_questions(skill_id, function(questions){
+			select_questions(skill_id, rank, function(questions){
 				socket.nsp.to(room).emit("show-random-questions", {
 					data: players,
 					questions : questions,
@@ -349,6 +349,18 @@ io.on('connection', function(socket){
 		}
 	});
 
+	socket.on("reset", ({id}) => {
+		mysqlConf.getConnection(function(error, tempCount){
+			if (!!error){
+				tempCount.release();
+			} else {
+				tempCount.query("DELETE FROM tbl_players_inmatch WHERE student_id = '"+id+"'" , function(error, rows, fields){
+					tempCount.release();
+				});
+			}
+		});
+	});
+
 	// send message to all members of the room except the sender
 	socket.on("message", ({room, message, username}) => {
 		var selected_room = io.sockets.adapter.rooms['users'];
@@ -378,6 +390,7 @@ io.on('connection', function(socket){
 			id: id
 		});
 	});
+
 
 	// notify all user upon your signib-in
 	socket.on("out-focus", ({room, email, username, rank, id}) => {
@@ -467,7 +480,7 @@ function updateRank(points) {
 	}else if (points < 1999){
 		rank = "Master";
 	}else if (points >= 1999){
-		rank = "Senior Master";
+		rank = "Legend";
 	}
 
 	return rank;
@@ -492,7 +505,7 @@ function updatePoints($winner_pnt, $winner_rank, $loser_pnt, $loser_rank, $winne
 	});
 }
 
-function select_questions(id, callback) {
+function select_questions(id, rank, callback) {
 	var questions = "";
 	console.log(id, "id");
 	mysqlConf.getConnection(function(error, tempCount){
@@ -506,7 +519,15 @@ function select_questions(id, callback) {
 					callback(rows);
 				});
 			} else {
-				tempCount.query("SELECT DISTINCT * FROM tbl_questions WHERE skill = '"+id+"' ORDER BY RAND() LIMIT 10", function(error, rows, fields){
+				var difficulty = 0;
+
+				if (rank == "A" || rank == "B") {
+					difficulty = 1;
+				} else if (rank == "Master" || rank == "Legend") {
+					difficulty = 2;
+				}
+
+				tempCount.query("SELECT DISTINCT * FROM tbl_questions WHERE skill = '"+id+"' and difficulty = '"+difficulty+"' ORDER BY RAND() LIMIT 10", function(error, rows, fields){
 					tempCount.release();
 					callback(rows);
 				});

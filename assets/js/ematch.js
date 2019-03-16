@@ -49,14 +49,21 @@ function ematchModel(argument) {
 	}
 
 	if (email != "") {
-			elem.hide_loader();
-			elem.socket.emit('join_room', {room: "users", data: email});
-			elem.socket.emit('message', {room: "users", message: isLogin, username:username});
-			if (localStorage.getItem('logged') === null) {
-				elem.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
-				localStorage.setItem("logged", "yes");
-			}
-			elem.updatePoints(isLogin);
+		elem.hide_loader();
+		
+		ifvisible.setIdleDuration(10);
+	
+		ifvisible.idle(function(){
+			ematch.userLogout(isLogin);
+		});
+
+		elem.socket.emit('join_room', {room: "users", data: email});
+		elem.socket.emit('message', {room: "users", message: isLogin, username:username});
+		if (localStorage.getItem('logged') === null) {
+			elem.socket.emit('send-alert', {room: "users", username: username, email: email, rank:rank });
+			localStorage.setItem("logged", "yes");
+		}
+		elem.updatePoints(isLogin);
 	} else {
 		localStorage.clear();
 		elem.hide_loader();
@@ -64,6 +71,7 @@ function ematchModel(argument) {
 
 	if (localStorage.getItem("logged")) {
 		$(window).focus(function() {
+			console.log("das");
 	   		elem.socket.emit('in-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
 		}).blur(function() {
 		    elem.socket.emit('out-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
@@ -74,7 +82,13 @@ function ematchModel(argument) {
 		var user_id = data.user_id;
 		var user_row = $('.people-table').find('.'+user_id+"-user");
 		$(user_row).find('.online-status i').removeClass('offline').addClass('online');
-		$('.total-online').text(data.online - 1);
+
+		if (data.online > 0) {
+			$('.total-online').text(data.online - 1);
+		} else {
+			$('.total-online').text('0');
+		}
+
 	});
 
 	this.socket.on('recieve-msg', function(data){
@@ -136,7 +150,8 @@ function ematchModel(argument) {
 				points: points, 
 				id: isLogin, 
 				skill_id : data.skill_id,
-				skill: data.skill
+				skill: data.skill,
+				rank: rank,
 			}
 
 			elem.socket.emit('enter-room', info );
@@ -270,12 +285,13 @@ function ematchModel(argument) {
 
 	this.socket.on('duel-rejection', function(data){
 		dialog.reject_Duel(data.msg, "Duel match failed.");
-	});
+	});	
 
 	this.socket.on('display-duel-result', function(data){
 		$('.dialog-wrapper').remove();
 		elem.show_loader();
-		
+		canvas1.render();
+
 		elem.home_Directory("result", {}, function(){
 
 			var C_number = 0;
@@ -286,11 +302,13 @@ function ematchModel(argument) {
 
 			C_number = parseInt(data['data']['winner_newpoints']) - parseInt(data['data']['winner_oldpoints'])
 			if (parseInt(data['data']['winner_id']) == parseInt(isLogin)) {
+				$('#victory_audio').trigger('play');
 				$('.preview-result p').text("You win!");
 				$('.points-indicator').text("+");
 				localStorage.setItem('my_points', data['data']['winner_newpoints']);
 				localStorage.setItem('my_rank', data['data']['winner_rank']);
 			} else {
+				$('#lose_audio').trigger('play');
 				$('.preview-result p').text("You lost!");
 				$('.points-indicator').text("-");
 				localStorage.setItem('my_points',data['data']['losser_newpoints']);

@@ -11,8 +11,10 @@ $(document).ready(function(){
 		}
 	});
 	
+
 	$(window).bind('load', function() {
 		ematch.hide_loader();
+
 		$('body').trigger('click');
 
 		setTimeout(function() {
@@ -54,6 +56,7 @@ $(document).ready(function(){
 	$(document).on('click', '.game-status-reset', function(){
 		dialog.confirm("Are you sure you want reset ?", function(){
 			ematch.show_loader();
+			ematch.socket.emit('reset', {id: isLogin});
 			location.reload();
 		}, "Confirm ?");
 	});

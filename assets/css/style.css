@@ -990,7 +990,7 @@ input:focus::placeholder {
 .vanquished-content div:first-child p {
 	font-family: Arial;
     font-size: 40px;
-    color: #000;
+    color: #ea0e0e;
 }
 
 .vanquished-opponent {
@@ -1086,6 +1086,12 @@ input:focus::placeholder {
     padding: 0px 10px;
     color: #fff;
     text-align: right;
+}
+
+.question-timer img {
+    width: 20px;
+    position: relative;
+    top: -3px;
 }
 
 .lds-ellipsis {
