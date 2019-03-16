@@ -51,7 +51,7 @@ function ematchModel(argument) {
 	if (email != "") {
 		elem.hide_loader();
 
-		ifvisible.setIdleDuration(10);
+		ifvisible.setIdleDuration(30);
 	
 		ifvisible.idle(function(){
 			ematch.userLogout(isLogin);
@@ -212,14 +212,6 @@ function ematchModel(argument) {
 				$(this).remove();
 			}
 		});
-
-		$('.people-table .members-status').each(function(){
-			var elem = this;
-			if ($(this).attr("data-value") == data.id) {
-				$(this).find('.members-status-option').text('inactive');
-			}
-		});
-
 
 	});
 
