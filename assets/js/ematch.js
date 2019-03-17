@@ -55,8 +55,7 @@ function ematchModel(argument) {
 		ifvisible.setIdleDuration(180);
 	
 		ifvisible.idle(function(){
-			elem.socket.emit('forceExit', {id: isLogin});
-			elem.socket.emit('send-notification', {room: "users", id: isLogin});
+			elem.socket.emit('forceExit', {room: "users", id: isLogin});
 		});
 
 		if( ifvisible.now() ){

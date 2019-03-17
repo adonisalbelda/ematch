@@ -391,7 +391,7 @@ io.on('connection', function(socket){
 		});
 	});
 
-	socket.on("forceExit", ({id}) => {
+	socket.on("forceExit", ({room, id}) => {
 		mysqlConf.getConnection(function(error, tempCount){
 			if (!!error){
 				tempCount.release();
@@ -401,6 +401,11 @@ io.on('connection', function(socket){
 					tempCount.release();
 				});
 			}
+		});
+
+		socket.to(room).emit("update-users", {
+			id: id,
+			online: connections.length,
 		});
 	});
 
