@@ -140,13 +140,14 @@ function ematchModel(argument) {
 	});
 
 	this.socket.on('duel-abort', function(data){
+		$('#play-music').remove();
 		dialog.reject_Duel(data.msg);
 	});
 
 	this.socket.on('confirm-match', function(data){
-		$('#ready_audio').trigger('play');
+		$('body').append('<embed name="GoodEnough" src="../sounds/ready.mp3" loop="true" autostart="true" height="0" class="back-music" id="play-music">');
 		dialog.matchReady(function(){
-
+			$('#play-music').remove();
 			var info = {
 				room: data.room, 
 				username: username, 
@@ -166,6 +167,7 @@ function ematchModel(argument) {
 			}, msg);
 
 		}, function(){
+			$('#play-music').remove();
 			elem.socket.emit('reject-match', {sender: data.sender, receiver: data.receiver, username: username});
 		});
 	});
@@ -251,11 +253,13 @@ function ematchModel(argument) {
 	});
 
 	this.socket.on('duel-confirmation', function(data){
-		$('#ready_audio').trigger('play');
+		$('body').append('<embed name="GoodEnough" src="../sounds/ready.mp3" loop="true" autostart="true" height="0" class="back-music" id="play-music">');
 		dialog.show_request(data.username + " wants wants to Duel you!", function() {
 			var room = elem.generate_Room();
+			$('#play-music').remove();
 			elem.socket.emit('accept-duel', {sender: data.sender, room: room, receiver: data.receiver});
 		}, "Confirm ?", function() {
+			$('#play-music').remove();
 			elem.socket.emit('reject-duel', {sender: data.sender, receiver: data.receiver, username: username});
 		});
 	});
@@ -273,6 +277,7 @@ function ematchModel(argument) {
 	});
 
 	this.socket.on('duel-rejection', function(data){
+		$('#play-music').remove();
 		dialog.reject_Duel(data.msg, "Duel match failed.");
 	});	
 
@@ -291,13 +296,13 @@ function ematchModel(argument) {
 
 			C_number = parseInt(data['data']['winner_newpoints']) - parseInt(data['data']['winner_oldpoints'])
 			if (parseInt(data['data']['winner_id']) == parseInt(isLogin)) {
-				$('#victory_audio').trigger('play');
+				$('body').append('<embed name="GoodEnough" src="../sounds/victory.mp3" loop="true" autostart="true" height="0" class="back-music" id="play-music">');
 				$('.preview-result p').text("You win!");
 				$('.points-indicator').text("+");
 				localStorage.setItem('my_points', data['data']['winner_newpoints']);
 				localStorage.setItem('my_rank', data['data']['winner_rank']);
 			} else {
-				$('#lose_audio').trigger('play');
+				$('body').append('<embed name="GoodEnough" src="../sounds/lose.mp3" loop="true" autostart="true" height="0" class="back-music" id="play-music">');
 				$('.preview-result p').text("You lost!");
 				$('.points-indicator').text("-");
 				localStorage.setItem('my_points',data['data']['losser_newpoints']);
@@ -674,6 +679,7 @@ function ematchModel(argument) {
 	            elem.animatePoints();
 	            if (gameDone) {
 	            	gameDone = false;
+	            	$('#play-music').remove();
 	            	location.reload();
 	            } 
 

@@ -75,6 +75,7 @@ input:focus::placeholder {
 .back-music {
 	position: absolute;
 	top: 0px;
+    /*display: none;*/
 }
 
 .duel-player-btn button {
