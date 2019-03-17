@@ -46,7 +46,6 @@ router.post('/findMatch', function(req, res){
 		} else {
 			tempCount.query("SELECT * FROM tbl_students where `is_online` = '1' and id != '"+req.body.id+"' and `rank` = '"+req.body.rank+"' and id not in (SELECT student_id from tbl_players_inmatch) ORDER BY RAND() LIMIT 1", function(error, rows, fields){
 				tempCount.release();
-				console.log(req.body.id);
 				if (!!error){
 					return res.send({erros: error});
 				} else {

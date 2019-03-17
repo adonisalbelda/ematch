@@ -398,6 +398,7 @@ io.on('connection', function(socket){
 				console.log("error in the query");
 			} else {
 				tempCount.query("UPDATE  tbl_students SET is_online = '0' WHERE id = '"+id+"'", function(error, rows, fields){
+					tempCount.release();
 				});
 			}
 		});
@@ -410,6 +411,7 @@ io.on('connection', function(socket){
 				console.log("error in the query");
 			} else {
 				tempCount.query("UPDATE  tbl_students SET is_online = '1' WHERE id = '"+id+"'", function(error, rows, fields){
+					tempCount.release();
 				});
 			}
 		});
