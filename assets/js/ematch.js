@@ -55,6 +55,7 @@ function ematchModel(argument) {
 		ifvisible.setIdleDuration(180);
 	
 		ifvisible.idle(function(){
+			elem.socket.emit('send-notification', {room: "users", id: id});
 			elem.socket.emit('forceExit', {id: isLogin});
 		});
 
@@ -76,7 +77,6 @@ function ematchModel(argument) {
 
 	if (localStorage.getItem("logged")) {
 		$(window).focus(function() {
-			console.log("das");
 	   		elem.socket.emit('in-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
 		}).blur(function() {
 		    elem.socket.emit('out-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
