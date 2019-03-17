@@ -188,14 +188,6 @@ function ematchModel(argument) {
 		if (!check_rowExists(data.id)) {
 			$('.duel-member-list tbody').append(row);
 		}
-
-		$('.people-table .members-status').each(function(){
-			var elem = this;
-			if ($(this).attr("data-value") == data.id) {
-				$(this).find('.members-status-option').text('active');
-			}
-		});
-
 	});
 
 	function check_rowExists(id) {
