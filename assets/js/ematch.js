@@ -285,6 +285,7 @@ function ematchModel(argument) {
 		$('.dialog-wrapper').remove();
 		elem.show_loader();
 		canvas1.render();
+		console.log(data);
 
 		elem.home_Directory("result", {}, function(){
 
@@ -301,10 +302,17 @@ function ematchModel(argument) {
 				$('.points-indicator').text("+");
 				localStorage.setItem('my_points', data['data']['winner_newpoints']);
 				localStorage.setItem('my_rank', data['data']['winner_rank']);
+				$(".send-message").attr("send-name", data['data']['losser_username']);
+				$(".send-message").attr("send-id", data['data']['losser_id']);
+				$(".send-message").attr("send-email", data['data']['losser_email']);
+				
 			} else {
 				$('body').append('<embed name="GoodEnough" src="../sounds/lose.mp3" loop="true" autostart="true" height="0" class="back-music" id="play-music">');
 				$('.preview-result p').text("You lost!");
 				$('.points-indicator').text("-");
+				$(".send-message").attr("send-name", data['data']['winner_username']);
+				$(".send-message").attr("send-id", data['data']['winner_id']);
+				$(".send-message").attr("send-email", data['data']['winner_email']);
 				localStorage.setItem('my_points',data['data']['losser_newpoints']);
 				localStorage.setItem('my_rank',data['data']['losser_rank']);
 			}
@@ -322,6 +330,7 @@ function ematchModel(argument) {
 			$('.result-label').text(data['data']['label']);
 			$('.result-winner-rank').text(data['data']['winner_rank']);
 			$('.result-losser').text(data['data']['losser_username']);
+
 		});
 	});
 
@@ -473,8 +482,8 @@ function ematchModel(argument) {
 
 	this.update_registerStatus =  function (val, action, data = {}) {
 
-		var statuses = ['personal-info', 'security-info', 'profile-info'];
-		var label = ['personal info', 'security info', 'profile info'];
+		var statuses = ['personal-info', 'security-info'];
+		var label = ['personal info', 'security info'];
 
 		if (val == (statuses.length-1) && action == 1) {
 			return true;
@@ -665,7 +674,7 @@ function ematchModel(argument) {
     	});
 	}
 
-	this.home_Directory = function (url, data, callback = "") {
+	this.home_Directory = function (url, data, callback = "", isMessaging = false) {
 		var popup = this;
 		popup.show_loader();
 		$.ajax({
@@ -677,7 +686,7 @@ function ematchModel(argument) {
 	            $('.main-wrapper').addClass('animated bounceInDown')
 	            $('#match-dir-home').attr("data-value", "home");
 	            elem.animatePoints();
-	            if (gameDone) {
+	            if (gameDone && !isMessaging) {
 	            	gameDone = false;
 	            	$('#play-music').remove();
 	            	location.reload();

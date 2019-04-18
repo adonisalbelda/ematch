@@ -253,6 +253,7 @@ io.on('connection', function(socket){
 				winner['winner_oldpoints'] = points;
 				winner['losser_oldpoints'] = results[room].points;
 				winner['losser_username'] = results[room].username
+				winner['losser_email'] = results[room].email
 				winner['losser_id'] = results[room].id;
 				winner['label'] = "Vanquished";
 			} else if ( score < results[room].score) {
@@ -262,6 +263,7 @@ io.on('connection', function(socket){
 				winner['winner_oldpoints'] = results[room].points;
 				winner['losser_oldpoints'] = points;
 				winner['losser_username'] = username;
+				winner['losser_email'] = email
 				winner['losser_id'] = id;
 				winner['label'] = "Vanquished";
 			} else {
@@ -272,6 +274,7 @@ io.on('connection', function(socket){
 					winner['winner_oldpoints'] = results[room].points;
 					winner['losser_oldpoints'] = points;
 					winner['losser_username'] = username;
+					winner['losser_email'] = email
 					winner['losser_id'] = id;
 					winner['label'] = "Vanquished";
 				} else {
@@ -281,6 +284,7 @@ io.on('connection', function(socket){
 					winner['winner_oldpoints'] = points;
 					winner['losser_oldpoints'] = results[room].points;
 					winner['losser_username'] = results[room].username
+					winner['losser_email'] = results[room].email
 					winner['losser_id'] = results[room].id;
 					winner['label'] = "Vanquished";
 				}

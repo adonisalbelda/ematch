@@ -120,14 +120,82 @@ $(document).ready(function(){
 
 				ematch.insertData();
 			}, "Confirm ?");
+		} else {
+			$(this).attr("disabled", "disabled");
 		}
 	});
 
 	$(document).on('click', '#form-prev-status', function() {
 		$('#click_audio').trigger('play');
+		$('#form-next-status').removeAttr("disabled");
 		var val = parseInt($(this).attr("data-value"));
 		ematch.update_registerStatus(val, 0);
+	});
 
+	$(document).on('input', '.first-name', function(){
+		if($('.last-name').val() != "" && $('.envelope').val() != "" && $(this).val() != "") {
+			$('#form-next-status').removeAttr("disabled");
+		} else {
+			$('#form-next-status').attr("disabled", "disabled");
+		}
+	});
+
+	$(document).on('input', '.envelope', function(){
+		if($('.last-name').val() != "" && $(this).val() != "" && $('.first-name').val() != "") {
+			$('#form-next-status').removeAttr("disabled");
+		} else {
+			$('#form-next-status').attr("disabled", "disabled");
+		}
+	});
+
+	$(document).on('input', '.last-name', function(){
+		if($(this).val() != "" && $('.envelope').val() != "" && $('.first-name').val() != "") {
+			$('#form-next-status').removeAttr("disabled");
+		} else {
+			$('#form-next-status').attr("disabled", "disabled");
+		}
+	});
+
+	$(document).on('input', '.username', function(){
+		if($(this).val() != "" && $('.password').val() != "" && $('.c-password').val() != "") {
+			if ($('.password').val() == $('.c-password').val()){
+				$('#form-next-status').removeAttr("disabled");
+			}
+		} else {
+			$('#form-next-status').attr("disabled", "disabled");
+		}
+
+		if ($('.password').val().length < 8) {
+			$('#form-next-status').attr("disabled", "disabled");
+		}
+	});
+
+	$(document).on('input', '.password', function(){
+		if($('.username').val() != "" && $(this).val() != "" && $('.c-password').val() != "") {
+			if ($('.password').val() == $('.c-password').val()){
+				$('#form-next-status').removeAttr("disabled");
+			}
+		} else {
+			$('#form-next-status').attr("disabled", "disabled");
+		}
+
+		if ($('.password').val().length < 8) {
+			$('#form-next-status').attr("disabled", "disabled");
+		}
+	});
+
+	$(document).on('input', '.c-password', function(){
+		if($('.username').val() != "" && $('.password').val() != "" && $(this).val() != "") {
+			if ($('.password').val() == $('.c-password').val()){
+				$('#form-next-status').removeAttr("disabled");
+			}
+		} else {
+			$('#form-next-status').attr("disabled", "disabled");
+		}
+
+		if ($('.password').val().length < 8) {
+			$('#form-next-status').attr("disabled", "disabled");
+		}
 	});
 
 	$(document).on('change', '#choose-pro-img', function() {
@@ -216,7 +284,7 @@ $(document).ready(function(){
 		next = false;
 	});
 
-	$(document).on('click', '.view-match-results button', function(){
+	$(document).on('click', '.view-match-results .view-match', function(){
 		$('.match-preview-overlay').css('visibility', 'visible').addClass('animated bounce');
 		var questions = JSON.parse(localStorage.getItem('questions'));
 		$.each( questions, function( key, value ) {
@@ -241,6 +309,7 @@ $(document).ready(function(){
 		});
 		localStorage.removeItem("questions");
 	});
+
 
 	$(document).on('click', '.pre-image-close', function(){
 		$('.match-preview-overlay').css('visibility', 'hidden').removeClass('animated bounce');
@@ -321,6 +390,27 @@ $(document).ready(function(){
 	$(document).on('click', '#rankings-view', function() {
 		var url = "ranking";
 		ematch.home_Directory(url, {});
+	});
+
+	$(document).on('click', ".send-message", function(){
+		var url = "ranking";
+		var elem = this;
+		ematch.home_Directory(url, {}, function(){
+			$('.members-conversation').css('display', 'block');
+			$('.members-list-online').css('display', 'none');
+			
+			$(".msg-convo-list").empty();
+			var objDiv = $(".msg-convo-list");
+			var h = objDiv.get(0).scrollHeight;
+		 	objDiv.animate({scrollTop: h});
+
+			receiver_email = $(elem).attr("send-email");
+			receiver_id = $(elem).attr("send-id");
+			name = $(elem).attr("send-name");
+			$('.members-msg').text( name + " and Your "+ "conversation");
+
+			ematch.retrieveConvo(isLogin, receiver_id);
+		},true);
 	});
 
 	$(document).on('click', '#matches-view', function() {
