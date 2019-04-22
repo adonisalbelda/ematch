@@ -39,6 +39,10 @@ router.get('/ranking', function(req, res){
 	});
 });
 
+router.get('/toturial', function(req, res){
+	return res.render('footer/toturial');	
+});
+
 router.post('/matches', function(req, res){
 	mysqlConf.getConnection(function(error, tempCount){
 		if (!!error){

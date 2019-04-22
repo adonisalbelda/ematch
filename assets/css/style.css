@@ -330,6 +330,22 @@ input:focus::placeholder {
 	width: 40px;
 }
 
+.tutorial-view-content {
+    width: 90%;
+    max-height: 73vh;
+    overflow-y: auto;
+    position: relative;
+    top: 100px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #24424a;
+}
+
+.tutorial-view-content img {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
 .duel-name p{
 	font-size: 22px;
 	position: relative;

@@ -392,6 +392,11 @@ $(document).ready(function(){
 		ematch.home_Directory(url, {});
 	});
 
+	$(document).on('click', '#tutorial-view', function() {
+		var url = "toturial";
+		ematch.home_Directory(url, {});
+	});
+
 	$(document).on('click', ".send-message", function(){
 		var url = "ranking";
 		var elem = this;
