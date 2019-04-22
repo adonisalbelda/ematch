@@ -332,7 +332,7 @@ input:focus::placeholder {
 
 .tutorial-view-content {
     width: 90%;
-    max-height: 73vh;
+    max-height: 70vh;
     overflow-y: auto;
     position: relative;
     top: 100px;
