@@ -72,6 +72,32 @@ $(document).ready(function(){
 		// ematch.home_Directory("home");
 	});
 
+	$(document).on("click", ".save-personal-box", function(){
+		ematch.formData['firstname'] = $('.first-name').val();
+		ematch.formData['lastname'] = $('.last-name').val();
+		ematch.formData['email'] = $('.envelope').val();
+		ematch.formData['course'] = $('.course').val();
+
+		ematch.changeInfo();
+	});
+
+	$(document).on("click", ".save-account-box", function(){
+
+		if ($('.username').val() == "" ){
+			return false;
+		}
+
+		if ($('.password').val() != $('.c-password').val()) {
+			return false;
+		}
+		
+		ematch.formData['username'] = $('.username').val();
+		ematch.formData['password'] = $('.password').val();
+		
+		ematch.changeAccount();
+	});
+	
+
 	$(document).on('click', "#register-btn", function(e) {
 		$('#click_audio').trigger('play');
 		e.preventDefault();

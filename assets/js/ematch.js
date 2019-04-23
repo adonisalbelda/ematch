@@ -419,6 +419,62 @@ function ematchModel(argument) {
     	});
 	}
 
+	this.changeInfo = function () {
+		var popup = this;
+		this.show_loader();
+		$.ajax({
+	        url: "/changeInfo",
+	        method:"POST",
+	        data : JSON.stringify(this.formData),
+	        processData: false,
+			contentType: "application/json",
+	        success: function(data) {	
+	        	popup.hide_loader();
+				if (data.hasOwnProperty("success")) {
+					dialog.alert("Successfuly updated your information.", "Status", function() {
+						location.reload();
+						this.formData = {};
+					});
+				} else {
+					dialog.showErrors(data, "Error upon changing info, try again.");	    		
+				}
+
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	        	popup.hide_loader();
+	            alert('error ' + textStatus + " " + errorThrown);
+	        }
+    	});
+	}
+
+	this.changeAccount = function () {
+		var popup = this;
+		this.show_loader();
+		$.ajax({
+	        url: "/changeAccount",
+	        method:"POST",
+	        data : JSON.stringify(this.formData),
+	        processData: false,
+			contentType: "application/json",
+	        success: function(data) {	
+	        	popup.hide_loader();
+				if (data.hasOwnProperty("success")) {
+					dialog.alert("Successfuly updated your account.", "Status", function() {
+						location.reload();
+						this.formData = {};
+					});
+				} else {
+					dialog.showErrors(data, "Error upon changing info, try again.");	    		
+				}
+
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	        	popup.hide_loader();
+	            alert('error ' + textStatus + " " + errorThrown);
+	        }
+    	});
+	}
+
 	this.userLogout = function (id) {
 		var popup = this;
 		this.formData["id"] = id;

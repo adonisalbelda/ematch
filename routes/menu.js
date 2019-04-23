@@ -62,6 +62,44 @@ router.post('/matches', function(req, res){
 	});
 });
 
+router.post('/changeInfo', function(req, res){
+	console.log(req.body);
+	mysqlConf.getConnection(function(error, tempCount){
+		if (!!error){
+			tempCount.release();
+			console.log("error in the query");
+		} else {
+			console.log("query successed");
+			tempCount.query("UPDATE tbl_students SET fname = '"+req.body.firstname+"', lname = '"+req.body.lastname+"', email = '"+req.body.email+"', course = '"+req.body.course+"' ", function(error, rows, fields){
+				if (!!error){
+					return res.send({errors: error});
+				} 
+				tempCount.release();
+				res.send({"success": rows});	
+			});
+		}	
+	});
+});
+
+router.post('/changeAccount', function(req, res){
+	console.log(req.body);
+	mysqlConf.getConnection(function(error, tempCount){
+		if (!!error){
+			tempCount.release();
+			console.log("error in the query");
+		} else {
+			console.log("query successed");
+			tempCount.query("UPDATE tbl_students SET username = '"+req.body.username+"', password = '"+req.body.password+"'", function(error, rows, fields){
+				if (!!error){
+					return res.send({errors: error});
+				} 
+				tempCount.release();
+				res.send({"success": rows});	
+			});
+		}	
+	});
+});
+
 router.post('/conversation', function(req, res){
 	console.log(req.body);
 	mysqlConf.getConnection(function(error, tempCount){
