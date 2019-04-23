@@ -70,7 +70,7 @@ router.post('/changeInfo', function(req, res){
 			console.log("error in the query");
 		} else {
 			console.log("query successed");
-			tempCount.query("UPDATE tbl_students SET fname = '"+req.body.firstname+"', lname = '"+req.body.lastname+"', email = '"+req.body.email+"', course = '"+req.body.course+"' ", function(error, rows, fields){
+			tempCount.query("UPDATE tbl_students SET fname = '"+req.body.firstname+"', lname = '"+req.body.lastname+"', email = '"+req.body.email+"', course = '"+req.body.course+"' WHERE id = '"+req.body.id+"' ", function(error, rows, fields){
 				if (!!error){
 					return res.send({errors: error});
 				} 
@@ -89,7 +89,7 @@ router.post('/changeAccount', function(req, res){
 			console.log("error in the query");
 		} else {
 			console.log("query successed");
-			tempCount.query("UPDATE tbl_students SET username = '"+req.body.username+"', password = '"+req.body.password+"'", function(error, rows, fields){
+			tempCount.query("UPDATE tbl_students SET username = '"+req.body.username+"', password = '"+req.body.password+"' WHERE id = '"+req.body.id+"'", function(error, rows, fields){
 				if (!!error){
 					return res.send({errors: error});
 				} 
@@ -108,7 +108,7 @@ router.post('/conversation', function(req, res){
 			console.log("error in the query");
 		} else {
 			console.log("query successed");
-			tempCount.query("SELECT * FROM tbl_messages WHERE (sender = '"+req.body.sender+"' and reciever = '"+req.body.receiver+"') or (sender = '"+req.body.receiver+"' and reciever = '"+req.body.sender+"') ORDER BY date ASC", function(error, rows, fields){
+			tempCount.query("SELECT * FROM tbl_messages WHERE (sender = '"+req.body.sender+"' and reciever = '"+req.body.receiver+"') or (sender = '"+req.body.receiver+"' and reciever = '"+req.body.sender+" ') ORDER BY date ASC", function(error, rows, fields){
 				if (!!error){
 					return res.send({errors: error});
 				} else {

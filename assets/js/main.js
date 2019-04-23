@@ -77,6 +77,7 @@ $(document).ready(function(){
 		ematch.formData['lastname'] = $('.last-name').val();
 		ematch.formData['email'] = $('.envelope').val();
 		ematch.formData['course'] = $('.course').val();
+		ematch.formData['id'] = isLogin;
 
 		ematch.changeInfo();
 	});
@@ -93,6 +94,7 @@ $(document).ready(function(){
 		
 		ematch.formData['username'] = $('.username').val();
 		ematch.formData['password'] = $('.password').val();
+		ematch.formData['id'] = isLogin;
 		
 		ematch.changeAccount();
 	});
