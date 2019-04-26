@@ -134,7 +134,7 @@ router.post('/login',[
 						req.session.rank = rows[0]['rank'];
 						req.session.profile = rows[0]['profile'];
 
-						tempCount.query("UPDATE  tbl_students SET is_online = '1' WHERE id = '"+rows[0]['id']+"'", function(error, rows, fields){
+						tempCount.query("UPDATE tbl_students SET `is_online` = '1' WHERE `id` = 31 ", function(error, rows, fields){
 							if (!!error){
 								return res.send({errors: error});
 							} 	
