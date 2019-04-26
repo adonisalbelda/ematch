@@ -52,15 +52,15 @@ function ematchModel(argument) {
 		elem.hide_loader();
 
 
-		ifvisible.setIdleDuration(180);
+		// ifvisible.setIdleDuration(180);
 	
-		ifvisible.idle(function(){
-			elem.socket.emit('forceExit', {room: "users", id: isLogin});
-		});
+		// ifvisible.idle(function(){
+		// 	elem.socket.emit('forceExit', {room: "users", id: isLogin});
+		// });
 
-		if( ifvisible.now() ){
-			elem.socket.emit('forceLogin', {id: isLogin});
-		}
+		// if( ifvisible.now() ){
+		// 	elem.socket.emit('forceLogin', {id: isLogin});
+		// }
 
 		elem.socket.emit('join_room', {room: "users", data: email});
 		elem.socket.emit('message', {room: "users", message: isLogin, username:username});
