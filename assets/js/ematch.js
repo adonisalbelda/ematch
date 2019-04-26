@@ -74,13 +74,13 @@ function ematchModel(argument) {
 		elem.hide_loader();
 	}
 
-	if (localStorage.getItem("logged")) {
-		$(window).focus(function() {
-	   		elem.socket.emit('in-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
-		}).blur(function() {
-		    elem.socket.emit('out-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
-		});
-	}
+	// if (localStorage.getItem("logged")) {
+	// 	$(window).focus(function() {
+	//    		elem.socket.emit('in-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
+	// 	}).blur(function() {
+	// 	    elem.socket.emit('out-focus', {room: "users",email: email, username: username, rank: rank, id: isLogin });
+	// 	});
+	// }
 
 	this.socket.on('message', function(data){
 		var user_id = data.user_id;
